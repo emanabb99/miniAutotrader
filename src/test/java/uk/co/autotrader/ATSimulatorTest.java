@@ -15,7 +15,7 @@ public class ATSimulatorTest {
         List<String> output = simulator.outputSimulation();
 
         // Then
-        assertEquals(15, output.size());
+        assertEquals(18, output.size());
         assertEquals("**********************", output.get(0));
         assertEquals("Welcome to Mini Autotrader!", output.get(1));
         assertEquals("**********************", output.get(2));
@@ -31,6 +31,11 @@ public class ATSimulatorTest {
         assertEquals("Steve McSteve has bought the car Fire Truck on Autotrader.", output.get(12));
         assertEquals("**********************", output.get(13));
         assertEquals("There are 1 cars listed on Autotrader.", output.get(14));
+        assertEquals("**********************",output.get(15));
+        assertEquals("CAR LISTINGS:", output.get(16));
+        assertEquals("Ol’ Granny Guardrails has listed a Robin Reliant on Autotrader.", output.get(17));
+
+
     }
 
     }

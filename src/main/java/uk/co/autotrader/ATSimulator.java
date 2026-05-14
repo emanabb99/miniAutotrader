@@ -20,8 +20,6 @@ public class ATSimulator {
     private void runSimulation() {
         output.add("**********************");
         output.add("Welcome to Mini Autotrader!");
-        output.add("**********************");
-        output.add("CAR LISTINGS:");
 
         Autotrader at = new Autotrader(output);
 
@@ -34,16 +32,17 @@ public class ATSimulator {
         Customer customer3 = new Customer("Steve McSteve");
 
         Listing listing1 = new Listing("1999 Ford Fiesta",bobsBelles);
-        at.addListing(listing1, bobsBelles);
+        at.addListing(listing1);
 
         Listing listing2 = new Listing("Tesla Model Y",bigBucks);
-        at.addListing(listing2, bigBucks);
+        at.addListing(listing2);
 
         Listing listing3 = new Listing("Fire Truck",bigBucks);
-        at.addListing(listing3, bigBucks);
+        at.addListing(listing3);
 
         Listing listing4 = new Listing("Robin Reliant",olGranny);
-        at.addListing(listing4, olGranny);
+        at.addListing(listing4);
+        at.browseCars();
 
         output.add("**********************");
 
@@ -54,6 +53,7 @@ public class ATSimulator {
 
         output.add("**********************");
         at.countListings();
+        at.browseCars();
 
     }
 }

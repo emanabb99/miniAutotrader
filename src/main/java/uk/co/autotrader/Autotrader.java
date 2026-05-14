@@ -12,9 +12,8 @@ public class Autotrader {
         this.output = output;
     }
 
-    public void addListing(Listing listing, Retailer retailer) {
+    public void addListing(Listing listing) {
         carsListedOnAutotrader.add(listing);
-        output.add(retailer.getRetailerName() + " has listed a " + listing.vehicle + " on Autotrader.");
     }
 
     public void countListings() {
@@ -23,16 +22,23 @@ public class Autotrader {
     }
 
     public void sellCar(Listing listing, Customer customer) {
-        for (Listing car: carsListedOnAutotrader){
+        for (Listing car : carsListedOnAutotrader){
             if ((listing.vehicle).equals(car.vehicle)){
                 boughtCars.add(listing);
             }
         }
-        for (Listing boughtCar: boughtCars) {
+        for (Listing boughtCar : boughtCars) {
             carsListedOnAutotrader.remove(boughtCar);
         }
         output.add(customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.");
     }
 
+    public void browseCars(){
+        output.add("**********************");
+        output.add("CAR LISTINGS:");
+        for (Listing car : carsListedOnAutotrader){
+            output.add(car.owner.getRetailerName() + " has listed a " + car.vehicle + " on Autotrader.");
+        }
+    }
 
 }
