@@ -19,17 +19,4 @@ public class Listing {
     }
 
 
-
-    public void sellCar(Listing listing, Customer customer) {
-        for (Listing car: carsListedOnAutotrader){
-            if ((car.toString()).equals(listing.toString())){
-                boughtCars.add(listing);
-            }
-        }
-        for (Listing boughtCar: boughtCars) {
-            carsListedOnAutotrader.remove(boughtCar);
-        }
-    }
-
-
 }

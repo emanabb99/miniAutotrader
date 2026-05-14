@@ -38,19 +38,10 @@ public class ATSimulator {
         Listing listing4 = new Listing("Robin Reliant",olGranny);
         output.add(olGranny.getRetailerName() + " has listed a " + listing4.vehicle + " on Autotrader.");
 
-        ;
-//        for (String listing: carsListedOnAutotrader){
-//            if (listing.equals("1999 Ford Fiesta")){
-//                output.add(carBuyerName + " has bought the car " + listing + ".");
-//                boughtCars.add(listing);
-//            }
-//        }
-//        for (String boughtCar: boughtCars) {
-//            if (carsListedOnAutotrader.contains(boughtCar)) {
-//                int index = carsListedOnAutotrader.indexOf(boughtCar);
-//                carsListedOnAutotrader.remove(index);
-//            }
-//        }
-//        output.add("There are currently " + carsListedOnAutotrader.size() + " cars listed on Autotrader");
+        output.add("Car purchases:");
+        output.add(bobsBelles.sellCar(listing1,customer1));
+        output.add(bobsBelles.sellCar(listing2,customer2));
+        output.add(bobsBelles.sellCar(listing3,customer3));
+
     }
 }
