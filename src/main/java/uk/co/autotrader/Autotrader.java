@@ -2,14 +2,20 @@ package uk.co.autotrader;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Autotrader {
     ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
     ArrayList<Listing> boughtCars = new ArrayList<>();
+    private List<String> output;
 
+    public Autotrader(List<String> output) {
+        this.output = output;
+    }
 
-    public void addListing(Listing listing) {
+    public String addListing(Listing listing, Retailer retailer) {
         carsListedOnAutotrader.add(listing);
+        return retailer.getRetailerName() + " has listed a " + listing.vehicle + " on Autotrader.";
     }
 
     public int countListings() {
@@ -25,9 +31,8 @@ public class Autotrader {
         for (Listing boughtCar: boughtCars) {
             carsListedOnAutotrader.remove(boughtCar);
         }
-        return customer.getCustomerName() + " has bought the car " + listing.vehicle + ".";
+        return customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.";
     }
-
 
 
 }

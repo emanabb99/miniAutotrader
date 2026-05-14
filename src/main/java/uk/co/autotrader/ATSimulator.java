@@ -18,40 +18,42 @@ public class ATSimulator {
     }
 
     private void runSimulation() {
+        output.add("**********************");
         output.add("Welcome to Mini Autotrader!");
-        Autotrader at = new Autotrader();
+        output.add("**********************");
+        output.add("CAR LISTINGS:");
+
+        Autotrader at = new Autotrader(output);
         Retailer bobsBelles = new Retailer("Bob's and Belle's Bangers");
         Retailer bigBucks = new Retailer("Big Buck’s Best Deals");
         Retailer olGranny = new Retailer("Ol’ Granny Guardrails");
 
-        Customer customer1 = new Customer("Megan MoneyBanks");
+        Customer customer1 = new Customer("Megan Moneybanks");
         Customer customer2 = new Customer("Robin Banks");
         Customer customer3 = new Customer("Steve McSteve");
 
         Listing listing1 = new Listing("1999 Ford Fiesta",bobsBelles);
-        at.addListing(listing1);
-        output.add(bobsBelles.getRetailerName() + " has listed a " + listing1.vehicle + " on Autotrader.");
+        output.add(at.addListing(listing1, bobsBelles));
 
         Listing listing2 = new Listing("Tesla Model Y",bigBucks);
-        at.addListing(listing2);
-        output.add(bigBucks.getRetailerName() + " has listed a " + listing2.vehicle + " on Autotrader.");
+        output.add(at.addListing(listing2, bigBucks));
 
         Listing listing3 = new Listing("Fire Truck",bigBucks);
-        at.addListing(listing3);
-        output.add(bigBucks.getRetailerName() + " has listed a " + listing3.vehicle + " on Autotrader.");
+        output.add(at.addListing(listing3, bigBucks));
 
         Listing listing4 = new Listing("Robin Reliant",olGranny);
-        at.addListing(listing4);
-        output.add(olGranny.getRetailerName() + " has listed a " + listing4.vehicle + " on Autotrader.");
+        output.add(at.addListing(listing4, olGranny));
 
+        output.add("**********************");
 
-        output.add("number" + at.countListings());
-        output.add("Car purchases:");
+        output.add("CAR PURCHASES:");
         output.add(at.sellCar(listing1,customer1));
         output.add(at.sellCar(listing2,customer2));
         output.add(at.sellCar(listing3,customer3));
 
-        output.add("There are " + at.countListings() + " cars listed on Autotrader");
+        output.add("**********************");
+
+        output.add("There are " + at.countListings() + " cars listed on Autotrader.");
 
     }
 }

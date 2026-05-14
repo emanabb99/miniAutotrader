@@ -15,27 +15,22 @@ public class ATSimulatorTest {
         List<String> output = simulator.outputSimulation();
 
         // Then
-        assertEquals("Welcome to Mini Autotrader!", output.get(0));
+        assertEquals(15, output.size());
+        assertEquals("**********************", output.get(0));
+        assertEquals("Welcome to Mini Autotrader!", output.get(1));
+        assertEquals("**********************", output.get(2));
+        assertEquals("CAR LISTINGS:", output.get(3));
+        assertEquals("Bob's and Belle's Bangers has listed a 1999 Ford Fiesta on Autotrader.", output.get(4));
+        assertEquals("Big Buck’s Best Deals has listed a Tesla Model Y on Autotrader.", output.get(5));
+        assertEquals("Big Buck’s Best Deals has listed a Fire Truck on Autotrader.", output.get(6));
+        assertEquals("Ol’ Granny Guardrails has listed a Robin Reliant on Autotrader.", output.get(7));
+        assertEquals("**********************", output.get(8));
+        assertEquals("CAR PURCHASES:", output.get(9));
+        assertEquals("Megan Moneybanks has bought the car 1999 Ford Fiesta on Autotrader.", output.get(10));
+        assertEquals("Robin Banks has bought the car Tesla Model Y on Autotrader.", output.get(11));
+        assertEquals("Steve McSteve has bought the car Fire Truck on Autotrader.", output.get(12));
+        assertEquals("**********************", output.get(13));
+        assertEquals("There are 1 cars listed on Autotrader.", output.get(14));
     }
 
-    @Test
-    void simulationIndex1showsListing() {
-        ATSimulator simulator = new ATSimulator();
-        List<String> output = simulator.outputSimulation();
-        assertEquals("Bob's and Belle's Bangers has listed a 1999 Ford Fiesta on Autotrader.",output.get(1));
     }
-
-    @Test
-    void simulationIndex2showsPurchase() {
-        ATSimulator simulator = new ATSimulator();
-        List<String> output = simulator.outputSimulation();
-        assertEquals("Megan MoneyBanks has bought the car 1999 Ford Fiesta.",output.get(2));
-    }
-
-//    @Test
-//    void simulationIndex3showsListingsAmount() {
-//        ATSimulator simulator = new ATSimulator();
-//        List<String> output = simulator.outputSimulation();
-//        assertEquals();
-//    }
-}
