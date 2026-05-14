@@ -1,7 +1,7 @@
 package uk.co.autotrader;
 
 public class Retailer {
-    private String retailerName;
+    private final String retailerName;
 
     public Retailer(String retailerName){
         this.retailerName = retailerName;
