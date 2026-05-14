@@ -33,16 +33,16 @@ public class ATSimulator {
         Customer customer3 = new Customer("Steve McSteve");
 
         Listing listing1 = new Listing("1999 Ford Fiesta",bobsBelles);
-        output.add(at.addListing(listing1, bobsBelles));
+        at.addListing(listing1, bobsBelles);
 
         Listing listing2 = new Listing("Tesla Model Y",bigBucks);
-        output.add(at.addListing(listing2, bigBucks));
+        at.addListing(listing2, bigBucks);
 
         Listing listing3 = new Listing("Fire Truck",bigBucks);
-        output.add(at.addListing(listing3, bigBucks));
+        at.addListing(listing3, bigBucks);
 
         Listing listing4 = new Listing("Robin Reliant",olGranny);
-        output.add(at.addListing(listing4, olGranny));
+        at.addListing(listing4, olGranny);
 
         output.add("**********************");
 

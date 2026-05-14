@@ -7,15 +7,15 @@ import java.util.List;
 public class Autotrader {
     ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
     ArrayList<Listing> boughtCars = new ArrayList<>();
-    private List<String> output;
+    private ArrayList<String> output = new ArrayList<>();
 
-    public Autotrader(List<String> output) {
+    public Autotrader(ArrayList<String> output) {
         this.output = output;
     }
 
-    public String addListing(Listing listing, Retailer retailer) {
+    public void addListing(Listing listing, Retailer retailer) {
         carsListedOnAutotrader.add(listing);
-        return retailer.getRetailerName() + " has listed a " + listing.vehicle + " on Autotrader.";
+        output.add(retailer.getRetailerName() + " has listed a " + listing.vehicle + " on Autotrader.");
     }
 
     public int countListings() {
