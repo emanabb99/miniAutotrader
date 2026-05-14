@@ -54,7 +54,5 @@ public class ATSimulator {
 
         output.add("**********************");
 
-        output.add("There are " + at.countListings() + " cars listed on Autotrader.");
-
     }
 }
