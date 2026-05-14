@@ -53,6 +53,7 @@ public class ATSimulator {
         at.sellCar(listing3,customer3);
 
         output.add("**********************");
+        at.countListings();
 
     }
 }
