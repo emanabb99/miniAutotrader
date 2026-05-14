@@ -24,4 +24,18 @@ public class ATSimulatorTest {
         List<String> output = simulator.outputSimulation();
         assertEquals("Bob's and Belle's Bangers has listed a 1999 Ford Fiesta on Autotrader.",output.get(1));
     }
+
+    @Test
+    void simulationIndex2showsPurchase() {
+        ATSimulator simulator = new ATSimulator();
+        List<String> output = simulator.outputSimulation();
+        assertEquals("Megan MoneyBanks has bought the car 1999 Ford Fiesta.",output.get(2));
+    }
+
+//    @Test
+//    void simulationIndex3showsListingsAmount() {
+//        ATSimulator simulator = new ATSimulator();
+//        List<String> output = simulator.outputSimulation();
+//        assertEquals();
+//    }
 }
