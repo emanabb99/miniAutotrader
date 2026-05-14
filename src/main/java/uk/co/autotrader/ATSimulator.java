@@ -19,5 +19,11 @@ public class ATSimulator {
 
     private void runSimulation() {
         output.add("Welcome to Mini Autotrader!");
+        String retailerName = "Bob's and Belle's Bangers";
+        String carName = "1999 Ford Fiesta";
+        String carBuyerName = "Megan MoneyBanks";
+        ArrayList<String> carsListedOnAutotrader = new ArrayList<>();
+        carsListedOnAutotrader.add(carName);
+        output.add(retailerName + " has listed a " + carName + " on Autotrader.");
     }
 }
