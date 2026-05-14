@@ -1,8 +1,7 @@
 package uk.co.autotrader;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Autotrader {
     ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
@@ -22,7 +21,7 @@ public class Autotrader {
         return carsListedOnAutotrader.size();
     }
 
-    public String sellCar(Listing listing, Customer customer) {
+    public void sellCar(Listing listing, Customer customer) {
         for (Listing car: carsListedOnAutotrader){
             if ((listing.vehicle).equals(car.vehicle)){
                 boughtCars.add(listing);
@@ -31,7 +30,7 @@ public class Autotrader {
         for (Listing boughtCar: boughtCars) {
             carsListedOnAutotrader.remove(boughtCar);
         }
-        return customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.";
+        output.add(customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.");
     }
 
 

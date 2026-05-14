@@ -24,6 +24,7 @@ public class ATSimulator {
         output.add("CAR LISTINGS:");
 
         Autotrader at = new Autotrader(output);
+
         Retailer bobsBelles = new Retailer("Bob's and Belle's Bangers");
         Retailer bigBucks = new Retailer("Big Buck’s Best Deals");
         Retailer olGranny = new Retailer("Ol’ Granny Guardrails");
@@ -47,9 +48,9 @@ public class ATSimulator {
         output.add("**********************");
 
         output.add("CAR PURCHASES:");
-        output.add(at.sellCar(listing1,customer1));
-        output.add(at.sellCar(listing2,customer2));
-        output.add(at.sellCar(listing3,customer3));
+        at.sellCar(listing1,customer1);
+        at.sellCar(listing2,customer2);
+        at.sellCar(listing3,customer3);
 
         output.add("**********************");
 
