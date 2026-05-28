@@ -63,7 +63,9 @@ public class Main {
                         weekFinished = main.displayMiniAutotrader(weekFinished);
                     }
                     break;
-                case ()
+                case (7):
+                    simulation = false;
+                    break;
             }
 
         }
