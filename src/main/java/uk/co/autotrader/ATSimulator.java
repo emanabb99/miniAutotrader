@@ -74,9 +74,9 @@ public class ATSimulator {
         at.customers.add(new Customer("Penny Coin"));
         at.customers.add(new Customer("Johny Bravo"));
 
-        Listing listing1 = new Listing("Fiat 500",at.retailers.get(3));
+        Listing listing1 = new Listing("Fiat 500",at.findRetailerByName("Eman's hot wheels"));
         at.addListing(listing1);
-        Listing listing2 = new Listing("Unknown car",at.retailers.get(4));
+        Listing listing2 = new Listing("Unknown car",at.findRetailerByName("I cant think of another name"));
         at.addListing(listing2);
         at.browseCars();
 
