@@ -6,6 +6,8 @@ import java.util.ArrayList;
 public class Autotrader {
     ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
     ArrayList<Listing> boughtCars = new ArrayList<>();
+    ArrayList<Retailer> retailers = new ArrayList<>();
+    ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<String> output = new ArrayList<>();
 
     public Autotrader(ArrayList<String> output) {
@@ -33,12 +35,47 @@ public class Autotrader {
         output.add(customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.");
     }
 
+    public void addRetailer(Retailer retailer) {
+        retailers.add(retailer);
+    }
+
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
     public void browseCars(){
         output.add("**********************");
         output.add("CAR LISTINGS:");
         for (Listing car : carsListedOnAutotrader){
             output.add(car.owner.getRetailerName() + " has listed a " + car.vehicle + " on Autotrader.");
         }
+    }
+
+    public Retailer findRetailerByName(String name){
+        for (Retailer retailer : retailers) {
+            if (name.equals(retailer.getRetailerName())) {
+                return retailer;
+            }
+        }
+        return null;
+    }
+
+    public Customer findCustomerByName(String name){
+        for (Customer customer: customers){
+            if (name.equals(customer.getCustomerName())){
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    public Listing findListingByName(String name) {
+        for (Listing listing: carsListedOnAutotrader) {
+            if (name.equals(listing.vehicle)){
+                return listing;
+            }
+        }
+        return null;
     }
 
 }

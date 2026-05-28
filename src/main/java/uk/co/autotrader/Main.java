@@ -1,5 +1,6 @@
 package uk.co.autotrader;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -9,11 +10,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         var simulator = new ATSimulator();
         while (!weekFinished) {
-            simulator.outputSimulation(day);
+            List<String> output = simulator.outputSimulation(day);
             System.out.println("Press 'f' to finish day.");
             String finish = sc.nextLine();
             if (finish.equals("f")){
                 day++;
+                output.clear();
                 if (day == 4) {
                     weekFinished = true;
                 }
