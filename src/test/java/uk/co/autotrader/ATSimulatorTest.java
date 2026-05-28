@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test;
 public class ATSimulatorTest {
 
     @Test
-    void givenSimulation_thenLinesAreOutput() {
+    void givenSimulationDay1_thenLinesAreOutput() {
         // Given
         ATSimulator simulator = new ATSimulator();
 
         // When
-        List<String> output = simulator.outputSimulation();
+        List<String> output = simulator.outputSimulation(1);
 
         // Then
         assertEquals(18, output.size());
-        assertEquals("**********************", output.get(0));
+        assertEquals("********************** Day 1", output.get(0));
         assertEquals("Welcome to Mini Autotrader!", output.get(1));
         assertEquals("**********************", output.get(2));
         assertEquals("CAR LISTINGS:", output.get(3));
@@ -31,11 +31,17 @@ public class ATSimulatorTest {
         assertEquals("Steve McSteve has bought the car Fire Truck on Autotrader.", output.get(12));
         assertEquals("**********************", output.get(13));
         assertEquals("There are 1 cars listed on Autotrader.", output.get(14));
-        assertEquals("**********************",output.get(15));
+        assertEquals("**********************", output.get(15));
         assertEquals("CAR LISTINGS:", output.get(16));
         assertEquals("Ol’ Granny Guardrails has listed a Robin Reliant on Autotrader.", output.get(17));
-
-
     }
 
+    @Test
+    void givenSimulationDay2_thenLinesAreOutput() {
+        ATSimulator simulator = new ATSimulator();
+        List<String> output = simulator.outputSimulation(2);
+        assertEquals(2,output.size());
+        assertEquals("********************** Day 2",output.get(0));
+        assertEquals("Welcome to Mini Autotrader!",output.get(1));
     }
+}

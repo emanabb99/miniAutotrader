@@ -7,8 +7,16 @@ public class ATSimulator {
 
     private final ArrayList<String> output = new ArrayList<>();
 
-    public List<String> outputSimulation() {
-        runSimulation();
+    public List<String> outputSimulation(int day) {
+        output.clear();
+        switch (day) {
+            case 1: runSimulationDay1();
+            break;
+            case 2: runSimulationDay2();
+            break;
+            case 3: runSimulationDay3();
+            break;
+        }
 
         for (String line: output) {
             System.out.println(line);
@@ -17,8 +25,24 @@ public class ATSimulator {
         return output;
     }
 
-    private void runSimulation() {
-        output.add("**********************");
+//    private void runListings() {
+//        Autotrader at = new Autotrader(output);
+//        Listing listing1 = new Listing("1999 Ford Fiesta",bobsBelles);
+//        at.addListing(listing1);
+//
+//        Listing listing2 = new Listing("Tesla Model Y",bigBucks);
+//        at.addListing(listing2);
+//
+//        Listing listing3 = new Listing("Fire Truck",bigBucks);
+//        at.addListing(listing3);
+//
+//        Listing listing4 = new Listing("Robin Reliant",olGranny);
+//        at.addListing(listing4);
+//        at.browseCars();
+//    }
+
+    private void runSimulationDay1() {
+        output.add("********************** Day 1");
         output.add("Welcome to Mini Autotrader!");
 
         Autotrader at = new Autotrader(output);
@@ -56,4 +80,14 @@ public class ATSimulator {
         at.browseCars();
 
     }
+
+    private void runSimulationDay2() {
+        output.add("********************** Day 2");
+        output.add("Welcome to Mini Autotrader!");
+    }
+
+    private void runSimulationDay3() {
+
+    }
+
 }
