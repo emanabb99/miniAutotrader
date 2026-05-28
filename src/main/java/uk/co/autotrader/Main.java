@@ -1,6 +1,5 @@
 package uk.co.autotrader;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,19 +23,15 @@ public class Main {
         return choice;
     }
 
-    public int displayMiniAutotrader() {
-        int day = 1;
-        int choice = 0;
+    public int displayMiniAutotrader(int day) {
         boolean weekFinished = false;
         while (!weekFinished) {
             List<String> output = simulator.outputSimulation(day);
-            if (day < 4) {
-                choice = menu();
-            }
+            int choice = menu();
+            output.clear();
             switch (choice) {
                 case (1):
                     day++;
-                    output.clear();
                     if (day == 5) {
                         weekFinished = true;
                     }
@@ -46,7 +41,7 @@ public class Main {
                     return choice;
             }
         }
-        return 0;
+        return 1;
     }
 
     public void displayRetailers(String retailerName) {
@@ -69,8 +64,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Main main = new Main();
         boolean simulation = true;
+        int choice = main.displayMiniAutotrader(1);
         while (simulation) {
-            int choice = main.displayMiniAutotrader();
             switch (choice) {
                 case (2):
                     System.out.println("Enter retailer name");
@@ -85,9 +80,17 @@ public class Main {
                 case (4):
                     System.out.println("Enter retailer name");
                     main.displayRetailers(sc.nextLine());
-                case(5):
+                    break;
+                case (5):
                     System.out.println("Enter customer full name");
                     main.displayCustomers(sc.nextLine());
+                    break;
+                case (6):
+                    System.out.println("What day would you like to go to? Choose upto day 3.");
+                    int day = sc.nextInt();
+                    sc.nextLine();
+                    main.displayMiniAutotrader(day);
+                    break;
                 case (7):
                     simulation = false;
                     break;
