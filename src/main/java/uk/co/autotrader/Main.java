@@ -1,5 +1,6 @@
 package uk.co.autotrader;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ public class Main {
     public int menu() {
         System.out.println("Press number to access following menu options: ");
         System.out.println("""
-                    1. Mini Autotrader
+                    1. Continue
                     2. Add a new retailer
                     3. Add a new customer
                     4. View a retailer
@@ -22,48 +23,49 @@ public class Main {
         return choice;
     }
 
-    public boolean displayMiniAutotrader(boolean weekFinished) {
+    public int displayMiniAutotrader() {
         int day = 1;
+        int choice = 0;
         var simulator = new ATSimulator();
+        boolean weekFinished = false;
         while (!weekFinished) {
             List<String> output = simulator.outputSimulation(day);
             if (day < 4) {
-                System.out.println("Press 'f' to finish day.");
-                System.out.println("Press 'q' to quit");
+                choice = menu();
             }
-            else if (day < 5) {
-                System.out.println("Press 'q' to quit");
-            }
-            String finish = sc.nextLine();
-            switch (finish) {
-                case ("f"):
+            switch (choice) {
+                case (1):
                     day++;
                     output.clear();
                     if (day == 5) {
                         weekFinished = true;
                     }
                     break;
-                case ("q"):
+                default:
                     weekFinished = true;
-                    break;
+                    return choice;
+
             }
         }
-        return weekFinished;
+        return 0;
+    }
+
+    public void displayRetailers(String retailerName) {
+        ATSimulator simulator = new ATSimulator();
+        for (Retailer retailer: simulator.at.retailers) {
+            if (retailerName.equals(retailer.getRetailerName())){
+                System.out.println(retailer.getRetailerName());
+            }
+        }
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Main main = new Main();
         boolean simulation = true;
-        boolean weekFinished = false;
         while (simulation) {
-            int menuOption = main.menu();
-            switch (menuOption) {
-                case (1):
-                    while (!weekFinished) {
-                        weekFinished = main.displayMiniAutotrader(weekFinished);
-                    }
-                    break;
+            int choice = main.displayMiniAutotrader();
+            switch (choice) {
                 case (2):
                     System.out.println("Enter retailer name");
                     Retailer retailer = new Retailer(sc.nextLine());
@@ -74,6 +76,9 @@ public class Main {
                     Customer customer = new Customer(sc.nextLine());
                     System.out.println("Customer successfully added");
                     break;
+                case (4):
+                    System.out.println("Enter retailer name");
+                    main.displayRetailers(sc.nextLine());
                 case (7):
                     simulation = false;
                     break;
