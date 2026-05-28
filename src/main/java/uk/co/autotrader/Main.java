@@ -8,8 +8,6 @@ public class Main {
     Scanner sc = new Scanner(System.in);
     ATSimulator simulator = new ATSimulator();
 
-
-
     public int menu() {
         System.out.println("Press number to access following menu options: ");
         System.out.println("""
@@ -46,7 +44,6 @@ public class Main {
                 default:
                     weekFinished = true;
                     return choice;
-
             }
         }
         return 0;
@@ -56,6 +53,14 @@ public class Main {
         for (Retailer retailer: simulator.at.retailers) {
             if (retailerName.equals(retailer.getRetailerName())){
                 System.out.println(retailer.getRetailerName());
+            }
+        }
+    }
+
+    public void displayCustomers(String customerName) {
+        for (Customer customer: simulator.at.customers) {
+            if (customerName.equals(customer.getCustomerName())){
+                System.out.println(customer.getCustomerName());
             }
         }
     }
@@ -80,6 +85,9 @@ public class Main {
                 case (4):
                     System.out.println("Enter retailer name");
                     main.displayRetailers(sc.nextLine());
+                case(5):
+                    System.out.println("Enter customer full name");
+                    main.displayCustomers(sc.nextLine());
                 case (7):
                     simulation = false;
                     break;
