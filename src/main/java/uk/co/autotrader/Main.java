@@ -52,6 +52,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Main main = new Main();
         boolean simulation = true;
         boolean weekFinished = false;
@@ -62,6 +63,16 @@ public class Main {
                     while (!weekFinished) {
                         weekFinished = main.displayMiniAutotrader(weekFinished);
                     }
+                    break;
+                case (2):
+                    System.out.println("Enter retailer name");
+                    Retailer retailer = new Retailer(sc.nextLine());
+                    System.out.println("Retailer successfully added");
+                    break;
+                case (3):
+                    System.out.println("Enter customer's full name");
+                    Customer customer = new Customer(sc.nextLine());
+                    System.out.println("Customer successfully added");
                     break;
                 case (7):
                     simulation = false;
