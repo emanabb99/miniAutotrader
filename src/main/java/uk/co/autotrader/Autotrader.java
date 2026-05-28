@@ -8,7 +8,7 @@ public class Autotrader {
     ArrayList<Listing> boughtCars = new ArrayList<>();
     ArrayList<Retailer> retailers = new ArrayList<>();
     ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<String> output = new ArrayList<>();
+    private ArrayList<String> output;
 
     public Autotrader(ArrayList<String> output) {
         this.output = output;
@@ -24,6 +24,7 @@ public class Autotrader {
     }
 
     public void sellCar(Listing listing, Customer customer) {
+
         for (Listing car : carsListedOnAutotrader){
             if ((listing.vehicle).equals(car.vehicle)){
                 boughtCars.add(listing);
