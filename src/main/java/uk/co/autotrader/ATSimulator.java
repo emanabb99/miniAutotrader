@@ -16,6 +16,8 @@ public class ATSimulator {
             break;
             case 3: runSimulationDay3();
             break;
+            case 4: summary();
+            break;
         }
 
         for (String line: output) {
@@ -69,26 +71,48 @@ public class ATSimulator {
         output.add("Welcome to Mini Autotrader!");
 
         at.retailers.add(new Retailer("Eman's hot wheels"));
-        at.retailers.add(new Retailer("I cant think of another name"));
+        at.retailers.add(new Retailer("Another retailer"));
 
         at.customers.add(new Customer("Penny Coin"));
         at.customers.add(new Customer("Johny Bravo"));
 
         Listing listing1 = new Listing("Fiat 500",at.findRetailerByName("Eman's hot wheels"));
         at.addListing(listing1);
-        Listing listing2 = new Listing("Unknown car",at.findRetailerByName("I cant think of another name"));
+        Listing listing2 = new Listing("Unknown car",at.findRetailerByName("Another retailer"));
         at.addListing(listing2);
         at.browseCars();
 
         output.add("**********************");
         output.add("CAR PURCHASES:");
-        at.sellCar(listing1,at.findCustomerByName("Penny Coin"));
-        at.sellCar(at.findListingByName("Robin Reliant"),at.findCustomerByName("Johny Bravo"));
+        at.sellCar(at.findListingByName("Robin Reliant"),at.findCustomerByName("Penny Coin"));
 
+        output.add("**********************");
+        at.countListings();
+        at.browseCars();
     }
 
     private void runSimulationDay3() {
+        output.add("********************** Day 3");
+        output.add("Welcome to Mini Autotrader!");
 
+        at.retailers.add(new Retailer("Last retailer"));
+        at.customers.add(new Customer("Peter Pan"));
+
+        Listing listing1 = new Listing("Bus",at.findRetailerByName("Last retailer"));
+        at.addListing(listing1);
+
+        output.add("**********************");
+        output.add("CAR PURCHASES:");
+        output.add("**********************");
+        at.countListings();
+        at.browseCars();
+    }
+
+    public void summary() {
+        output.add("**********************");
+        output.add("Performance for last 3 days");
+        output.add("Total sold cars: " + at.boughtCars.size());
+        at.browseCars();
     }
 
 }

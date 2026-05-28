@@ -11,12 +11,14 @@ public class Main {
         var simulator = new ATSimulator();
         while (!weekFinished) {
             List<String> output = simulator.outputSimulation(day);
-            System.out.println("Press 'f' to finish day.");
+            if (day < 4) {
+                System.out.println("Press 'f' to finish day.");
+            }
             String finish = sc.nextLine();
             if (finish.equals("f")){
                 day++;
                 output.clear();
-                if (day == 4) {
+                if (day == 5) {
                     weekFinished = true;
                 }
             }
