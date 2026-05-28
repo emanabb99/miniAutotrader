@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Main {
     Scanner sc = new Scanner(System.in);
+    ATSimulator simulator = new ATSimulator();
+
+
 
     public int menu() {
         System.out.println("Press number to access following menu options: ");
@@ -26,7 +29,6 @@ public class Main {
     public int displayMiniAutotrader() {
         int day = 1;
         int choice = 0;
-        var simulator = new ATSimulator();
         boolean weekFinished = false;
         while (!weekFinished) {
             List<String> output = simulator.outputSimulation(day);
@@ -51,7 +53,6 @@ public class Main {
     }
 
     public void displayRetailers(String retailerName) {
-        ATSimulator simulator = new ATSimulator();
         for (Retailer retailer: simulator.at.retailers) {
             if (retailerName.equals(retailer.getRetailerName())){
                 System.out.println(retailer.getRetailerName());
