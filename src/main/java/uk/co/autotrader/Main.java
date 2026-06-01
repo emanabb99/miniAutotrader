@@ -23,31 +23,22 @@ public class Main {
         return choice;
     }
 
-    public int displayMiniAutotrader(int day) {
-        boolean weekFinished = false;
-        while (!weekFinished) {
+    public void displayMiniAutotrader(int day) {
+        if (day<5) {
             List<String> output = simulator.outputSimulation(day);
-            int choice = menu();
             output.clear();
-            switch (choice) {
-                case (1):
-                    day++;
-                    if (day == 5) {
-                        weekFinished = true;
-                    }
-                    break;
-                default:
-                    weekFinished = true;
-                    return choice;
-            }
         }
-        return 1;
     }
 
     public void displayRetailers(String retailerName) {
         for (Retailer retailer: simulator.at.retailers) {
             if (retailerName.equals(retailer.getRetailerName())){
                 System.out.println(retailer.getRetailerName());
+            }
+        }
+        for (Listing listing: simulator.at.carsListedOnAutotrader){
+            if (retailerName.equals(listing.getOwner().getRetailerName())) {
+                System.out.println(listing.vehicle);
             }
         }
     }
@@ -61,42 +52,44 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        int day = 1;
         Main main = new Main();
         boolean simulation = true;
-        int choice = main.displayMiniAutotrader(1);
         while (simulation) {
+            main.displayMiniAutotrader(day);
+            int choice = main.menu();
             switch (choice) {
+                case (1):
+                    day++;
+                    break;
                 case (2):
                     System.out.println("Enter retailer name");
-                    Retailer retailer = new Retailer(sc.nextLine());
+                    Retailer retailer = new Retailer(main.sc.nextLine());
                     System.out.println("Retailer successfully added");
                     break;
                 case (3):
                     System.out.println("Enter customer's full name");
-                    Customer customer = new Customer(sc.nextLine());
+                    Customer customer = new Customer(main.sc.nextLine());
                     System.out.println("Customer successfully added");
                     break;
                 case (4):
                     System.out.println("Enter retailer name");
-                    main.displayRetailers(sc.nextLine());
+                    main.displayRetailers(main.sc.nextLine());
                     break;
                 case (5):
                     System.out.println("Enter customer full name");
-                    main.displayCustomers(sc.nextLine());
+                    main.displayCustomers(main.sc.nextLine());
                     break;
                 case (6):
                     System.out.println("What day would you like to go to? Choose upto day 3.");
-                    int day = sc.nextInt();
-                    sc.nextLine();
-                    main.displayMiniAutotrader(day);
+                    int dayForward = main.sc.nextInt();
+                    main.sc.nextLine();
+                    main.displayMiniAutotrader(dayForward);
                     break;
                 case (7):
                     simulation = false;
                     break;
             }
-
         }
-
     }
 }
