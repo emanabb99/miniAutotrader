@@ -52,12 +52,14 @@ public class MainMenu {
         return allListings;
     }
 
-    public void displayCustomers(String customerName) {
+    public boolean findCustomer(String customerName) {
+        boolean customerFound = false;
         for (Customer customer : simulator.at.customers) {
             if (customerName.equals(customer.getCustomerName())) {
-                System.out.println(customer.getCustomerName());
+                customerFound = true;
             }
         }
+        return customerFound;
     }
 
     public void addRetailer(Retailer retailer) {
@@ -104,7 +106,13 @@ public class MainMenu {
                     break;
                 case (5):
                     System.out.println("Enter customer full name");
-                    main.displayCustomers(main.sc.nextLine());
+                    boolean customerFound = main.findCustomer(main.sc.nextLine());
+                    if (customerFound) {
+                        System.out.println(customerFound);
+                    }
+                    else {
+                        System.out.println("Customer not found");
+                    }
                     break;
                 case (6):
                     System.out.println("What day would you like to go to? Choose upto day 3.");

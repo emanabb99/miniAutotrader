@@ -11,14 +11,14 @@ class MenuTest {
     MainMenu mainMenu = new MainMenu();
 
     @Test
-    void checkDisplayRetailerIfRetailerNotInList() {
+    void checkFindRetailerIfRetailerNotInList() {
         mainMenu.simulator.outputSimulation(1);
         boolean retailerFound = mainMenu.findRetailer("Retailer that does not exist");
         assertFalse(retailerFound);
     }
 
     @Test
-    void checkDisplayRetailerIfRetailerInList() {
+    void checkFindRetailerIfRetailerInList() {
         mainMenu.simulator.outputSimulation(1);
         boolean retailerFound = mainMenu.findRetailer("Bob's and Belle's Bangers");
         assertTrue(retailerFound);
@@ -39,6 +39,20 @@ class MenuTest {
 
         List<Listing> listings = mainMenu.displayListings("Big Buck's Best Deals");
         assertTrue(listings.isEmpty());
+    }
+
+    @Test
+    void checkFindCustomerIfCustomerNotInList(){
+        mainMenu.simulator.outputSimulation(1);
+        boolean customerFound = mainMenu.findCustomer("Customer that doesn't exist");
+        assertFalse(customerFound);
+    }
+
+    @Test
+    void checkFindCustomerIfCustomerInList(){
+        mainMenu.simulator.outputSimulation(1);
+        boolean customerFound = mainMenu.findCustomer("Megan Moneybanks");
+        assertTrue(customerFound);
     }
 
 }
