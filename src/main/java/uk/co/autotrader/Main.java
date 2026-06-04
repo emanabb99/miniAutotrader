@@ -103,9 +103,8 @@ public class Main {
                     break;
                 case (6):
                     System.out.println("What day would you like to go to? Choose upto day 3.");
-                    int dayForward = main.sc.nextInt();
+                    day = main.sc.nextInt();
                     main.sc.nextLine();
-                    main.displayMiniAutotrader(dayForward);
                     break;
                 case (7):
                     simulation = false;
