@@ -28,7 +28,7 @@ class MainMenuTest {
     void checkRetailerHasListings() {
         mainMenu.simulator.outputSimulation(1);
         List<Listing> listings = mainMenu.displayListings("Ol' Granny Guardrails");
-        assertEquals(listings.get(0).vehicle,"Robin Reliant");
+        assertEquals("Robin Reliant",listings.getFirst().vehicle);
     }
 
     @Test
