@@ -66,35 +66,34 @@ public class MainMenu {
         simulator.at.addRetailer(retailer);
     }
 
-    static void main() {
+    public void runMenuAndMiniAutoTrader() {
         int day = 1;
-        MainMenu main = new MainMenu();
         boolean simulation = true;
         while (simulation) {
-            main.displayMiniAutotrader(day);
-            int choice = main.displayMenu();
+            displayMiniAutotrader(day);
+            int choice = displayMenu();
             switch (choice) {
                 case (1):
                     day++;
                     break;
                 case (2):
                     System.out.println("Enter retailer name");
-                    Retailer retailer = new Retailer(main.sc.nextLine());
-                    main.addRetailer(retailer);
+                    Retailer retailer = new Retailer(sc.nextLine());
+                    addRetailer(retailer);
                     System.out.println("Retailer successfully added");
                     break;
                 case (3):
                     System.out.println("Enter customer's full name");
-                    new Customer(main.sc.nextLine());
+                    new Customer(sc.nextLine());
                     System.out.println("Customer successfully added");
                     break;
                 case (4):
                     System.out.println("Enter retailer name");
-                    String retailerName = main.sc.nextLine();
-                    if (!main.findRetailer(retailerName)) {
+                    String retailerName = sc.nextLine();
+                    if (!findRetailer(retailerName)) {
                         System.out.println("Retailer not found");
                     } else {
-                        List<Listing> listings = main.displayListings(retailerName);
+                        List<Listing> listings = displayListings(retailerName);
                         if (listings.isEmpty()) {
                             System.out.println("No listings");
                         } else {
@@ -106,23 +105,27 @@ public class MainMenu {
                     break;
                 case (5):
                     System.out.println("Enter customer full name");
-                    boolean customerFound = main.findCustomer(main.sc.nextLine());
+                    boolean customerFound = findCustomer(sc.nextLine());
                     if (customerFound) {
                         System.out.println(customerFound);
-                    }
-                    else {
+                    } else {
                         System.out.println("Customer not found");
                     }
                     break;
                 case (6):
                     System.out.println("What day would you like to go to? Choose upto day 3.");
-                    day = main.sc.nextInt();
-                    main.sc.nextLine();
+                    day = sc.nextInt();
+                    sc.nextLine();
                     break;
                 case (7):
                     simulation = false;
                     break;
             }
         }
+    }
+
+    static void main() {
+        MainMenu main = new MainMenu();
+        main.runMenuAndMiniAutoTrader();
     }
 }
