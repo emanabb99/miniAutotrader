@@ -7,7 +7,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class MenuTest {
+class MainMenuTest {
     MainMenu mainMenu = new MainMenu();
 
     @Test
@@ -54,5 +54,13 @@ class MenuTest {
         boolean customerFound = mainMenu.findCustomer("Megan Moneybanks");
         assertTrue(customerFound);
     }
+
+    @Test
+    void checkAddRetailerWorks() {
+        Retailer retailer = new Retailer("Eman");
+        mainMenu.addRetailer(retailer);
+        assertEquals(retailer,mainMenu.simulator.at.retailers.getFirst());
+    }
+
 
 }
