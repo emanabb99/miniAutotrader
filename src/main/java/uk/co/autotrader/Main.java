@@ -71,7 +71,7 @@ public class Main {
         simulator.at.addRetailer(retailer);
     }
 
-    public static void main(String[] args) {
+    static void main() {
         int day = 1;
         Main main = new Main();
         boolean simulation = true;
@@ -90,7 +90,7 @@ public class Main {
                     break;
                 case (3):
                     System.out.println("Enter customer's full name");
-                    Customer customer = new Customer(main.sc.nextLine());
+                    new Customer(main.sc.nextLine());
                     System.out.println("Customer successfully added");
                     break;
                 case (4):
