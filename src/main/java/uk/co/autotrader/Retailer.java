@@ -1,8 +1,5 @@
 package uk.co.autotrader;
 
-
-import java.util.ArrayList;
-
 public class Retailer {
     private final String retailerName;
     private long id;

@@ -24,6 +24,9 @@ public class Autotrader {
     }
 
     public void sellCar(Listing listing, Customer customer) {
+        if (customer == null) {
+            throw new RuntimeException("Customer not found");
+        }
 
         for (Listing car : carsListedOnAutotrader){
             if ((listing.vehicle).equals(car.vehicle)){

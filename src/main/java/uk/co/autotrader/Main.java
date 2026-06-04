@@ -1,5 +1,6 @@
 package uk.co.autotrader;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,15 +32,30 @@ public class Main {
     }
 
     public void displayRetailers(String retailerName) {
+        boolean retailerFound = false;
+        List<Listing> display = new ArrayList<>();
         for (Retailer retailer: simulator.at.retailers) {
             if (retailerName.equals(retailer.getRetailerName())){
-                System.out.println(retailer.getRetailerName());
+                retailerFound = true;
+                break;
             }
         }
-        for (Listing listing: simulator.at.carsListedOnAutotrader){
-            if (retailerName.equals(listing.getOwner().getRetailerName())) {
+        if (retailerFound){
+            System.out.println(retailerName);
+            for (Listing listing: simulator.at.carsListedOnAutotrader){
+                if (listing.getOwner().getRetailerName().equals(retailerName)) {
+                    display.add(listing);
+                }
+            }
+            if (display.isEmpty()){
+                System.out.println("No listings");
+            }
+            for (Listing listing: display){
                 System.out.println(listing.vehicle);
             }
+        }
+        else {
+            System.out.println("Retailer not found");
         }
     }
 
@@ -49,6 +65,10 @@ public class Main {
                 System.out.println(customer.getCustomerName());
             }
         }
+    }
+
+    public void addRetailer(Retailer retailer){
+        simulator.at.addRetailer(retailer);
     }
 
     public static void main(String[] args) {
@@ -65,6 +85,7 @@ public class Main {
                 case (2):
                     System.out.println("Enter retailer name");
                     Retailer retailer = new Retailer(main.sc.nextLine());
+                    main.addRetailer(retailer);
                     System.out.println("Retailer successfully added");
                     break;
                 case (3):
