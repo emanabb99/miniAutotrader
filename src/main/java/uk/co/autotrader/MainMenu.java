@@ -57,6 +57,7 @@ public class MainMenu {
         for (Customer customer : simulator.at.customers) {
             if (customerName.equals(customer.getCustomerName())) {
                 customerFound = true;
+                break;
             }
         }
         return customerFound;

@@ -22,20 +22,24 @@ public class Autotrader {
         return carsListedOnAutotrader.size();
     }
 
-    public void sellCar(Listing listing, Customer customer) {
+    public void sellCar(Listing listing, Customer customer, int buyingChance) {
         if (customer == null) {
             throw new RuntimeException("Customer not found");
         }
-
-        for (Listing car : carsListedOnAutotrader){
-            if ((listing.vehicle).equals(car.vehicle)){
-                boughtCars.add(listing);
+        if (buyingChance > 50) {
+            for (Listing car : carsListedOnAutotrader) {
+                if ((listing.vehicle).equals(car.vehicle)) {
+                    boughtCars.add(listing);
+                }
             }
+            for (Listing boughtCar : boughtCars) {
+                carsListedOnAutotrader.remove(boughtCar);
+            }
+            output.add(customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.");
         }
-        for (Listing boughtCar : boughtCars) {
-            carsListedOnAutotrader.remove(boughtCar);
+        else {
+            output.add(customer.getCustomerName() + " changed their mind about buying " + listing.vehicle);
         }
-        output.add(customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.");
     }
 
     public void addRetailer(Retailer retailer) {

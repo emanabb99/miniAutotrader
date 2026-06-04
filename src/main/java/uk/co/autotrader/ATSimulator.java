@@ -2,11 +2,14 @@ package uk.co.autotrader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ATSimulator {
 
     private final ArrayList<String> output = new ArrayList<>();
     Autotrader at = new Autotrader(output);
+    Random random = new Random(70);
+    Random random2 = new Random(10);
 
     public List<String> outputSimulation(int day) {
         switch (day) {
@@ -57,9 +60,10 @@ public class ATSimulator {
         output.add("**********************");
 
         output.add("CAR PURCHASES:");
-        at.sellCar(listing1,at.findCustomerByName("Megan Moneybanks"));
-        at.sellCar(listing2,at.findCustomerByName("Robin Banks"));
-        at.sellCar(listing3,at.findCustomerByName("Steve McSteve"));
+        int buying = random.nextInt(51)+50;
+        at.sellCar(listing1,at.findCustomerByName("Megan Moneybanks"),buying);
+        at.sellCar(listing2,at.findCustomerByName("Robin Banks"),buying);
+        at.sellCar(listing3,at.findCustomerByName("Steve McSteve"),buying);
 
         output.add("**********************");
         int count = at.countListings();
@@ -85,7 +89,8 @@ public class ATSimulator {
 
         output.add("**********************");
         output.add("CAR PURCHASES:");
-        at.sellCar(at.findListingByName("Robin Reliant"),at.findCustomerByName("Penny Coin"));
+        int buying = random.nextInt(51)+50;
+        at.sellCar(at.findListingByName("Robin Reliant"),at.findCustomerByName("Penny Coin"),buying);
 
         output.add("**********************");
         int count = at.countListings();
@@ -105,6 +110,8 @@ public class ATSimulator {
 
         output.add("**********************");
         output.add("CAR PURCHASES:");
+        int notBuying = random2.nextInt(51);
+        at.sellCar(at.findListingByName("Fiat 500"),at.findCustomerByName("Peter Pan"),notBuying);
         output.add("**********************");
         int count = at.countListings();
         output.add("There are " + count + " cars listed on Autotrader.");

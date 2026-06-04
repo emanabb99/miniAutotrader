@@ -64,13 +64,14 @@ public class ATSimulatorTest {
         assertEquals("Welcome to Mini Autotrader!", output.get(35));
         assertEquals("**********************", output.get(36));
         assertEquals("CAR PURCHASES:", output.get(37));
-        assertEquals("**********************", output.get(38));
-        assertEquals("There are 3 cars listed on Autotrader.", output.get(39));
-        assertEquals("**********************", output.get(40));
-        assertEquals("CAR LISTINGS:", output.get(41));
-        assertEquals("Eman's hot wheels has listed a Fiat 500 on Autotrader.", output.get(42));
-        assertEquals("Another retailer has listed a Unknown car on Autotrader.", output.get(43));
-        assertEquals("Last retailer has listed a Bus on Autotrader.", output.get(44));
+        assertEquals("Peter Pan changed their mind about buying Fiat 500", output.get(38));
+        assertEquals("**********************", output.get(39));
+        assertEquals("There are 3 cars listed on Autotrader.", output.get(40));
+        assertEquals("**********************", output.get(41));
+        assertEquals("CAR LISTINGS:", output.get(42));
+        assertEquals("Eman's hot wheels has listed a Fiat 500 on Autotrader.", output.get(43));
+        assertEquals("Another retailer has listed a Unknown car on Autotrader.", output.get(44));
+        assertEquals("Last retailer has listed a Bus on Autotrader.", output.get(45));
     }
 
     @Test
@@ -79,14 +80,14 @@ public class ATSimulatorTest {
         output = (simulator.outputSimulation(2));
         output = (simulator.outputSimulation(3));
         output = (simulator.outputSimulation(4));
-        assertEquals("**********************", output.get(45));
-        assertEquals("Performance for last 3 days", output.get(46));
-        assertEquals("Total sold cars: 4", output.get(47));
-        assertEquals("**********************", output.get(48));
-        assertEquals("CAR LISTINGS:", output.get(49));
-        assertEquals("Eman's hot wheels has listed a Fiat 500 on Autotrader.", output.get(50));
-        assertEquals("Another retailer has listed a Unknown car on Autotrader.", output.get(51));
-        assertEquals("Last retailer has listed a Bus on Autotrader.", output.get(52));
+        assertEquals("**********************", output.get(46));
+        assertEquals("Performance for last 3 days", output.get(47));
+        assertEquals("Total sold cars: 4", output.get(48));
+        assertEquals("**********************", output.get(49));
+        assertEquals("CAR LISTINGS:", output.get(50));
+        assertEquals("Eman's hot wheels has listed a Fiat 500 on Autotrader.", output.get(51));
+        assertEquals("Another retailer has listed a Unknown car on Autotrader.", output.get(52));
+        assertEquals("Last retailer has listed a Bus on Autotrader.", output.get(53));
 
     }
 }

@@ -3,6 +3,7 @@ package uk.co.autotrader;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -48,14 +49,29 @@ public class AutotraderTest {
     }
 
     @Test
-    void checkSellCarsRemovesCarFromLiveListingsIntoBoughtListings() {
+    void checkSellCarsIfBuyingChanceOver50() {
+        Random random = new Random(70);
         Listing listing = new Listing("Car",new Retailer("Eman"));
         at.addListing(listing);
         Customer customer = new Customer("Diya");
         assertEquals(listing,at.carsListedOnAutotrader.getFirst());
-        at.sellCar(listing,customer);
+        System.out.println(random.nextInt(51)+50);
+        at.sellCar(listing,customer,random.nextInt(51)+50);
         assertEquals(0,at.carsListedOnAutotrader.size());
         assertEquals(listing,at.boughtCars.getFirst());
+    }
+
+    @Test
+    void checkSellCarsIfBuyingChanceLessThan50(){
+        Random random = new Random(10);
+        Listing listing = new Listing("Car",new Retailer("Eman"));
+        at.addListing(listing);
+        Customer customer = new Customer("Diya");
+        assertEquals(listing,at.carsListedOnAutotrader.getFirst());
+        System.out.println(random.nextInt(51));
+        at.sellCar(listing,customer, random.nextInt(51));
+        assertEquals(1,at.carsListedOnAutotrader.size());
+        assertEquals(0,at.boughtCars.size());
     }
 
     @Test
@@ -93,7 +109,4 @@ public class AutotraderTest {
     void checkFindListingByNameIfListingDoesntExist() {
         assertNull(at.findListingByName("Customer that doesn't exist"));
     }
-
-
-
 }
