@@ -28,17 +28,17 @@ public class Autotrader {
         }
         if (buyingChance > 50) {
             for (Listing car : carsListedOnAutotrader) {
-                if ((listing.vehicle).equals(car.vehicle)) {
+                if ((listing.vehicleName).equals(car.vehicleName)) {
                     boughtCars.add(listing);
                 }
             }
             for (Listing boughtCar : boughtCars) {
                 carsListedOnAutotrader.remove(boughtCar);
             }
-            output.add(customer.getCustomerName() + " has bought the car " + listing.vehicle + " on Autotrader.");
+            output.add(customer.getCustomerName() + " has bought the car " + listing.vehicleName + " on Autotrader.");
         }
         else {
-            output.add(customer.getCustomerName() + " changed their mind about buying " + listing.vehicle);
+            output.add(customer.getCustomerName() + " changed their mind about buying " + listing.vehicleName);
         }
     }
 
@@ -54,7 +54,7 @@ public class Autotrader {
         output.add("**********************");
         output.add("CAR LISTINGS:");
         for (Listing car : carsListedOnAutotrader){
-            output.add(car.owner.getRetailerName() + " has listed a " + car.vehicle + " on Autotrader.");
+            output.add(car.owner.getRetailerName() + " has listed a " + car.vehicleName + " on Autotrader.");
         }
     }
 
@@ -78,7 +78,7 @@ public class Autotrader {
 
     public Listing findListingByName(String name) {
         for (Listing listing: carsListedOnAutotrader) {
-            if (name.equals(listing.vehicle)){
+            if (name.equals(listing.vehicleName)){
                 return listing;
             }
         }

@@ -99,7 +99,7 @@ public class MainMenu {
                             System.out.println("No listings");
                         } else {
                             for (Listing listing : listings) {
-                                System.out.println(listing.vehicle);
+                                System.out.println(listing.vehicleName);
                             }
                         }
                     }
