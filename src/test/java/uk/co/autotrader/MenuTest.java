@@ -31,4 +31,14 @@ class MenuTest {
         assertEquals(listings.get(0).vehicle,"Robin Reliant");
     }
 
+    @Test
+    void checkRetailerExistsButHasNoActiveListings() {
+        mainMenu.simulator.outputSimulation(1);
+        boolean retailerFound = mainMenu.findRetailer("Big Buck's Best Deals");
+        assertTrue(retailerFound);
+
+        List<Listing> listings = mainMenu.displayListings("Big Buck's Best Deals");
+        assertTrue(listings.isEmpty());
+    }
+
 }
