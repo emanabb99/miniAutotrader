@@ -2,8 +2,9 @@ package uk.co.autotrader;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class MenuTest {
@@ -21,6 +22,13 @@ class MenuTest {
         mainMenu.simulator.outputSimulation(1);
         boolean retailerFound = mainMenu.findRetailer("Bob's and Belle's Bangers");
         assertTrue(retailerFound);
+    }
+
+    @Test
+    void checkRetailerHasListings() {
+        mainMenu.simulator.outputSimulation(1);
+        List<Listing> listings = mainMenu.displayListings("Ol' Granny Guardrails");
+        assertEquals(listings.get(0).vehicle,"Robin Reliant");
     }
 
 }
