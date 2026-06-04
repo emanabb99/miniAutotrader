@@ -4,80 +4,73 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ATSimulator simulator = new ATSimulator();
 
-    public int menu() {
-        System.out.println("Press number to access following menu options: ");
+    public int displayMenu() {
+        System.out.println("Press number to access following displayMenu options: ");
         System.out.println("""
-                    1. Continue
-                    2. Add a new retailer
-                    3. Add a new customer
-                    4. View a retailer
-                    5. View a customer
-                    6. Skip ahead X days
-                    7. Quit simulation
-                    """);
-        int choice =  sc.nextInt();
+                1. Continue
+                2. Add a new retailer
+                3. Add a new customer
+                4. View a retailer
+                5. View a customer
+                6. Skip ahead X days
+                7. Quit simulation
+                """);
+        int choice = sc.nextInt();
         sc.nextLine();
         return choice;
     }
 
     public void displayMiniAutotrader(int day) {
-        if (day<5) {
+        if (day < 5) {
             List<String> output = simulator.outputSimulation(day);
             output.clear();
         }
     }
 
-    public void displayRetailers(String retailerName) {
+    public boolean findRetailer(String retailerName) {
         boolean retailerFound = false;
-        List<Listing> display = new ArrayList<>();
-        for (Retailer retailer: simulator.at.retailers) {
-            if (retailerName.equals(retailer.getRetailerName())){
+        for (Retailer retailer : simulator.at.retailers) {
+            if (retailerName.equals(retailer.getRetailerName())) {
                 retailerFound = true;
                 break;
             }
         }
-        if (retailerFound){
-            System.out.println(retailerName);
-            for (Listing listing: simulator.at.carsListedOnAutotrader){
-                if (listing.getOwner().getRetailerName().equals(retailerName)) {
-                    display.add(listing);
-                }
-            }
-            if (display.isEmpty()){
-                System.out.println("No listings");
-            }
-            for (Listing listing: display){
-                System.out.println(listing.vehicle);
+        return retailerFound;
+    }
+
+    public List<Listing> displayListings(String retailerName) {
+        List<Listing> allListings = new ArrayList<>();
+        for (Listing listing : simulator.at.carsListedOnAutotrader) {
+            if (listing.getOwner().getRetailerName().equals(retailerName)) {
+                allListings.add(listing);
             }
         }
-        else {
-            System.out.println("Retailer not found");
-        }
+        return allListings;
     }
 
     public void displayCustomers(String customerName) {
-        for (Customer customer: simulator.at.customers) {
-            if (customerName.equals(customer.getCustomerName())){
+        for (Customer customer : simulator.at.customers) {
+            if (customerName.equals(customer.getCustomerName())) {
                 System.out.println(customer.getCustomerName());
             }
         }
     }
 
-    public void addRetailer(Retailer retailer){
+    public void addRetailer(Retailer retailer) {
         simulator.at.addRetailer(retailer);
     }
 
     static void main() {
         int day = 1;
-        Main main = new Main();
+        MainMenu main = new MainMenu();
         boolean simulation = true;
         while (simulation) {
             main.displayMiniAutotrader(day);
-            int choice = main.menu();
+            int choice = main.displayMenu();
             switch (choice) {
                 case (1):
                     day++;
@@ -95,7 +88,19 @@ public class Main {
                     break;
                 case (4):
                     System.out.println("Enter retailer name");
-                    main.displayRetailers(main.sc.nextLine());
+                    String retailerName = main.sc.nextLine();
+                    if (!main.findRetailer(retailerName)) {
+                        System.out.println("Retailer not found");
+                    } else {
+                        List<Listing> listings = main.displayListings(retailerName);
+                        if (listings.isEmpty()) {
+                            System.out.println("No listings");
+                        } else {
+                            for (Listing listing : listings) {
+                                System.out.println(listing.vehicle);
+                            }
+                        }
+                    }
                     break;
                 case (5):
                     System.out.println("Enter customer full name");
