@@ -62,7 +62,8 @@ public class ATSimulator {
         at.sellCar(listing3,at.findCustomerByName("Steve McSteve"));
 
         output.add("**********************");
-        at.countListings();
+        int count = at.countListings();
+        output.add("There are " + count + " cars listed on Autotrader.");
         at.browseCars();
     }
 
@@ -87,7 +88,8 @@ public class ATSimulator {
         at.sellCar(at.findListingByName("Robin Reliant"),at.findCustomerByName("Penny Coin"));
 
         output.add("**********************");
-        at.countListings();
+        int count = at.countListings();
+        output.add("There are " + count + " cars listed on Autotrader.");
         at.browseCars();
     }
 
@@ -104,7 +106,8 @@ public class ATSimulator {
         output.add("**********************");
         output.add("CAR PURCHASES:");
         output.add("**********************");
-        at.countListings();
+        int count = at.countListings();
+        output.add("There are " + count + " cars listed on Autotrader.");
         at.browseCars();
     }
 

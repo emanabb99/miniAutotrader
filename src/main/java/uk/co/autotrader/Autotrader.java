@@ -18,9 +18,8 @@ public class Autotrader {
         carsListedOnAutotrader.add(listing);
     }
 
-    public void countListings() {
-        int numberOfListedCars = carsListedOnAutotrader.size();
-        output.add("There are " + numberOfListedCars + " cars listed on Autotrader.");
+    public int countListings() {
+        return carsListedOnAutotrader.size();
     }
 
     public void sellCar(Listing listing, Customer customer) {
