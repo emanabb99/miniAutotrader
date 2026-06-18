@@ -52,7 +52,7 @@ public class Autotrader {
 
     public void browseCars(){
         for (Listing car : carsListedOnAutotrader){
-            output.add(car.owner.getRetailerName() + " has listed a " + car.vehicleName + " on Autotrader.");
+            output.add(car.getOwner().getRetailerName() + " has listed a " + car.getDescription() + " on Autotrader.");
         }
     }
 

@@ -102,7 +102,7 @@ public class MainMenu {
                             System.out.println("No retailer listings");
                         } else {
                             for (Listing listing : retailerListings) {
-                                System.out.println(listing.vehicleName + " " + listing.getYear() + " - £" + listing.price);
+                                System.out.println(listing.getDescription());
                             }
                         }
                     }

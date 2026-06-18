@@ -5,11 +5,11 @@ import java.util.Random;
 
 public class Listing {
     String vehicleName;
-    Retailer owner;
-    int price;
+    private final Retailer owner;
+    private int price;
     Random random = new Random();
-    String year;
-    Categories category;
+    private final String year;
+    private final Categories category;
 
     public Listing(String vehicleName, Retailer owner){
         this.vehicleName = vehicleName;
@@ -32,7 +32,6 @@ public class Listing {
     public String createYear() {
         int year = random.nextInt(141)+1886;
         return String.valueOf(year);
-
     }
 
     public String getYear() {
@@ -46,5 +45,9 @@ public class Listing {
     public Categories generateRandomCategory() {
         Categories[] categoriesList = Categories.values();
         return categoriesList[random.nextInt(categoriesList.length)];
+    }
+
+    public String getDescription() {
+        return vehicleName.concat(" (").concat(getYear()).concat(") - £").concat(String.valueOf(getPrice()).concat(" - ").concat(category.toString()));
     }
 }
