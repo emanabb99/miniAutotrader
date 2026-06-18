@@ -10,8 +10,9 @@ public class ATSimulator {
     Autotrader at = new Autotrader(output);
     Random random = new Random(70);
     Random random2 = new Random(10);
+    NoiseLevelUtil noiseLevelUtil = new NoiseLevelUtil();
 
-    public List<String> outputSimulation(int day) {
+    public List<String> outputSimulation(int day, NoiseLevel noiseLevel) {
         switch (day) {
             case 1: runSimulationDay1();
             break;
@@ -23,7 +24,8 @@ public class ATSimulator {
             break;
         }
 
-        for (String line: output) {
+        List<String> subList = noiseLevelUtil.getPrintArrayBasedOnNoise(noiseLevel,output);
+        for (String line: subList) {
             System.out.println(line);
         }
 

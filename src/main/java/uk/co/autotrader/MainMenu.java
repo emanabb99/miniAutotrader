@@ -8,6 +8,16 @@ public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ATSimulator simulator = new ATSimulator();
 
+    public String chooseNoiseLevel() {
+        System.out.println("Choose noise level: ");
+        System.out.println("""
+                1. Quiet 
+                2. Normal
+                3. Verbose
+                """);
+        return sc.nextLine();
+    }
+
     public int displayMenu() {
         System.out.println("Enter number to access following Menu options: ");
         System.out.println("""
@@ -24,9 +34,9 @@ public class MainMenu {
         return choice;
     }
 
-    public void displayMiniAutotrader(int day) {
+    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel) {
         if (day < 5) {
-            List<String> output = simulator.outputSimulation(day);
+            List<String> output = simulator.outputSimulation(day,noiseLevel);
             output.clear();
         }
     }
@@ -69,9 +79,11 @@ public class MainMenu {
 
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
+        String noiseLevelString = chooseNoiseLevel().toUpperCase();
+        NoiseLevel noiseLevel = NoiseLevel.valueOf(noiseLevelString);
         boolean simulation = true;
         while (simulation) {
-            displayMiniAutotrader(day);
+            displayMiniAutotrader(day,noiseLevel);
             int choice = displayMenu();
             switch (choice) {
                 case (1):
