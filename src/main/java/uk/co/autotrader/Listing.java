@@ -14,20 +14,35 @@ public class Listing {
     public Listing(String vehicleName, Retailer owner){
         this.vehicleName = vehicleName;
         this.owner = owner;
-
-        List<Integer> prices = List.of(1000,3000,6000,15000);
-        price = prices.get(random.nextInt(4));
-
-        year = String.valueOf(random.nextInt(3)+1);
-
-        int[] secondDigit = {0,8,9};
-        year = year.concat(String.valueOf(secondDigit[random.nextInt(3)]));
-
-
-
+        this.price = createPrice();
+        this.year = createYear();
     }
 
     public Retailer getOwner() {
         return owner;
+    }
+
+    public int createPrice() {
+        List<Integer> prices = List.of(1000,3000,6000,15000);
+        price = prices.get(random.nextInt(4));
+        return price;
+    }
+
+    public String createYear() {
+        String year = "";
+        int firstDigit = random.nextInt(2)+1;
+        int secondDigit = firstDigit==1 ? random.nextInt(2)+8 : 0;
+        int thirdDigit = switch (secondDigit) {
+            case (8) -> random.nextInt(2) + 8;
+            case (0) -> random.nextInt(3);
+            default -> random.nextInt(10);
+        };
+        int fourthDigit = switch (thirdDigit) {
+            case(8) -> random.nextInt(4)+6;
+            case(2) -> random.nextInt(7);
+            default -> random.nextInt(10);
+        };
+        year = String.valueOf(firstDigit).concat(String.valueOf(secondDigit)).concat(String.valueOf(thirdDigit)).concat(String.valueOf(fourthDigit));
+        return year;
     }
 }
