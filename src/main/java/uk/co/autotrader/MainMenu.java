@@ -8,14 +8,19 @@ public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ATSimulator simulator = new ATSimulator();
 
-    public String chooseNoiseLevel() {
-        System.out.println("Choose noise level: ");
-        System.out.println("""
-                1. Quiet 
-                2. Normal
-                3. Verbose
-                """);
-        return sc.nextLine();
+    public NoiseLevel chooseNoiseLevel() {
+        System.out.println("Type in number for your desired noise level: ");
+        for (NoiseLevel noiseLevel : NoiseLevel.values()) {
+            System.out.println(noiseLevel.getValue() + ". " + noiseLevel);
+        }
+        int choice = sc.nextInt();
+        sc.nextLine();
+        for (NoiseLevel noiseLevel : NoiseLevel.values()) {
+            if (noiseLevel.getValue() == choice) {
+                return noiseLevel;
+            }
+        }
+        return null;
     }
 
     public int displayMenu() {
@@ -36,7 +41,7 @@ public class MainMenu {
 
     public void displayMiniAutotrader(int day, NoiseLevel noiseLevel) {
         if (day < 5) {
-            List<String> output = simulator.outputSimulation(day,noiseLevel);
+            List<String> output = simulator.outputSimulation(day, noiseLevel);
             output.clear();
         }
     }
@@ -79,11 +84,14 @@ public class MainMenu {
 
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
-        String noiseLevelString = chooseNoiseLevel().toUpperCase();
-        NoiseLevel noiseLevel = NoiseLevel.valueOf(noiseLevelString);
+        NoiseLevel noiseLevel = chooseNoiseLevel();
+        while (noiseLevel==null) {
+            System.out.println("Invalid choice - please try again.");
+            noiseLevel = chooseNoiseLevel();
+        }
         boolean simulation = true;
         while (simulation) {
-            displayMiniAutotrader(day,noiseLevel);
+            displayMiniAutotrader(day, noiseLevel);
             int choice = displayMenu();
             switch (choice) {
                 case (1):
