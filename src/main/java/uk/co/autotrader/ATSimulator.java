@@ -55,6 +55,8 @@ public class ATSimulator {
         Listing listing4 = new Listing("Robin Reliant",at.findRetailerByName("Ol' Granny Guardrails"));
         at.addListing(listing4);
 
+        output.add("**********************");
+        output.add("CAR LISTINGS:");
         at.browseCars();
 
         output.add("**********************");

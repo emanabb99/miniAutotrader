@@ -51,8 +51,6 @@ public class Autotrader {
     }
 
     public void browseCars(){
-        output.add("**********************");
-        output.add("CAR LISTINGS:");
         for (Listing car : carsListedOnAutotrader){
             output.add(car.owner.getRetailerName() + " has listed a " + car.vehicleName + " on Autotrader.");
         }

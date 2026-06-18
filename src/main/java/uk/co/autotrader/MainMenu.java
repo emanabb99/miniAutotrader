@@ -9,7 +9,7 @@ public class MainMenu {
     ATSimulator simulator = new ATSimulator();
 
     public int displayMenu() {
-        System.out.println("Press number to access following displayMenu options: ");
+        System.out.println("Enter number to access following Menu options: ");
         System.out.println("""
                 1. Continue
                 2. Add a new retailer
@@ -78,33 +78,37 @@ public class MainMenu {
                     day++;
                     break;
                 case (2):
+                    day++;
                     System.out.println("Enter retailer name");
                     Retailer retailer = new Retailer(sc.nextLine());
                     addRetailer(retailer);
                     System.out.println("Retailer successfully added");
                     break;
                 case (3):
+                    day++;
                     System.out.println("Enter customer's full name");
                     new Customer(sc.nextLine());
                     System.out.println("Customer successfully added");
                     break;
                 case (4):
+                    day++;
                     System.out.println("Enter retailer name");
                     String retailerName = sc.nextLine();
                     if (!findRetailer(retailerName)) {
                         System.out.println("Retailer not found");
                     } else {
-                        List<Listing> listings = displayListings(retailerName);
-                        if (listings.isEmpty()) {
-                            System.out.println("No listings");
+                        List<Listing> retailerListings = displayListings(retailerName);
+                        if (retailerListings.isEmpty()) {
+                            System.out.println("No retailer listings");
                         } else {
-                            for (Listing listing : listings) {
-                                System.out.println(listing.vehicleName);
+                            for (Listing listing : retailerListings) {
+                                System.out.println(listing.vehicleName + " " + listing.getYear() + " - £" + listing.price);
                             }
                         }
                     }
                     break;
                 case (5):
+                    day++;
                     System.out.println("Enter customer full name");
                     boolean customerFound = findCustomer(sc.nextLine());
                     if (customerFound) {
