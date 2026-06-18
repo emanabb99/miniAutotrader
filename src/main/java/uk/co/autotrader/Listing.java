@@ -42,4 +42,12 @@ public class Listing {
         };
         return String.valueOf(firstDigit).concat(String.valueOf(secondDigit)).concat(String.valueOf(thirdDigit)).concat(String.valueOf(fourthDigit));
     }
+
+    public String getYear() {
+        return year;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

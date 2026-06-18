@@ -2,7 +2,10 @@ package uk.co.autotrader;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ListingTest {
 
@@ -11,5 +14,22 @@ public class ListingTest {
         Retailer retailer = new Retailer("Eman");
         Listing listing = new Listing("Fiat 500",retailer);
         assertEquals(retailer,listing.getOwner());
+    }
+
+    @Test
+    void checkGetYearReturnsYearInRightFormatAndRightRange() {
+        Retailer retailer = new Retailer("Eman");
+        Listing listing = new Listing("Fiat 500",retailer);
+        assertTrue(listing.getYear().matches("^\\d{4}$"));
+        int year = Integer.parseInt(listing.getYear());
+        assertTrue(year <= 2026 && year >= 1886);
+    }
+
+    @Test
+    void checkGetPriceReturnsPriceThatMatchesPriceOptions() {
+        Retailer retailer = new Retailer("Eman");
+        Listing listing = new Listing("Fiat 500",retailer);
+        List<Integer> prices = List.of(1000,3000,6000,15000);
+        assertTrue(prices.contains(listing.getPrice()));
     }
 }
