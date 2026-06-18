@@ -1,6 +1,5 @@
 package uk.co.autotrader;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +28,6 @@ public class Listing {
     }
 
     public String createYear() {
-        String year = "";
         int firstDigit = random.nextInt(2)+1;
         int secondDigit = firstDigit==1 ? random.nextInt(2)+8 : 0;
         int thirdDigit = switch (secondDigit) {
@@ -42,7 +40,6 @@ public class Listing {
             case(2) -> random.nextInt(7);
             default -> random.nextInt(10);
         };
-        year = String.valueOf(firstDigit).concat(String.valueOf(secondDigit)).concat(String.valueOf(thirdDigit)).concat(String.valueOf(fourthDigit));
-        return year;
+        return String.valueOf(firstDigit).concat(String.valueOf(secondDigit)).concat(String.valueOf(thirdDigit)).concat(String.valueOf(fourthDigit));
     }
 }
