@@ -30,19 +30,9 @@ public class Listing {
     }
 
     public String createYear() {
-        int firstDigit = random.nextInt(2)+1;
-        int secondDigit = firstDigit==1 ? random.nextInt(2)+8 : 0;
-        int thirdDigit = switch (secondDigit) {
-            case (8) -> random.nextInt(2) + 8;
-            case (0) -> random.nextInt(3);
-            default -> random.nextInt(10);
-        };
-        int fourthDigit = switch (thirdDigit) {
-            case(8) -> random.nextInt(4)+6;
-            case(2) -> random.nextInt(7);
-            default -> random.nextInt(10);
-        };
-        return String.valueOf(firstDigit).concat(String.valueOf(secondDigit)).concat(String.valueOf(thirdDigit)).concat(String.valueOf(fourthDigit));
+        int year = random.nextInt(141)+1886;
+        return String.valueOf(year);
+
     }
 
     public String getYear() {
