@@ -1,6 +1,8 @@
 package uk.co.autotrader;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 
 public class Autotrader {
@@ -36,8 +38,7 @@ public class Autotrader {
                 carsListedOnAutotrader.remove(boughtCar);
             }
             output.add(customer.getCustomerName() + " has bought the car " + listing.vehicleName + " on Autotrader.");
-        }
-        else {
+        } else {
             output.add(customer.getCustomerName() + " changed their mind about buying " + listing.vehicleName);
         }
     }
@@ -50,13 +51,18 @@ public class Autotrader {
         addCustomer.add(customer);
     }
 
-    public void browseCars(){
-        for (Listing car : carsListedOnAutotrader){
-            output.add(car.getOwner().getRetailerName() + " has listed a " + car.getDescription() + " on Autotrader.");
+    public void browseCars(String filter) {
+        Stream<Listing> carsStream = carsListedOnAutotrader.stream();
+        switch (filter) {
+            case ("priceLow") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice));
+            case ("priceHigh") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
+            case ("age") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
         }
+        carsStream.forEach(car ->
+                output.add(car.getOwner().getRetailerName() + " has listed a " + car.getDescription() + " on Autotrader."));
     }
 
-    public Retailer findRetailerByName(String name){
+    public Retailer findRetailerByName(String name) {
         for (Retailer retailer : addRetailer) {
             if (name.equals(retailer.getRetailerName())) {
                 return retailer;
@@ -65,9 +71,9 @@ public class Autotrader {
         return null;
     }
 
-    public Customer findCustomerByName(String name){
-        for (Customer customer: addCustomer){
-            if (name.equals(customer.getCustomerName())){
+    public Customer findCustomerByName(String name) {
+        for (Customer customer : addCustomer) {
+            if (name.equals(customer.getCustomerName())) {
                 return customer;
             }
         }
@@ -75,8 +81,8 @@ public class Autotrader {
     }
 
     public Listing findListingByName(String name) {
-        for (Listing listing: carsListedOnAutotrader) {
-            if (name.equals(listing.vehicleName)){
+        for (Listing listing : carsListedOnAutotrader) {
+            if (name.equals(listing.vehicleName)) {
                 return listing;
             }
         }

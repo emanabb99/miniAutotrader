@@ -8,6 +8,15 @@ public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ATSimulator simulator = new ATSimulator();
 
+    public String sortResults(int sortNumber) {
+        return switch(sortNumber) {
+            case (1) -> "priceLow";
+            case (2) -> "priceHigh";
+            case (3) -> "age";
+            default -> "";
+        };
+    }
+
     public NoiseLevel chooseNoiseLevel() {
         System.out.println("Type in number for your desired noise level: ");
         for (NoiseLevel noiseLevel : NoiseLevel.values()) {
@@ -32,15 +41,16 @@ public class MainMenu {
                 4. View a retailer
                 5. View a customer
                 6. Skip ahead X days
-                7. Quit simulation
+                7. Filter the results
+                8. Quit simulation
                 """);
         int choice = sc.nextInt();
         sc.nextLine();
         return choice;
     }
 
-    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary) {
-        List<String> output = simulator.outputSimulation(day, noiseLevel, summary);
+    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary, String filter) {
+        List<String> output = simulator.outputSimulation(day, noiseLevel,summary,filter);
         output.clear();
     }
 
@@ -82,6 +92,7 @@ public class MainMenu {
 
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
+        String sort = "";
         NoiseLevel noiseLevel = chooseNoiseLevel();
         while (noiseLevel == null) {
             System.out.println("Invalid choice - please try again.");
@@ -90,7 +101,7 @@ public class MainMenu {
         boolean simulation = true;
         boolean summary = false;
         while (simulation) {
-            displayMiniAutotrader(day, noiseLevel, summary);
+            displayMiniAutotrader(day, noiseLevel, summary, sort);
             int choice = displayMenu();
             switch (choice) {
                 case (1):
@@ -142,6 +153,15 @@ public class MainMenu {
                     sc.nextLine();
                     break;
                 case (7):
+                    System.out.println("Choose how to filter the results");
+                    for (Sort sorted: Sort.values()) {
+                        System.out.println(sorted.number + ". " + sorted);
+                    }
+                    int sortNumber = sc.nextInt();
+                    sort = sortResults(sortNumber);
+                    sc.nextLine();
+                    break;
+                case (8):
                     simulation = false;
                     summary = true;
                     break;
@@ -150,7 +170,7 @@ public class MainMenu {
                     break;
             }
         }
-        displayMiniAutotrader(day,noiseLevel,summary);
+        displayMiniAutotrader(day,noiseLevel,summary,sort);
     }
 
     static void main() {
