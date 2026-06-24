@@ -35,17 +35,21 @@ public class ATSimulator {
     public List<String> outputSimulation(int day, NoiseLevel noiseLevel, boolean summary) {
         if (summary) {
             summary(day);
-        }
-        if (day==1) {
-            runSimulationDay1();
+            for (String line: output) {
+                System.out.println(line);
+            }
         }
         else {
-            runSimulationDayRandom(day);
-        }
-
-        List<String> subList = noiseLevelUtil.getPrintArrayBasedOnNoise(noiseLevel,output);
-        for (String line: subList) {
-            System.out.println(line);
+            if (day==1) {
+                runSimulationDay1();
+            }
+            else {
+                runSimulationDayRandom(day);
+            }
+            List<String> subList = noiseLevelUtil.getPrintArrayBasedOnNoise(noiseLevel,output);
+            for (String line: subList) {
+                System.out.println(line);
+            }
         }
         return output;
     }
@@ -88,7 +92,7 @@ public class ATSimulator {
         output.add("********************** Day " + day);
         output.add("Welcome to Mini Autotrader!");
 
-        int randomAmount = randomNoSeed.nextInt(5);
+        int randomAmount = randomNoSeed.nextInt(5)+1;
         for (int i = 1; i < randomAmount; i++){
             String vehicleChosen = vehicles.get(randomNoSeed.nextInt(vehicles.size()));
             Retailer retailerChosen = at.addRetailer.get(randomNoSeed.nextInt(at.addRetailer.size()));
@@ -99,11 +103,13 @@ public class ATSimulator {
         output.add("**********************");
         output.add("CAR PURCHASES:");
 
-        for (int i = 0; i < randomAmount; i++) {
-            int buyingProbability = randomNoSeed.nextInt(101);
-            Listing listingChosen = at.carsListedOnAutotrader.get(randomNoSeed.nextInt(at.carsListedOnAutotrader.size()));
-            Customer customerChosen = at.addCustomer.get(randomNoSeed.nextInt(at.addCustomer.size()));
-            at.sellCar(listingChosen,customerChosen,buyingProbability);
+        if (at.countListings()>1) {
+            for (int i = 0; i < randomAmount; i++) {
+                int buyingProbability = randomNoSeed.nextInt(101);
+                Listing listingChosen = at.carsListedOnAutotrader.get(randomNoSeed.nextInt(at.carsListedOnAutotrader.size()));
+                Customer customerChosen = at.addCustomer.get(randomNoSeed.nextInt(at.addCustomer.size()));
+                at.sellCar(listingChosen, customerChosen, buyingProbability);
+            }
         }
 
         output.add("**********************");
@@ -114,8 +120,9 @@ public class ATSimulator {
 
     public void summary(int numberOfDays) {
         output.add("**********************");
-        output.add("Performance for last" + numberOfDays +"days");
+        output.add("Performance for last " + numberOfDays +" days");
         output.add("Total sold cars: " + at.boughtCars.size());
+        output.add("Remaining unsold listings:");
         at.browseCars();
     }
 
