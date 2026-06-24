@@ -1,6 +1,6 @@
 package uk.co.autotrader;
 
-public enum Categories {
+public enum Category {
     ALL_ROUNDER,
     BIG_BOOT,
     CHEAPER_INSURANCE,

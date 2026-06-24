@@ -62,5 +62,4 @@ class MainMenuTest {
         assertEquals(retailer,mainMenu.simulator.at.findRetailerByName("Eman"));
     }
 
-
 }

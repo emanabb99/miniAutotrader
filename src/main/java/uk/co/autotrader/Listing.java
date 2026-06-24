@@ -9,7 +9,7 @@ public class Listing {
     private int price;
     Random random = new Random();
     private final String year;
-    private final Categories category;
+    private final Category category;
 
     public Listing(String vehicleName, Retailer owner){
         this.vehicleName = vehicleName;
@@ -42,9 +42,13 @@ public class Listing {
         return price;
     }
 
-    public Categories generateRandomCategory() {
-        Categories[] categoriesList = Categories.values();
-        return categoriesList[random.nextInt(categoriesList.length)];
+    public Category generateRandomCategory() {
+        Category[] categoryList = Category.values();
+        return categoryList[random.nextInt(categoryList.length)];
+    }
+
+    public Category getCategory(){
+        return category;
     }
 
     public String getDescription() {
