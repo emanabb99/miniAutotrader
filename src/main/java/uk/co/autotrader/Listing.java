@@ -48,6 +48,6 @@ public class Listing {
     }
 
     public String getDescription() {
-        return vehicleName.concat(" (").concat(getYear()).concat(") - £").concat(String.valueOf(getPrice()).concat(" - ").concat(category.toString()));
+        return vehicleName.concat(" (").concat(getYear()).concat(") - (").concat(category.toString()).concat(") - £").concat(String.valueOf(getPrice()));
     }
 }

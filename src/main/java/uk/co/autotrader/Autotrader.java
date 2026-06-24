@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Autotrader {
     ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
     ArrayList<Listing> boughtCars = new ArrayList<>();
-    ArrayList<Retailer> retailers = new ArrayList<>();
-    ArrayList<Customer> customers = new ArrayList<>();
+    ArrayList<Retailer> addRetailer = new ArrayList<>();
+    ArrayList<Customer> addCustomer = new ArrayList<>();
     private ArrayList<String> output;
 
     public Autotrader(ArrayList<String> output) {
@@ -43,11 +43,11 @@ public class Autotrader {
     }
 
     public void addRetailer(Retailer retailer) {
-        retailers.add(retailer);
+        addRetailer.add(retailer);
     }
 
     public void addCustomer(Customer customer) {
-        customers.add(customer);
+        addCustomer.add(customer);
     }
 
     public void browseCars(){
@@ -57,7 +57,7 @@ public class Autotrader {
     }
 
     public Retailer findRetailerByName(String name){
-        for (Retailer retailer : retailers) {
+        for (Retailer retailer : addRetailer) {
             if (name.equals(retailer.getRetailerName())) {
                 return retailer;
             }
@@ -66,7 +66,7 @@ public class Autotrader {
     }
 
     public Customer findCustomerByName(String name){
-        for (Customer customer: customers){
+        for (Customer customer: addCustomer){
             if (name.equals(customer.getCustomerName())){
                 return customer;
             }

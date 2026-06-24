@@ -17,8 +17,8 @@ public class AutotraderTest {
         Retailer retailer2 = new Retailer("Diya");
         at.addRetailer(retailer1);
         at.addRetailer(retailer2);
-        assertEquals(retailer1,at.retailers.get(0));
-        assertEquals(retailer2,at.retailers.get(1));
+        assertEquals(retailer1,at.addRetailer.get(0));
+        assertEquals(retailer2,at.addRetailer.get(1));
     }
 
     @Test
@@ -27,8 +27,8 @@ public class AutotraderTest {
         Customer customer2 = new Customer("Diya");
         at.addCustomer(customer1);
         at.addCustomer(customer2);
-        assertEquals(customer1,at.customers.get(0));
-        assertEquals(customer2,at.customers.get(1));
+        assertEquals(customer1,at.addCustomer.get(0));
+        assertEquals(customer2,at.addCustomer.get(1));
     }
 
     @Test

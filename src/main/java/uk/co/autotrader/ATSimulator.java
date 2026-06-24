@@ -8,42 +8,51 @@ public class ATSimulator {
 
     private final ArrayList<String> output = new ArrayList<>();
     Autotrader at = new Autotrader(output);
+    Random randomNoSeed = new Random();
     Random random = new Random(70);
-    Random random2 = new Random(10);
     NoiseLevelUtil noiseLevelUtil = new NoiseLevelUtil();
+    List<String> vehicles;
 
-    public List<String> outputSimulation(int day, NoiseLevel noiseLevel) {
-        switch (day) {
-            case 1: runSimulationDay1();
-            break;
-            case 2: runSimulationDay2();
-            break;
-            case 3: runSimulationDay3();
-            break;
-            case 4: summary();
-            break;
+    ATSimulator() {
+        vehicles = List.of("Fiat 500","Mercedes Benz C class","Mini Cooper","A red van","Audi A3", "Ford Fiesta");
+        at.addRetailer(new Retailer("Bob's and Belle's Bangers"));
+        at.addRetailer(new Retailer("Big Buck's Best Deals"));
+        at.addRetailer(new Retailer("Ol' Granny Guardrails"));
+        at.addRetailer(new Retailer("Eman's hot wheels"));
+        at.addRetailer(new Retailer("Another retailer"));
+        at.addRetailer(new Retailer("Random retailer"));
+        at.addRetailer(new Retailer("Vehicle supermarket"));
+
+        at.addCustomer(new Customer("Megan Moneybanks"));
+        at.addCustomer(new Customer("Robin Banks"));
+        at.addCustomer(new Customer("Steve McSteve"));
+        at.addCustomer(new Customer("Penny Coin"));
+        at.addCustomer(new Customer("Johny Bravo"));
+        at.addCustomer(new Customer("Barbie"));
+        at.addCustomer(new Customer("Dexter"));
+    }
+
+    public List<String> outputSimulation(int day, NoiseLevel noiseLevel, boolean summary) {
+        if (summary) {
+            summary(day);
+        }
+        if (day==1) {
+            runSimulationDay1();
+        }
+        else {
+            runSimulationDayRandom(day);
         }
 
         List<String> subList = noiseLevelUtil.getPrintArrayBasedOnNoise(noiseLevel,output);
         for (String line: subList) {
             System.out.println(line);
         }
-
         return output;
     }
 
-    private void runSimulationDay1() {
+    public void runSimulationDay1() {
         output.add("********************** Day 1");
         output.add("Welcome to Mini Autotrader!");
-
-        at.addRetailer(new Retailer("Bob's and Belle's Bangers"));
-        at.addRetailer(new Retailer("Big Buck's Best Deals"));
-        at.addRetailer(new Retailer("Ol' Granny Guardrails"));
-
-        at.addCustomer(new Customer("Megan Moneybanks"));
-        at.addCustomer(new Customer("Robin Banks"));
-        at.addCustomer(new Customer("Steve McSteve"));
-
 
         Listing listing1 = new Listing("1999 Ford Fiesta",at.findRetailerByName("Bob's and Belle's Bangers"));
         at.addListing(listing1);
@@ -75,26 +84,27 @@ public class ATSimulator {
         at.browseCars();
     }
 
-    private void runSimulationDay2() {
-        output.add("********************** Day 2");
+    public void runSimulationDayRandom(int day) {
+        output.add("********************** Day " + day);
         output.add("Welcome to Mini Autotrader!");
 
-        at.retailers.add(new Retailer("Eman's hot wheels"));
-        at.retailers.add(new Retailer("Another retailer"));
+        int randomAmount = randomNoSeed.nextInt(5);
+        for (int i = 1; i < randomAmount; i++){
+            String vehicleChosen = vehicles.get(randomNoSeed.nextInt(vehicles.size()));
+            Retailer retailerChosen = at.addRetailer.get(randomNoSeed.nextInt(at.addRetailer.size()));
+            at.addListing(new Listing(vehicleChosen,retailerChosen));
+        }
 
-        at.customers.add(new Customer("Penny Coin"));
-        at.customers.add(new Customer("Johny Bravo"));
-
-        Listing listing1 = new Listing("Fiat 500",at.findRetailerByName("Eman's hot wheels"));
-        at.addListing(listing1);
-        Listing listing2 = new Listing("Unknown car",at.findRetailerByName("Another retailer"));
-        at.addListing(listing2);
         at.browseCars();
-
         output.add("**********************");
         output.add("CAR PURCHASES:");
-        int buying = random.nextInt(51)+50;
-        at.sellCar(at.findListingByName("Robin Reliant"),at.findCustomerByName("Penny Coin"),buying);
+
+        for (int i = 0; i < randomAmount; i++) {
+            int buyingProbability = randomNoSeed.nextInt(101);
+            Listing listingChosen = at.carsListedOnAutotrader.get(randomNoSeed.nextInt(at.carsListedOnAutotrader.size()));
+            Customer customerChosen = at.addCustomer.get(randomNoSeed.nextInt(at.addCustomer.size()));
+            at.sellCar(listingChosen,customerChosen,buyingProbability);
+        }
 
         output.add("**********************");
         int count = at.countListings();
@@ -102,29 +112,9 @@ public class ATSimulator {
         at.browseCars();
     }
 
-    private void runSimulationDay3() {
-        output.add("********************** Day 3");
-        output.add("Welcome to Mini Autotrader!");
-
-        at.retailers.add(new Retailer("Last retailer"));
-        at.customers.add(new Customer("Peter Pan"));
-
-        Listing listing1 = new Listing("Bus",at.findRetailerByName("Last retailer"));
-        at.addListing(listing1);
-
+    public void summary(int numberOfDays) {
         output.add("**********************");
-        output.add("CAR PURCHASES:");
-        int notBuying = random2.nextInt(51);
-        at.sellCar(at.findListingByName("Fiat 500"),at.findCustomerByName("Peter Pan"),notBuying);
-        output.add("**********************");
-        int count = at.countListings();
-        output.add("There are " + count + " cars listed on Autotrader.");
-        at.browseCars();
-    }
-
-    public void summary() {
-        output.add("**********************");
-        output.add("Performance for last 3 days");
+        output.add("Performance for last" + numberOfDays +"days");
         output.add("Total sold cars: " + at.boughtCars.size());
         at.browseCars();
     }

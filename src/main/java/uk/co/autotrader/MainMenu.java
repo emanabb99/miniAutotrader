@@ -39,16 +39,14 @@ public class MainMenu {
         return choice;
     }
 
-    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel) {
-        if (day < 5) {
-            List<String> output = simulator.outputSimulation(day, noiseLevel);
-            output.clear();
-        }
+    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary) {
+        List<String> output = simulator.outputSimulation(day, noiseLevel, summary);
+        output.clear();
     }
 
     public boolean findRetailer(String retailerName) {
         boolean retailerFound = false;
-        for (Retailer retailer : simulator.at.retailers) {
+        for (Retailer retailer : simulator.at.addRetailer) {
             if (retailerName.equals(retailer.getRetailerName())) {
                 retailerFound = true;
                 break;
@@ -69,7 +67,7 @@ public class MainMenu {
 
     public boolean findCustomer(String customerName) {
         boolean customerFound = false;
-        for (Customer customer : simulator.at.customers) {
+        for (Customer customer : simulator.at.addCustomer) {
             if (customerName.equals(customer.getCustomerName())) {
                 customerFound = true;
                 break;
@@ -85,13 +83,14 @@ public class MainMenu {
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
         NoiseLevel noiseLevel = chooseNoiseLevel();
-        while (noiseLevel==null) {
+        while (noiseLevel == null) {
             System.out.println("Invalid choice - please try again.");
             noiseLevel = chooseNoiseLevel();
         }
         boolean simulation = true;
+        boolean summary = false;
         while (simulation) {
-            displayMiniAutotrader(day, noiseLevel);
+            displayMiniAutotrader(day, noiseLevel, summary);
             int choice = displayMenu();
             switch (choice) {
                 case (1):
@@ -138,15 +137,20 @@ public class MainMenu {
                     }
                     break;
                 case (6):
-                    System.out.println("What day would you like to go to? Choose upto day 3.");
+                    System.out.println("What day would you like to go to?");
                     day = sc.nextInt();
                     sc.nextLine();
                     break;
                 case (7):
                     simulation = false;
+                    summary = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice - please try again.");
                     break;
             }
         }
+        displayMiniAutotrader(day,noiseLevel,summary);
     }
 
     static void main() {
