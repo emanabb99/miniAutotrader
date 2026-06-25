@@ -1,4 +1,4 @@
-package uk.co.autotrader;
+package uk.co.autotrader.model;
 
 import java.util.ArrayList;
 import java.util.List;

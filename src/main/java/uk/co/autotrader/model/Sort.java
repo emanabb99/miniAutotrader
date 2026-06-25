@@ -1,4 +1,4 @@
-package uk.co.autotrader;
+package uk.co.autotrader.model;
 
 public enum Sort {
     PRICE_LOW_TO_HIGH(1),

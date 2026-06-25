@@ -1,4 +1,4 @@
-package uk.co.autotrader;
+package uk.co.autotrader.model;
 
 import org.junit.jupiter.api.Test;
 

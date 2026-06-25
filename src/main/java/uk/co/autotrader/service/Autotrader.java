@@ -1,4 +1,9 @@
-package uk.co.autotrader;
+package uk.co.autotrader.service;
+
+import uk.co.autotrader.model.Customer;
+import uk.co.autotrader.model.Listing;
+import uk.co.autotrader.model.Retailer;
+import uk.co.autotrader.model.Sort;
 
 import java.util.ArrayList;
 import java.util.Comparator;

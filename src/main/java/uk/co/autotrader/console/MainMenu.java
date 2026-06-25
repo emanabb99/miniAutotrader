@@ -1,4 +1,8 @@
-package uk.co.autotrader;
+package uk.co.autotrader.console;
+
+import uk.co.autotrader.model.*;
+import uk.co.autotrader.service.Autotrader;
+import uk.co.autotrader.simulation.ATSimulator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +10,9 @@ import java.util.Scanner;
 
 public class MainMenu {
     Scanner sc = new Scanner(System.in);
-    ATSimulator simulator = new ATSimulator();
+    ArrayList<String> output = new ArrayList<>();
+    Autotrader autotrader = new Autotrader(output);
+    public ATSimulator simulator = new ATSimulator(autotrader,output);
 
     public Sort sortResults(int sortNumber) {
         return switch(sortNumber) {
@@ -60,7 +66,7 @@ public class MainMenu {
     }
 
     public Retailer findRetailer(String retailerName) {
-        for (Retailer retailer : simulator.at.getRetailers()) {
+        for (Retailer retailer : autotrader.getRetailers()) {
             if (retailerName.equals(retailer.getRetailerName())) {
                 return retailer;
             }
@@ -70,7 +76,7 @@ public class MainMenu {
 
     public List<Listing> displayListings(Retailer retailer) {
         List<Listing> allListings = new ArrayList<>();
-        for (Listing listing : simulator.at.getCarsListedOnAutotrader()) {
+        for (Listing listing : autotrader.getCarsListedOnAutotrader()) {
             if (listing.getOwner().equals(retailer)) {
                 allListings.add(listing);
             }
@@ -79,7 +85,7 @@ public class MainMenu {
     }
 
     public Customer findCustomer(String customerName) {
-        for (Customer customer : simulator.at.getCustomers()) {
+        for (Customer customer : autotrader.getCustomers()) {
             if (customerName.equals(customer.getCustomerName())) {
                 return customer;
             }
@@ -88,15 +94,15 @@ public class MainMenu {
     }
 
     public void addCustomer(Customer customer) {
-        simulator.at.addCustomer(customer);
-        if (simulator.at.getCustomers().contains(customer)) {
+        autotrader.addCustomer(customer);
+        if (autotrader.getCustomers().contains(customer)) {
             System.out.println("Customer successfully added");
         }
     }
 
     public void addRetailer(Retailer retailer) {
-        simulator.at.addRetailer(retailer);
-        if (simulator.at.getRetailers().contains(retailer)) {
+        autotrader.addRetailer(retailer);
+        if (autotrader.getRetailers().contains(retailer)) {
             System.out.println("Retailer successfully added");
         }
     }

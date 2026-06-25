@@ -1,9 +1,8 @@
-package uk.co.autotrader;
+package uk.co.autotrader.model;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

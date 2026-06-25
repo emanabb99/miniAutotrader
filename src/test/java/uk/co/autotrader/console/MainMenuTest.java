@@ -1,6 +1,9 @@
-package uk.co.autotrader;
+package uk.co.autotrader.console;
 
 import org.junit.jupiter.api.Test;
+import uk.co.autotrader.model.Customer;
+import uk.co.autotrader.model.Listing;
+import uk.co.autotrader.model.Retailer;
 
 import java.util.List;
 
@@ -31,7 +34,7 @@ class MainMenuTest {
 
     @Test
     void checkRetailerHasListings() {
-        mainMenu.simulator.at.addListing(listing1);
+        mainMenu.autotrader.addListing(listing1);
         List<Listing> listings = mainMenu.displayListings(retailer1);
         assertEquals("Car",listings.getFirst().getVehicleName());
     }
@@ -61,7 +64,7 @@ class MainMenuTest {
     @Test
     void checkAddRetailerWorks() {
         mainMenu.addRetailer(retailer1);
-        assertEquals(retailer1,mainMenu.simulator.at.findRetailerByName("Eman"));
+        assertEquals(retailer1.getRetailerName(),mainMenu.autotrader.findRetailerByName("Eman").getRetailerName());
     }
 
 }
