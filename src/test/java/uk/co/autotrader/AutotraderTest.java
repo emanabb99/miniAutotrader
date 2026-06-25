@@ -19,13 +19,13 @@ public class AutotraderTest {
     @Test
     void givenAddRetailer_thenRetailerAddedToList() {
         at.addRetailer(retailer1);
-        assertTrue(at.retailers.contains(retailer1));
+        assertTrue(at.getRetailers().contains(retailer1));
     }
 
     @Test
     void givenAddCustomer_thenCustomerAddedToList() {
         at.addCustomer(customer1);
-        assertTrue(at.customers.contains(customer1));
+        assertTrue(at.getCustomers().contains(customer1));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class AutotraderTest {
         assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
         at.sellCar(listing1,customer1,60);
         assertEquals(0,at.carsListedOnAutotrader.size());
-        assertEquals(listing1,at.boughtCars.getFirst());
+        assertEquals(listing1,at.getBoughtCars().getFirst());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class AutotraderTest {
         assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
         at.sellCar(listing1,customer1, 40);
         assertEquals(1,at.carsListedOnAutotrader.size());
-        assertEquals(0,at.boughtCars.size());
+        assertEquals(0,at.getBoughtCars().size());
     }
 
     @Test

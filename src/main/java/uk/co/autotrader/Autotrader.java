@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 
 
 public class Autotrader {
-    ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
-    ArrayList<Listing> boughtCars = new ArrayList<>();
-    ArrayList<Retailer> retailers = new ArrayList<>();
-    ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<String> output;
+    List<Listing> carsListedOnAutotrader = new ArrayList<>();
+    private final List<Listing> boughtCars = new ArrayList<>();
+    private final List<Retailer> retailers = new ArrayList<>();
+    private final List<Customer> customers = new ArrayList<>();
+    private final List<String> output;
 
     public Autotrader(ArrayList<String> output) {
         this.output = output;
@@ -92,4 +92,15 @@ public class Autotrader {
         return null;
     }
 
+    public List<Listing> getBoughtCars() {
+        return boughtCars;
+    }
+
+    public List<Retailer> getRetailers() {
+        return retailers;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
 }

@@ -25,8 +25,7 @@ public class Listing {
 
     public int createPrice() {
         List<Integer> prices = List.of(1000,3000,6000,15000);
-        price = prices.get(random.nextInt(4));
-        return price;
+        return prices.get(random.nextInt(4));
     }
 
     public void setPrice(int price){

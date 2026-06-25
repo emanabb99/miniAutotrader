@@ -60,7 +60,7 @@ public class MainMenu {
     }
 
     public Retailer findRetailer(String retailerName) {
-        for (Retailer retailer : simulator.at.retailers) {
+        for (Retailer retailer : simulator.at.getRetailers()) {
             if (retailerName.equals(retailer.getRetailerName())) {
                 return retailer;
             }
@@ -79,7 +79,7 @@ public class MainMenu {
     }
 
     public Customer findCustomer(String customerName) {
-        for (Customer customer : simulator.at.customers) {
+        for (Customer customer : simulator.at.getCustomers()) {
             if (customerName.equals(customer.getCustomerName())) {
                 return customer;
             }
@@ -89,14 +89,14 @@ public class MainMenu {
 
     public void addCustomer(Customer customer) {
         simulator.at.addCustomer(customer);
-        if (simulator.at.customers.contains(customer)) {
+        if (simulator.at.getCustomers().contains(customer)) {
             System.out.println("Customer successfully added");
         }
     }
 
     public void addRetailer(Retailer retailer) {
         simulator.at.addRetailer(retailer);
-        if (simulator.at.retailers.contains(retailer)) {
+        if (simulator.at.getRetailers().contains(retailer)) {
             System.out.println("Retailer successfully added");
         }
     }
