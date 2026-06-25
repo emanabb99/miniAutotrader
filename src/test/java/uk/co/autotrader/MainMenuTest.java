@@ -8,32 +8,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class MainMenuTest {
-    MainMenu mainMenu = new MainMenu();
+    static MainMenu mainMenu;
+    static {
+        mainMenu = new MainMenu();
+    }
+    public static void createOutput() {
+        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false,"");
+    }
 
     @Test
     void checkFindRetailerIfRetailerNotInList() {
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false);
         boolean retailerFound = mainMenu.findRetailer("Retailer that does not exist");
         assertFalse(retailerFound);
     }
 
     @Test
     void checkFindRetailerIfRetailerInList() {
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false);
         boolean retailerFound = mainMenu.findRetailer("Bob's and Belle's Bangers");
         assertTrue(retailerFound);
     }
 
     @Test
     void checkRetailerHasListings() {
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false);
-        List<Listing> listings = mainMenu.displayListings("Ol' Granny Guardrails");
-        assertEquals("Robin Reliant",listings.getFirst().vehicleName);
+        mainMenu.simulator.at.addListing(new Listing("car",new Retailer("Eman")));
+        List<Listing> listings = mainMenu.displayListings("Eman");
+        assertEquals("car",listings.getFirst().vehicleName);
     }
 
     @Test
     void checkRetailerExistsButHasNoActiveListings() {
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false);
         boolean retailerFound = mainMenu.findRetailer("Big Buck's Best Deals");
         assertTrue(retailerFound);
 
@@ -43,14 +46,12 @@ class MainMenuTest {
 
     @Test
     void checkFindCustomerIfCustomerNotInList(){
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false);
         boolean customerFound = mainMenu.findCustomer("Customer that doesn't exist");
         assertFalse(customerFound);
     }
 
     @Test
     void checkFindCustomerIfCustomerInList(){
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false);
         boolean customerFound = mainMenu.findCustomer("Megan Moneybanks");
         assertTrue(customerFound);
     }
