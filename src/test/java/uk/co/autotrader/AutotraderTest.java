@@ -31,7 +31,7 @@ public class AutotraderTest {
     @Test
     void givenAddListing_thenListingAddedToList() {
         at.addListing(listing1);
-        assertTrue(at.carsListedOnAutotrader.contains(listing1));
+        assertTrue(at.getCarsListedOnAutotrader().contains(listing1));
     }
 
     @Test
@@ -44,18 +44,18 @@ public class AutotraderTest {
     @Test
     void givenSellingACar_whenBuyingChanceMoreThan50_thenCarIsSold() {
         at.addListing(listing1);
-        assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
+        assertEquals(listing1,at.getCarsListedOnAutotrader().getFirst());
         at.sellCar(listing1,customer1,60);
-        assertEquals(0,at.carsListedOnAutotrader.size());
+        assertEquals(0,at.getCarsListedOnAutotrader().size());
         assertEquals(listing1,at.getBoughtCars().getFirst());
     }
 
     @Test
     void givenSellingACar_whenBuyingChanceLessThan50_thenCarIsNotSold(){
         at.addListing(listing1);
-        assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
+        assertEquals(listing1,at.getCarsListedOnAutotrader().getFirst());
         at.sellCar(listing1,customer1, 40);
-        assertEquals(1,at.carsListedOnAutotrader.size());
+        assertEquals(1,at.getCarsListedOnAutotrader().size());
         assertEquals(0,at.getBoughtCars().size());
     }
 

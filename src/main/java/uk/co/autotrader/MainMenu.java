@@ -70,7 +70,7 @@ public class MainMenu {
 
     public List<Listing> displayListings(Retailer retailer) {
         List<Listing> allListings = new ArrayList<>();
-        for (Listing listing : simulator.at.carsListedOnAutotrader) {
+        for (Listing listing : simulator.at.getCarsListedOnAutotrader()) {
             if (listing.getOwner().equals(retailer)) {
                 allListings.add(listing);
             }
@@ -136,10 +136,10 @@ public class MainMenu {
         }
     }
 
-    public Sort handleSorting(Sort sort) {
+    public Sort handleSorting() {
         System.out.println("Choose how to filter the results");
         for (Sort sorted: Sort.values()) {
-            System.out.println(sorted.number + ". " + sorted);
+            System.out.println(sorted.getNumber() + ". " + sorted);
         }
         int sortNumber = sc.nextInt();
         sc.nextLine();
@@ -177,7 +177,7 @@ public class MainMenu {
                     sc.nextLine();
                     break;
                 case (7):
-                    sort = handleSorting(sort);
+                    sort = handleSorting();
                     break;
                 case (8):
                     simulation = false;

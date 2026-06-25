@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 
 public class Autotrader {
-    List<Listing> carsListedOnAutotrader = new ArrayList<>();
+    private final List<Listing> carsListedOnAutotrader = new ArrayList<>();
     private final List<Listing> boughtCars = new ArrayList<>();
     private final List<Retailer> retailers = new ArrayList<>();
     private final List<Customer> customers = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Autotrader {
         }
         if (buyingChance > 50) {
             for (Listing car : carsListedOnAutotrader) {
-                if ((listing.getVehicleName()).equals(car.getVehicleName())) {
+                if (listing.equals(car)) {
                     boughtCars.add(listing);
                 }
             }
@@ -93,14 +93,18 @@ public class Autotrader {
     }
 
     public List<Listing> getBoughtCars() {
-        return boughtCars;
+        return List.copyOf(boughtCars);
     }
 
     public List<Retailer> getRetailers() {
-        return retailers;
+        return List.copyOf(retailers);
     }
 
     public List<Customer> getCustomers() {
-        return customers;
+        return List.copyOf(customers);
+    }
+
+    public List<Listing> getCarsListedOnAutotrader() {
+        return List.copyOf(carsListedOnAutotrader);
     }
 }
