@@ -9,58 +9,59 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MainMenuTest {
     static MainMenu mainMenu;
+    Retailer retailer1 = new Retailer("Eman");
+    Customer customer1 = new Customer("Diya");
+    Listing listing1 = new Listing("Car",retailer1);
     static {
         mainMenu = new MainMenu();
-    }
-    public static void createOutput() {
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false,null);
     }
 
     @Test
     void checkFindRetailerIfRetailerNotInList() {
-        boolean retailerFound = mainMenu.findRetailer("Retailer that does not exist");
-        assertFalse(retailerFound);
+        Retailer retailer = mainMenu.findRetailer("Retailer that does not exist");
+        assertNull(retailer);
     }
 
     @Test
     void checkFindRetailerIfRetailerInList() {
-        boolean retailerFound = mainMenu.findRetailer("Bob's and Belle's Bangers");
-        assertTrue(retailerFound);
+        mainMenu.addRetailer(retailer1);
+        Retailer retailer = mainMenu.findRetailer("Eman");
+        assertEquals(retailer1,retailer);
     }
 
     @Test
     void checkRetailerHasListings() {
-        mainMenu.simulator.at.addListing(new Listing("car",new Retailer("Eman")));
-        List<Listing> listings = mainMenu.displayListings("Eman");
-        assertEquals("car",listings.getFirst().vehicleName);
+        mainMenu.simulator.at.addListing(listing1);
+        List<Listing> listings = mainMenu.displayListings(retailer1);
+        assertEquals("Car",listings.getFirst().vehicleName);
     }
 
     @Test
     void checkRetailerExistsButHasNoActiveListings() {
-        boolean retailerFound = mainMenu.findRetailer("Big Buck's Best Deals");
-        assertTrue(retailerFound);
+        Retailer retailer2 = new Retailer("Retailer");
+        mainMenu.addRetailer(retailer2);
+        assertEquals(retailer2,mainMenu.findRetailer("Retailer"));
 
-        List<Listing> listings = mainMenu.displayListings("Big Buck's Best Deals");
+        List<Listing> listings = mainMenu.displayListings(retailer2);
         assertTrue(listings.isEmpty());
     }
 
     @Test
     void checkFindCustomerIfCustomerNotInList(){
-        boolean customerFound = mainMenu.findCustomer("Customer that doesn't exist");
-        assertFalse(customerFound);
+        Customer customer = mainMenu.findCustomer("Customer that doesn't exist");
+        assertNull(customer);
     }
 
     @Test
     void checkFindCustomerIfCustomerInList(){
-        boolean customerFound = mainMenu.findCustomer("Megan Moneybanks");
-        assertTrue(customerFound);
+        mainMenu.addCustomer(customer1);
+        assertEquals(customer1,mainMenu.findCustomer("Diya"));
     }
 
     @Test
     void checkAddRetailerWorks() {
-        Retailer retailer = new Retailer("Eman");
-        mainMenu.addRetailer(retailer);
-        assertEquals(retailer,mainMenu.simulator.at.findRetailerByName("Eman"));
+        mainMenu.addRetailer(retailer1);
+        assertEquals(retailer1,mainMenu.simulator.at.findRetailerByName("Eman"));
     }
 
 }

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,22 +43,18 @@ public class AutotraderTest {
 
     @Test
     void givenSellingACar_whenBuyingChanceMoreThan50_thenCarIsSold() {
-        Random random = new Random(70);
         at.addListing(listing1);
         assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
-        System.out.println(random.nextInt(51)+50);
-        at.sellCar(listing1,customer1,random.nextInt(51)+50);
+        at.sellCar(listing1,customer1,60);
         assertEquals(0,at.carsListedOnAutotrader.size());
         assertEquals(listing1,at.boughtCars.getFirst());
     }
 
     @Test
-    void givenSellingACar_whenBuyingChanceLessThan50_thenCarIsSold(){
-        Random random = new Random(10);
+    void givenSellingACar_whenBuyingChanceLessThan50_thenCarIsNotSold(){
         at.addListing(listing1);
         assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
-        System.out.println(random.nextInt(51));
-        at.sellCar(listing1,customer1, random.nextInt(51));
+        at.sellCar(listing1,customer1, 40);
         assertEquals(1,at.carsListedOnAutotrader.size());
         assertEquals(0,at.boughtCars.size());
     }
