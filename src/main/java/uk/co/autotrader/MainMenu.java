@@ -18,6 +18,7 @@ public class MainMenu {
     }
 
     public NoiseLevel chooseNoiseLevel() {
+        NoiseLevel noiseLevelchoice = null;
         System.out.println("Type in number for your desired noise level: ");
         for (NoiseLevel noiseLevel : NoiseLevel.values()) {
             System.out.println(noiseLevel.getValue() + ". " + noiseLevel);
@@ -26,10 +27,14 @@ public class MainMenu {
         sc.nextLine();
         for (NoiseLevel noiseLevel : NoiseLevel.values()) {
             if (noiseLevel.getValue() == choice) {
-                return noiseLevel;
+                noiseLevelchoice = noiseLevel;
             }
         }
-        return null;
+        while (noiseLevelchoice==null) {
+            System.out.println("Invalid choice - please try again");
+            noiseLevelchoice = chooseNoiseLevel();
+        }
+        return noiseLevelchoice;
     }
 
     public int displayMenu() {
@@ -84,16 +89,18 @@ public class MainMenu {
 
     public void addRetailer(Retailer retailer) {
         simulator.at.addRetailer(retailer);
+        System.out.println("Retailer successfully added");
+    }
+
+    public Retailer handleAddRetailer() {
+        System.out.println("Enter retailer name");
+        return new Retailer(sc.nextLine());
     }
 
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
         Sort sort = null;
         NoiseLevel noiseLevel = chooseNoiseLevel();
-        while (noiseLevel == null) {
-            System.out.println("Invalid choice - please try again.");
-            noiseLevel = chooseNoiseLevel();
-        }
         boolean simulation = true;
         boolean summary = false;
         while (simulation) {
@@ -104,11 +111,7 @@ public class MainMenu {
                     day++;
                     break;
                 case (2):
-                    day++;
-                    System.out.println("Enter retailer name");
-                    Retailer retailer = new Retailer(sc.nextLine());
-                    addRetailer(retailer);
-                    System.out.println("Retailer successfully added");
+                    addRetailer(handleAddRetailer());
                     break;
                 case (3):
                     day++;
