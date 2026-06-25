@@ -3,110 +3,136 @@ package uk.co.autotrader;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AutotraderTest {
     Autotrader at = new Autotrader(new ArrayList<>());
+    Retailer retailer1 = new Retailer("Eman");
+    Retailer retailer2 = new Retailer("Diya");
+    Customer customer1 = new Customer("Eman");
+    Listing listing1 = new Listing("Car",retailer1);
+    Listing listing2 = new Listing("Bike",retailer2);
+    Listing listing3 = new Listing("Bus",new Retailer("Asim"));
 
     @Test
-    void checkAddRetailer() {
-        Retailer retailer1 = new Retailer("Eman");
-        Retailer retailer2 = new Retailer("Diya");
+    void givenAddRetailer_thenRetailerAddedToList() {
         at.addRetailer(retailer1);
-        at.addRetailer(retailer2);
-        assertEquals(retailer1,at.addRetailer.get(0));
-        assertEquals(retailer2,at.addRetailer.get(1));
+        assertTrue(at.retailers.contains(retailer1));
     }
 
     @Test
-    void checkAddCustomer() {
-        Customer customer1 = new Customer("Eman");
-        Customer customer2 = new Customer("Diya");
+    void givenAddCustomer_thenCustomerAddedToList() {
         at.addCustomer(customer1);
-        at.addCustomer(customer2);
-        assertEquals(customer1,at.addCustomer.get(0));
-        assertEquals(customer2,at.addCustomer.get(1));
+        assertTrue(at.customers.contains(customer1));
     }
 
     @Test
-    void checkAddListings() {
-        Listing listing = new Listing("Car",new Retailer("Eman"));
-        at.addListing(listing);
-        assertEquals(listing,at.carsListedOnAutotrader.getFirst());
-
+    void givenAddListing_thenListingAddedToList() {
+        at.addListing(listing1);
+        assertTrue(at.carsListedOnAutotrader.contains(listing1));
     }
 
     @Test
-    void checkCountListingsReturnsCorrectNumber(){
-        Listing listing = new Listing("Car",new Retailer("Eman"));
-        Listing listing2 = new Listing("Bike",new Retailer("Diya"));
-        at.addListing(listing);
+    void givenListingsAdded_thenCountListingsReturnsSumOfListing(){
+        at.addListing(listing1);
         at.addListing(listing2);
         assertEquals(2,at.countListings());
     }
 
     @Test
-    void checkSellCarsIfBuyingChanceOver50() {
+    void givenSellingACar_whenBuyingChanceMoreThan50_thenCarIsSold() {
         Random random = new Random(70);
-        Listing listing = new Listing("Car",new Retailer("Eman"));
-        at.addListing(listing);
-        Customer customer = new Customer("Diya");
-        assertEquals(listing,at.carsListedOnAutotrader.getFirst());
+        at.addListing(listing1);
+        assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
         System.out.println(random.nextInt(51)+50);
-        at.sellCar(listing,customer,random.nextInt(51)+50);
+        at.sellCar(listing1,customer1,random.nextInt(51)+50);
         assertEquals(0,at.carsListedOnAutotrader.size());
-        assertEquals(listing,at.boughtCars.getFirst());
+        assertEquals(listing1,at.boughtCars.getFirst());
     }
 
     @Test
-    void checkSellCarsIfBuyingChanceLessThan50(){
+    void givenSellingACar_whenBuyingChanceLessThan50_thenCarIsSold(){
         Random random = new Random(10);
-        Listing listing = new Listing("Car",new Retailer("Eman"));
-        at.addListing(listing);
-        Customer customer = new Customer("Diya");
-        assertEquals(listing,at.carsListedOnAutotrader.getFirst());
+        at.addListing(listing1);
+        assertEquals(listing1,at.carsListedOnAutotrader.getFirst());
         System.out.println(random.nextInt(51));
-        at.sellCar(listing,customer, random.nextInt(51));
+        at.sellCar(listing1,customer1, random.nextInt(51));
         assertEquals(1,at.carsListedOnAutotrader.size());
         assertEquals(0,at.boughtCars.size());
     }
 
     @Test
-    void checkFindRetailerByNameIfRetailerInList() {
-        Retailer retailer = new Retailer("Eman");
-        at.addRetailer(retailer);
-        assertEquals(retailer,at.findRetailerByName("Eman"));
+    void givenRetailerExists_whenFindRetailer_thenReturnRetailer() {
+        at.addRetailer(retailer1);
+        assertEquals(retailer1,at.findRetailerByName("Eman"));
     }
 
     @Test
-    void checkFindRetailerByNameIfRetailerDoesntExist() {
+    void givenRetailerDoesntExist_whenFindRetailer_thenReturnNull() {
         assertNull(at.findRetailerByName("Retailer that doesn't exist"));
     }
 
     @Test
-    void checkFindCustomerByNameIfCustomerInList() {
-        Customer customer = new Customer("Eman");
-        at.addCustomer(customer);
-        assertEquals(customer,at.findCustomerByName("Eman"));
+    void givenCustomerExists_whenFindCustomer_thenReturnCustomer() {
+        at.addCustomer(customer1);
+        assertEquals(customer1,at.findCustomerByName("Eman"));
     }
 
     @Test
-    void checkFindCustomerByNameIfCustomerDoesntExist() {
+    void givenCustomerDoesntExist_whenFindCustomer_thenReturnNull() {
         assertNull(at.findCustomerByName("Customer that doesn't exist"));
     }
 
     @Test
-    void checkFindListingByNameIfListingInList() {
-        Listing listing = new Listing("Car",new Retailer("Eman"));
-        at.addListing(listing);
-        assertEquals(listing,at.findListingByName("Car"));
+    void givenListingExists_whenFindListing_thenReturnListing() {
+        at.addListing(listing1);
+        assertEquals(listing1,at.findListingByName("Car"));
     }
 
     @Test
-    void checkFindListingByNameIfListingDoesntExist() {
-        assertNull(at.findListingByName("Customer that doesn't exist"));
+    void givenListingDoesntExist_whenFindListing_thenReturnNull() {
+        assertNull(at.findListingByName("Listing that doesn't exist"));
+    }
+
+    @Test
+    void givenSortByPrice_whenBrowseCars_thenCarsAreSortedByPriceFromLow() {
+        at.addListing(listing1);
+        at.addListing(listing2);
+        at.addListing(listing3);
+        listing1.setPrice(500);
+        listing2.setPrice(1000);
+        listing3.setPrice(750);
+
+        List<Listing> sortedList = List.of(listing1,listing3,listing2);
+        assertEquals(sortedList,at.browseCars(Sort.PRICE_LOW_TO_HIGH));
+    }
+
+    @Test
+    void givenSortByPriceHigh_whenBrowseCars_thenCarsAreSortedByPriceFromHigh() {
+        at.addListing(listing1);
+        at.addListing(listing2);
+        at.addListing(listing3);
+        listing1.setPrice(500);
+        listing2.setPrice(1000);
+        listing3.setPrice(750);
+
+        List<Listing> sortedList = List.of(listing2,listing3,listing1);
+        assertEquals(sortedList,at.browseCars(Sort.PRICE_HIGH_TO_LOW));
+    }
+
+    @Test
+    void givenSortByAge_whenBrowseCars_thenCarsAreSortedByAgeNewest() {
+        at.addListing(listing1);
+        at.addListing(listing2);
+        at.addListing(listing3);
+        listing1.setYear("2000");
+        listing2.setYear("1900");
+        listing3.setYear("2026");
+
+        List<Listing> sortedList = List.of(listing3,listing1,listing2);
+        assertEquals(sortedList,at.browseCars(Sort.AGE));
     }
 }

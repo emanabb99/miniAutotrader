@@ -31,7 +31,7 @@ public class ATSimulator {
         at.addCustomer(new Customer("Dexter"));
     }
 
-    public List<String> outputSimulation(int day, NoiseLevel noiseLevel, boolean summary, String sort) {
+    public List<String> outputSimulation(int day, NoiseLevel noiseLevel, boolean summary, Sort sort) {
         if (summary) {
             summary(day,sort);
             for (String line : output) {
@@ -47,14 +47,14 @@ public class ATSimulator {
         return output;
     }
 
-    public void runSimulationDayRandom(int day, String sort) {
+    public void runSimulationDayRandom(int day, Sort sort) {
         output.add("********************** Day " + day);
         output.add("Welcome to Mini Autotrader!" + "\n");
 
         int randomAmount = randomNoSeed.nextInt(5) + 1;
         for (int i = 0; i < randomAmount; i++) {
             String vehicleChosen = vehicles.get(randomNoSeed.nextInt(vehicles.size()));
-            Retailer retailerChosen = at.addRetailer.get(randomNoSeed.nextInt(at.addRetailer.size()));
+            Retailer retailerChosen = at.retailers.get(randomNoSeed.nextInt(at.retailers.size()));
             at.addListing(new Listing(vehicleChosen, retailerChosen));
         }
 
@@ -66,7 +66,7 @@ public class ATSimulator {
             for (int i = 0; i < randomAmount; i++) {
                 int buyingProbability = randomNoSeed.nextInt(101);
                 Listing listingChosen = at.carsListedOnAutotrader.get(randomNoSeed.nextInt(at.carsListedOnAutotrader.size()));
-                Customer customerChosen = at.addCustomer.get(randomNoSeed.nextInt(at.addCustomer.size()));
+                Customer customerChosen = at.customers.get(randomNoSeed.nextInt(at.customers.size()));
                 at.sellCar(listingChosen, customerChosen, buyingProbability);
             }
         }
@@ -79,7 +79,7 @@ public class ATSimulator {
         at.browseCars(sort);
     }
 
-    public void summary(int numberOfDays,String sort) {
+    public void summary(int numberOfDays,Sort sort) {
         output.add("**********************");
         output.add("Performance for last " + numberOfDays + " days");
         output.add("Total sold cars: " + at.boughtCars.size());

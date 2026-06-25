@@ -8,8 +8,8 @@ public class Listing {
     private final Retailer owner;
     private int price;
     Random random = new Random();
-    private final String year;
-    private final Category category;
+    private String year;
+    private Category category;
 
     public Listing(String vehicleName, Retailer owner){
         this.vehicleName = vehicleName;
@@ -27,6 +27,14 @@ public class Listing {
         List<Integer> prices = List.of(1000,3000,6000,15000);
         price = prices.get(random.nextInt(4));
         return price;
+    }
+
+    public void setPrice(int price){
+        this.price = price;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String createYear() {

@@ -2,14 +2,15 @@ package uk.co.autotrader;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 
 public class Autotrader {
     ArrayList<Listing> carsListedOnAutotrader = new ArrayList<>();
     ArrayList<Listing> boughtCars = new ArrayList<>();
-    ArrayList<Retailer> addRetailer = new ArrayList<>();
-    ArrayList<Customer> addCustomer = new ArrayList<>();
+    ArrayList<Retailer> retailers = new ArrayList<>();
+    ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<String> output;
 
     public Autotrader(ArrayList<String> output) {
@@ -44,26 +45,28 @@ public class Autotrader {
     }
 
     public void addRetailer(Retailer retailer) {
-        addRetailer.add(retailer);
+        retailers.add(retailer);
     }
 
     public void addCustomer(Customer customer) {
-        addCustomer.add(customer);
+        customers.add(customer);
     }
 
-    public void browseCars(String filter) {
+    public List<Listing> browseCars(Sort filter) {
         Stream<Listing> carsStream = carsListedOnAutotrader.stream();
-        switch (filter) {
-            case ("priceLow") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice));
-            case ("priceHigh") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
-            case ("age") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getYear).reversed());
-        }
-        carsStream.forEach(car ->
-                output.add(car.getDescription()));
+        carsStream = switch (filter) {
+            case PRICE_LOW_TO_HIGH -> carsStream.sorted(Comparator.comparing(Listing::getPrice));
+            case PRICE_HIGH_TO_LOW -> carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
+            case AGE -> carsStream.sorted(Comparator.comparing(Listing::getYear).reversed());
+            case null -> carsStream;
+        };
+        List<Listing> carList = carsStream.toList();
+        carList.forEach(car -> output.add(car.getDescription()));
+        return carList;
     }
 
     public Retailer findRetailerByName(String name) {
-        for (Retailer retailer : addRetailer) {
+        for (Retailer retailer : retailers) {
             if (name.equals(retailer.getRetailerName())) {
                 return retailer;
             }
@@ -72,7 +75,7 @@ public class Autotrader {
     }
 
     public Customer findCustomerByName(String name) {
-        for (Customer customer : addCustomer) {
+        for (Customer customer : customers) {
             if (name.equals(customer.getCustomerName())) {
                 return customer;
             }

@@ -13,7 +13,7 @@ class MainMenuTest {
         mainMenu = new MainMenu();
     }
     public static void createOutput() {
-        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false,"");
+        mainMenu.simulator.outputSimulation(1,NoiseLevel.NORMAL,false,null);
     }
 
     @Test

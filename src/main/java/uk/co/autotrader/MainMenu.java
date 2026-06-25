@@ -8,12 +8,12 @@ public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ATSimulator simulator = new ATSimulator();
 
-    public String sortResults(int sortNumber) {
+    public Sort sortResults(int sortNumber) {
         return switch(sortNumber) {
-            case (1) -> "priceLow";
-            case (2) -> "priceHigh";
-            case (3) -> "age";
-            default -> "";
+            case (1) -> Sort.PRICE_LOW_TO_HIGH;
+            case (2) -> Sort.PRICE_HIGH_TO_LOW;
+            case (3) -> Sort.AGE;
+            default -> null;
         };
     }
 
@@ -49,20 +49,18 @@ public class MainMenu {
         return choice;
     }
 
-    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary, String filter) {
+    public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary, Sort filter) {
         List<String> output = simulator.outputSimulation(day, noiseLevel, summary, filter);
         output.clear();
     }
 
     public boolean findRetailer(String retailerName) {
-        boolean retailerFound = false;
-        for (Retailer retailer : simulator.at.addRetailer) {
+        for (Retailer retailer : simulator.at.retailers) {
             if (retailerName.equals(retailer.getRetailerName())) {
-                retailerFound = true;
-                break;
+                return true;
             }
         }
-        return retailerFound;
+        return false;
     }
 
     public List<Listing> displayListings(String retailerName) {
@@ -76,14 +74,12 @@ public class MainMenu {
     }
 
     public boolean findCustomer(String customerName) {
-        boolean customerFound = false;
-        for (Customer customer : simulator.at.addCustomer) {
+        for (Customer customer : simulator.at.customers) {
             if (customerName.equals(customer.getCustomerName())) {
-                customerFound = true;
-                break;
+                return true;
             }
         }
-        return customerFound;
+        return false;
     }
 
     public void addRetailer(Retailer retailer) {
@@ -92,7 +88,7 @@ public class MainMenu {
 
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
-        String sort = "";
+        Sort sort = null;
         NoiseLevel noiseLevel = chooseNoiseLevel();
         while (noiseLevel == null) {
             System.out.println("Invalid choice - please try again.");
@@ -142,7 +138,7 @@ public class MainMenu {
                     System.out.println("Enter customer full name");
                     boolean customerFound = findCustomer(sc.nextLine());
                     if (customerFound) {
-                        System.out.println(customerFound);
+                        System.out.println("Customer found - " + customerFound);
                     } else {
                         System.out.println("Customer not found");
                     }
