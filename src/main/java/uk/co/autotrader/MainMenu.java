@@ -78,13 +78,13 @@ public class MainMenu {
         return allListings;
     }
 
-    public boolean findCustomer(String customerName) {
+    public Customer findCustomer(String customerName) {
         for (Customer customer : simulator.at.customers) {
             if (customerName.equals(customer.getCustomerName())) {
-                return true;
+                return customer;
             }
         }
-        return false;
+        return null;
     }
 
     public void addCustomer(Customer customer) {
@@ -126,6 +126,16 @@ public class MainMenu {
         }
     }
 
+    public void handleFindCustomer() {
+        System.out.println("Enter customer full name");
+        Customer customer = findCustomer(sc.nextLine());
+        if (customer!=null) {
+            System.out.println("Customer found - " + customer.getCustomerName());
+        } else {
+            System.out.println("Customer not found");
+        }
+    }
+
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
         Sort sort = null;
@@ -149,14 +159,7 @@ public class MainMenu {
                     handleFindRetailer();
                     break;
                 case (5):
-                    day++;
-                    System.out.println("Enter customer full name");
-                    boolean customerFound = findCustomer(sc.nextLine());
-                    if (customerFound) {
-                        System.out.println("Customer found - " + customerFound);
-                    } else {
-                        System.out.println("Customer not found");
-                    }
+                    handleFindCustomer();
                     break;
                 case (6):
                     System.out.println("What day would you like to go to?");
