@@ -37,9 +37,9 @@ public class Autotrader {
             for (Listing boughtCar : boughtCars) {
                 carsListedOnAutotrader.remove(boughtCar);
             }
-            output.add(customer.getCustomerName() + " has bought the car " + listing.vehicleName + " on Autotrader.");
+            output.add(customer.getCustomerName() + " - " + listing.vehicleName + " - SOLD");
         } else {
-            output.add(customer.getCustomerName() + " changed their mind about buying " + listing.vehicleName);
+            output.add(customer.getCustomerName() + " - " + listing.vehicleName + " - CANCELLED");
         }
     }
 
@@ -56,10 +56,10 @@ public class Autotrader {
         switch (filter) {
             case ("priceLow") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice));
             case ("priceHigh") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
-            case ("age") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
+            case ("age") -> carsStream = carsStream.sorted(Comparator.comparing(Listing::getYear).reversed());
         }
         carsStream.forEach(car ->
-                output.add(car.getOwner().getRetailerName() + " has listed a " + car.getDescription() + " on Autotrader."));
+                output.add(car.getDescription()));
     }
 
     public Retailer findRetailerByName(String name) {

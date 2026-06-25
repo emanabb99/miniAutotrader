@@ -52,6 +52,6 @@ public class Listing {
     }
 
     public String getDescription() {
-        return vehicleName.concat(" (").concat(getYear()).concat(") - (").concat(category.toString()).concat(") - £").concat(String.valueOf(getPrice()));
+        return owner.getRetailerName() + "\n    " + vehicleName + "\n    " + getYear() + "\n    " + category + "\n    £" + getPrice() + "\n";
     }
 }

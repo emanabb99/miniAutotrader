@@ -50,7 +50,7 @@ public class MainMenu {
     }
 
     public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary, String filter) {
-        List<String> output = simulator.outputSimulation(day, noiseLevel,summary,filter);
+        List<String> output = simulator.outputSimulation(day, noiseLevel, summary, filter);
         output.clear();
     }
 

@@ -49,10 +49,10 @@ public class ATSimulator {
 
     public void runSimulationDayRandom(int day, String sort) {
         output.add("********************** Day " + day);
-        output.add("Welcome to Mini Autotrader!");
+        output.add("Welcome to Mini Autotrader!" + "\n");
 
         int randomAmount = randomNoSeed.nextInt(5) + 1;
-        for (int i = 1; i < randomAmount; i++) {
+        for (int i = 0; i < randomAmount; i++) {
             String vehicleChosen = vehicles.get(randomNoSeed.nextInt(vehicles.size()));
             Retailer retailerChosen = at.addRetailer.get(randomNoSeed.nextInt(at.addRetailer.size()));
             at.addListing(new Listing(vehicleChosen, retailerChosen));
@@ -72,8 +72,10 @@ public class ATSimulator {
         }
 
         output.add("**********************");
+        output.add("\n");
         int count = at.countListings();
-        output.add("There are " + count + " cars listed on Autotrader.");
+        if (count==1) output.add("There is " + count + " car listed on Autotrader");
+        else output.add("There are " + count + " cars listed on Autotrader.");
         at.browseCars(sort);
     }
 
