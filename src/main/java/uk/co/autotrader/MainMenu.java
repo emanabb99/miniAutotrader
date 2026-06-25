@@ -136,6 +136,16 @@ public class MainMenu {
         }
     }
 
+    public Sort handleSorting(Sort sort) {
+        System.out.println("Choose how to filter the results");
+        for (Sort sorted: Sort.values()) {
+            System.out.println(sorted.number + ". " + sorted);
+        }
+        int sortNumber = sc.nextInt();
+        sc.nextLine();
+        return sortResults(sortNumber);
+    }
+
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
         Sort sort = null;
@@ -167,13 +177,7 @@ public class MainMenu {
                     sc.nextLine();
                     break;
                 case (7):
-                    System.out.println("Choose how to filter the results");
-                    for (Sort sorted: Sort.values()) {
-                        System.out.println(sorted.number + ". " + sorted);
-                    }
-                    int sortNumber = sc.nextInt();
-                    sort = sortResults(sortNumber);
-                    sc.nextLine();
+                    sort = handleSorting(sort);
                     break;
                 case (8):
                     simulation = false;
