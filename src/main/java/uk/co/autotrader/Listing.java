@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Listing {
-    String vehicleName;
+    private String vehicleName;
     private final Retailer owner;
     private int price;
-    Random random = new Random();
     private String year;
     private Category category;
 
@@ -24,6 +23,7 @@ public class Listing {
     }
 
     public int createPrice() {
+        Random random = new Random();
         List<Integer> prices = List.of(1000,3000,6000,15000);
         return prices.get(random.nextInt(4));
     }
@@ -37,6 +37,7 @@ public class Listing {
     }
 
     public String createYear() {
+        Random random = new Random();
         int year = random.nextInt(141)+1886;
         return String.valueOf(year);
     }
@@ -50,6 +51,7 @@ public class Listing {
     }
 
     public Category generateRandomCategory() {
+        Random random = new Random();
         Category[] categoryList = Category.values();
         return categoryList[random.nextInt(categoryList.length)];
     }
@@ -60,5 +62,17 @@ public class Listing {
 
     public String getDescription() {
         return owner.getRetailerName() + "\n    " + vehicleName + "\n    " + getYear() + "\n    " + category + "\n    £" + getPrice() + "\n";
+    }
+
+    public String getVehicleName(){
+        return vehicleName;
+    }
+
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -31,16 +31,16 @@ public class Autotrader {
         }
         if (buyingChance > 50) {
             for (Listing car : carsListedOnAutotrader) {
-                if ((listing.vehicleName).equals(car.vehicleName)) {
+                if ((listing.getVehicleName()).equals(car.getVehicleName())) {
                     boughtCars.add(listing);
                 }
             }
             for (Listing boughtCar : boughtCars) {
                 carsListedOnAutotrader.remove(boughtCar);
             }
-            output.add(customer.getCustomerName() + " - " + listing.vehicleName + " - SOLD");
+            output.add(customer.getCustomerName() + " - " + listing.getVehicleName() + " - SOLD");
         } else {
-            output.add(customer.getCustomerName() + " - " + listing.vehicleName + " - CANCELLED");
+            output.add(customer.getCustomerName() + " - " + listing.getVehicleName() + " - CANCELLED");
         }
     }
 
@@ -85,7 +85,7 @@ public class Autotrader {
 
     public Listing findListingByName(String name) {
         for (Listing listing : carsListedOnAutotrader) {
-            if (name.equals(listing.vehicleName)) {
+            if (name.equals(listing.getVehicleName())) {
                 return listing;
             }
         }
