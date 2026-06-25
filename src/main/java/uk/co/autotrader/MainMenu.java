@@ -87,14 +87,28 @@ public class MainMenu {
         return false;
     }
 
+    public void addCustomer(Customer customer) {
+        simulator.at.addCustomer(customer);
+        if (simulator.at.customers.contains(customer)) {
+            System.out.println("Customer successfully added");
+        }
+    }
+
     public void addRetailer(Retailer retailer) {
         simulator.at.addRetailer(retailer);
-        System.out.println("Retailer successfully added");
+        if (simulator.at.retailers.contains(retailer)) {
+            System.out.println("Retailer successfully added");
+        }
     }
 
     public Retailer handleAddRetailer() {
         System.out.println("Enter retailer name");
         return new Retailer(sc.nextLine());
+    }
+
+    public Customer handleAddCustomer() {
+        System.out.println("Enter customer's full name");
+        return new Customer(sc.nextLine());
     }
 
     public void runMenuAndMiniAutoTrader() {
@@ -114,10 +128,7 @@ public class MainMenu {
                     addRetailer(handleAddRetailer());
                     break;
                 case (3):
-                    day++;
-                    System.out.println("Enter customer's full name");
-                    new Customer(sc.nextLine());
-                    System.out.println("Customer successfully added");
+                    addCustomer(handleAddCustomer());
                     break;
                 case (4):
                     day++;
