@@ -59,19 +59,19 @@ public class MainMenu {
         output.clear();
     }
 
-    public boolean findRetailer(String retailerName) {
+    public Retailer findRetailer(String retailerName) {
         for (Retailer retailer : simulator.at.retailers) {
             if (retailerName.equals(retailer.getRetailerName())) {
-                return true;
+                return retailer;
             }
         }
-        return false;
+        return null;
     }
 
-    public List<Listing> displayListings(String retailerName) {
+    public List<Listing> displayListings(Retailer retailer) {
         List<Listing> allListings = new ArrayList<>();
         for (Listing listing : simulator.at.carsListedOnAutotrader) {
-            if (listing.getOwner().getRetailerName().equals(retailerName)) {
+            if (listing.getOwner().equals(retailer)) {
                 allListings.add(listing);
             }
         }
@@ -111,6 +111,21 @@ public class MainMenu {
         return new Customer(sc.nextLine());
     }
 
+    public void handleFindRetailer() {
+        System.out.println("Enter retailer name");
+        Retailer retailer = findRetailer(sc.nextLine());
+        if (retailer==null) {
+            System.out.println("Retailer not found");
+        } else {
+            List<Listing> retailerListings = displayListings(retailer);
+            if (retailerListings.isEmpty()) {
+                System.out.println("No retailer listings");
+            } else {
+                retailerListings.forEach(list-> System.out.println(list.getDescription()));
+            }
+        }
+    }
+
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
         Sort sort = null;
@@ -131,21 +146,7 @@ public class MainMenu {
                     addCustomer(handleAddCustomer());
                     break;
                 case (4):
-                    day++;
-                    System.out.println("Enter retailer name");
-                    String retailerName = sc.nextLine();
-                    if (!findRetailer(retailerName)) {
-                        System.out.println("Retailer not found");
-                    } else {
-                        List<Listing> retailerListings = displayListings(retailerName);
-                        if (retailerListings.isEmpty()) {
-                            System.out.println("No retailer listings");
-                        } else {
-                            for (Listing listing : retailerListings) {
-                                System.out.println(listing.getDescription());
-                            }
-                        }
-                    }
+                    handleFindRetailer();
                     break;
                 case (5):
                     day++;
