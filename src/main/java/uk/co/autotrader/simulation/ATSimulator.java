@@ -70,10 +70,9 @@ public class ATSimulator {
 
         if (autotrader.countListings() > 1) {
             for (int i = 0; i < randomAmount; i++) {
-                int buyingProbability = randomNoSeed.nextInt(101);
                 Listing listingChosen = autotrader.getCarsListedOnAutotrader().get(randomNoSeed.nextInt(autotrader.getCarsListedOnAutotrader().size()));
                 Customer customerChosen = autotrader.getCustomers().get(randomNoSeed.nextInt(autotrader.getCustomers().size()));
-                String buyingStatus = autotrader.sellCar(listingChosen, customerChosen, buyingProbability);
+                String buyingStatus = autotrader.sellCar(listingChosen, customerChosen);
                 output.add(customerChosen.getCustomerName() + " - " + listingChosen.getVehicleName() + " - " + buyingStatus);
             }
         }

@@ -8,6 +8,7 @@ import uk.co.autotrader.model.Sort;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 
@@ -25,10 +26,17 @@ public class Autotrader {
         return carsListedOnAutotrader.size();
     }
 
-    public String sellCar(Listing listing, Customer customer, int buyingChance) {
-        String buyingStatus;
+    public String sellCar(Listing listing, Customer customer) {
+        int buyingChance;
+        Random random = new Random();
         if (customer == null) {
             throw new RuntimeException("Customer not found");
+        }
+        if (listing.getPrice() < customer.getMaxBudget() && listing.getPrice() > customer.getMinBudget()) {
+            buyingChance = random.nextInt(101)+50;
+        }
+        else {
+            buyingChance = random.nextInt(50);
         }
         if (buyingChance > 50) {
             for (Listing car : carsListedOnAutotrader) {
@@ -39,11 +47,10 @@ public class Autotrader {
             for (Listing boughtCar : boughtCars) {
                 carsListedOnAutotrader.remove(boughtCar);
             }
-            buyingStatus = "SOLD";
+            return "SOLD";
         } else {
-            buyingStatus = "CANCELLED";
+            return "CANCELLED";
         }
-        return buyingStatus;
     }
 
     public void addRetailer(Retailer retailer) {

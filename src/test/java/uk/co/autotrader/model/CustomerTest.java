@@ -16,8 +16,6 @@ class CustomerTest {
     @Test
     void givenCalculateMinBudget_whenCalculateMaxBudget_MinBudgetIsAlwaysLessThanMaxBudget() {
         Customer customer = new Customer("Eman");
-        int maxBudget = customer.calculateMaxBudget();
-        int minBudget = customer.calculateMinBudget(maxBudget);
-        assertTrue(minBudget<maxBudget);
+        assertTrue(customer.getMinBudget()<customer.getMaxBudget());
     }
 }

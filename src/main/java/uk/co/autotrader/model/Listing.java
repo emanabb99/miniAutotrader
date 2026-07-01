@@ -22,7 +22,7 @@ public class Listing {
         return owner;
     }
 
-    public int createPrice() {
+    private int createPrice() {
         Random random = new Random();
         List<Integer> prices = List.of(1000,3000,6000,15000);
         return prices.get(random.nextInt(4));
@@ -36,7 +36,7 @@ public class Listing {
         this.year = year;
     }
 
-    public String createYear() {
+    private String createYear() {
         Random random = new Random();
         int year = random.nextInt(141)+1886;
         return String.valueOf(year);
@@ -50,7 +50,7 @@ public class Listing {
         return price;
     }
 
-    public Category generateRandomCategory() {
+    private Category generateRandomCategory() {
         Random random = new Random();
         Category[] categoryList = Category.values();
         return categoryList[random.nextInt(categoryList.length)];

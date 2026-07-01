@@ -6,10 +6,12 @@ import uk.co.autotrader.model.Listing;
 import uk.co.autotrader.model.Retailer;
 import uk.co.autotrader.model.Sort;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AutotraderTest {
+    Random random = new Random();
     Autotrader at = new Autotrader();
     Retailer retailer1 = new Retailer("Eman");
     Retailer retailer2 = new Retailer("Diya");
@@ -44,20 +46,23 @@ public class AutotraderTest {
     }
 
     @Test
-    void givenSellingACar_whenBuyingChanceMoreThan50_thenCarIsSold() {
+    void givenSellingACar_whenListingIsHigherThanCustomerMaxBudget_thenCarIsNotSold() {
         at.addListing(listing1);
-        assertEquals(listing1,at.getCarsListedOnAutotrader().getFirst());
-        String buyingOutcome = at.sellCar(listing1,customer1,60);
-        assertEquals(0,at.getCarsListedOnAutotrader().size());
-        assertEquals(listing1,at.getBoughtCars().getFirst());
-        assertEquals("SOLD",buyingOutcome);
+        listing1.setPrice(20000);
+        customer1.setMaxBudget(15000);
+        String buyingOutcome = at.sellCar(listing1,customer1);
+        assertEquals(1,at.getCarsListedOnAutotrader().size());
+        assertEquals(0,at.getBoughtCars().size());
+        assertEquals("CANCELLED",buyingOutcome);
     }
 
     @Test
-    void givenSellingACar_whenBuyingChanceLessThan50_thenCarIsNotSold(){
+    void givenSellingACar_whenListingIsLowerThanCustomerMinBudget_thenCarIsNotSold() {
         at.addListing(listing1);
-        assertEquals(listing1,at.getCarsListedOnAutotrader().getFirst());
-        String buyingOutcome = at.sellCar(listing1,customer1, 40);
+        listing1.setPrice(2000);
+        int maxBudget = customer1.getMaxBudget();
+        customer1.setMinBudget(random.nextInt(maxBudget-2000)+2000);
+        String buyingOutcome = at.sellCar(listing1,customer1);
         assertEquals(1,at.getCarsListedOnAutotrader().size());
         assertEquals(0,at.getBoughtCars().size());
         assertEquals("CANCELLED",buyingOutcome);
