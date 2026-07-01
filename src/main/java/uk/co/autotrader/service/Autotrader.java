@@ -16,11 +16,6 @@ public class Autotrader {
     private final List<Listing> boughtCars = new ArrayList<>();
     private final List<Retailer> retailers = new ArrayList<>();
     private final List<Customer> customers = new ArrayList<>();
-    private final List<String> output;
-
-    public Autotrader(ArrayList<String> output) {
-        this.output = output;
-    }
 
     public void addListing(Listing listing) {
         carsListedOnAutotrader.add(listing);

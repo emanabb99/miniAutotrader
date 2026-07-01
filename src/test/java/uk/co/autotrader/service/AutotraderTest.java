@@ -5,14 +5,12 @@ import uk.co.autotrader.model.Customer;
 import uk.co.autotrader.model.Listing;
 import uk.co.autotrader.model.Retailer;
 import uk.co.autotrader.model.Sort;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AutotraderTest {
-    Autotrader at = new Autotrader(new ArrayList<>());
+    Autotrader at = new Autotrader();
     Retailer retailer1 = new Retailer("Eman");
     Retailer retailer2 = new Retailer("Diya");
     Customer customer1 = new Customer("Eman");

@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ArrayList<String> output = new ArrayList<>();
-    Autotrader autotrader = new Autotrader(output);
+    Autotrader autotrader = new Autotrader();
     public ATSimulator simulator = new ATSimulator(autotrader,output);
 
     public Sort sortResults(int sortNumber) {
