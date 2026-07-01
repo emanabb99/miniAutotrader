@@ -49,18 +49,20 @@ public class AutotraderTest {
     void givenSellingACar_whenBuyingChanceMoreThan50_thenCarIsSold() {
         at.addListing(listing1);
         assertEquals(listing1,at.getCarsListedOnAutotrader().getFirst());
-        at.sellCar(listing1,customer1,60);
+        String buyingOutcome = at.sellCar(listing1,customer1,60);
         assertEquals(0,at.getCarsListedOnAutotrader().size());
         assertEquals(listing1,at.getBoughtCars().getFirst());
+        assertEquals("SOLD",buyingOutcome);
     }
 
     @Test
     void givenSellingACar_whenBuyingChanceLessThan50_thenCarIsNotSold(){
         at.addListing(listing1);
         assertEquals(listing1,at.getCarsListedOnAutotrader().getFirst());
-        at.sellCar(listing1,customer1, 40);
+        String buyingOutcome = at.sellCar(listing1,customer1, 40);
         assertEquals(1,at.getCarsListedOnAutotrader().size());
         assertEquals(0,at.getBoughtCars().size());
+        assertEquals("CANCELLED",buyingOutcome);
     }
 
     @Test

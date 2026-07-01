@@ -30,7 +30,8 @@ public class Autotrader {
         return carsListedOnAutotrader.size();
     }
 
-    public void sellCar(Listing listing, Customer customer, int buyingChance) {
+    public String sellCar(Listing listing, Customer customer, int buyingChance) {
+        String buyingStatus = "";
         if (customer == null) {
             throw new RuntimeException("Customer not found");
         }
@@ -43,10 +44,11 @@ public class Autotrader {
             for (Listing boughtCar : boughtCars) {
                 carsListedOnAutotrader.remove(boughtCar);
             }
-            output.add(customer.getCustomerName() + " - " + listing.getVehicleName() + " - SOLD");
+            buyingStatus = "SOLD";
         } else {
-            output.add(customer.getCustomerName() + " - " + listing.getVehicleName() + " - CANCELLED");
+            buyingStatus = "CANCELLED";
         }
+        return buyingStatus;
     }
 
     public void addRetailer(Retailer retailer) {
