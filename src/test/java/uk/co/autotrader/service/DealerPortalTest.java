@@ -26,7 +26,7 @@ class DealerPortalTest {
         DealerPortal dealerPortal = new DealerPortal(new Retailer("Eman"),autotrader);
         dealerPortal.addListing("Car");
         dealerPortal.addListing("Bus");
-        List<String> myListings = dealerPortal.displayListings();
+        List<Listing> myListings = dealerPortal.displayListings();
         assertEquals(2, myListings.size());
     }
 
@@ -37,7 +37,7 @@ class DealerPortalTest {
         dealerPortal.addListing("Car");
         dealerPortal.addListing("Bus");
         dealerPortal2.addListing("Bike");
-        List<String> myListings = dealerPortal2.displayListings();
+        List<Listing> myListings = dealerPortal2.displayListings();
         assertEquals(1, myListings.size());
     }
 

@@ -21,11 +21,11 @@ public class DealerPortal {
         autotrader.addListing(new Listing(vehicleName, retailer));
     }
 
-    public List<String> displayListings() {
-        List<String> listingDescriptions = new ArrayList<>();
+    public List<Listing> displayListings() {
+        List<Listing> listingDescriptions = new ArrayList<>();
         for (Listing listing : autotrader.getCarsListedOnAutotrader()) {
             if (listing.getRetailer().equals(retailer)) {
-                listingDescriptions.add(listing.getDescription());
+                listingDescriptions.add(listing);
             }
         }
         return listingDescriptions;
