@@ -10,12 +10,11 @@ import java.util.List;
 
 public class DealerPortal {
     private final Retailer retailer;
-    private List<Listing> myListings = new ArrayList<>();
-    private List<Lead> myLeads = new ArrayList<>();
-    private final Autotrader autotrader = new Autotrader();
+    private final Autotrader autotrader;
 
-    public DealerPortal(Retailer retailer) {
+    public DealerPortal(Retailer retailer, Autotrader autotrader) {
         this.retailer = retailer;
+        this.autotrader = autotrader;
     }
 
     public void addListing(String vehicleName) {
@@ -25,28 +24,43 @@ public class DealerPortal {
     public List<String> displayListings() {
         List<String> listingDescriptions = new ArrayList<>();
         for (Listing listing : autotrader.getCarsListedOnAutotrader()) {
-            if (listing.getOwner().equals(retailer)) {
-                myListings.add(listing);
+            if (listing.getRetailer().equals(retailer)) {
+                listingDescriptions.add(listing.getDescription());
             }
-        }
-        for (Listing mylisting : myListings) {
-            listingDescriptions.add(mylisting.getDescription());
         }
         return listingDescriptions;
     }
 
-    public Listing editListing(Listing listing, int choice, Object newValue) {
-        switch(choice) {
-            case(1): listing.setVehicleName(newValue.toString()); break;
-            case(2): listing.setPrice(Integer.parseInt(newValue.toString())); break;
-            case(3): listing.setYear(newValue.toString()); break;
-            case(4): listing.setCategory(Category.valueOf(newValue.toString())); break;
+        public List<String> displayLeads () {
+            List<String> leadsDescriptions = new ArrayList<>();
+            for (Lead lead : autotrader.getLeads()) {
+                if (lead.getRetailer().equals(retailer)) {
+                    leadsDescriptions.add(lead.getMessage());
+                }
+            }
+            return leadsDescriptions;
         }
-        return listing;
-    }
 
-    public Autotrader getAutotrader() {
-        return autotrader;
-    }
+        public Listing editListing (Listing listing,int choice, Object newValue){
+            switch (choice) {
+                case (1):
+                    listing.setVehicleName(newValue.toString());
+                    break;
+                case (2):
+                    listing.setPrice(Integer.parseInt(newValue.toString()));
+                    break;
+                case (3):
+                    listing.setYear(newValue.toString());
+                    break;
+                case (4):
+                    listing.setCategory(Category.valueOf(newValue.toString()));
+                    break;
+            }
+            return listing;
+        }
 
-}
+        public Autotrader getAutotrader () {
+            return autotrader;
+        }
+
+    }

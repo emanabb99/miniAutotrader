@@ -1,9 +1,6 @@
 package uk.co.autotrader.service;
 
-import uk.co.autotrader.model.Customer;
-import uk.co.autotrader.model.Listing;
-import uk.co.autotrader.model.Retailer;
-import uk.co.autotrader.model.Sort;
+import uk.co.autotrader.model.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +13,7 @@ public class Autotrader {
     private final List<Listing> carsListedOnAutotrader = new ArrayList<>();
     private final List<Listing> boughtCars = new ArrayList<>();
     private final List<Retailer> retailers = new ArrayList<>();
+    private final List<Lead> leads = new ArrayList<>();
     private final List<Customer> customers = new ArrayList<>();
 
     public void addListing(Listing listing) {
@@ -49,8 +47,13 @@ public class Autotrader {
             }
             return "SOLD";
         } else {
+            leads.add(new Lead(customer,listing));
             return "CANCELLED";
         }
+    }
+
+    public List<Lead> getLeads() {
+        return leads;
     }
 
     public void addRetailer(Retailer retailer) {

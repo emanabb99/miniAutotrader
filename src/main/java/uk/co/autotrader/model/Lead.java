@@ -12,7 +12,7 @@ public class Lead {
     public Lead(Customer customer, Listing listing) {
         this.customer = customer;
         this.listing = listing;
-        this.retailer = listing.getOwner();
+        this.retailer = listing.getRetailer();
         this.message = generateLeadMessage();
     }
 
@@ -20,7 +20,7 @@ public class Lead {
         return List.of("Do you offer click and collect?","Is there any discount?","Does this have cruise control?");
     }
 
-    public String generateLeadMessage() {
+    private String generateLeadMessage() {
         Random random = new Random();
         List<String> messagePool = generateQuery();
         String query = messagePool.get(random.nextInt(messagePool.size()));

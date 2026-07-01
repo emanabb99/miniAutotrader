@@ -14,7 +14,7 @@ public class ListingTest {
     void checkGetOwnerReturnsListingOwner() {
         Retailer retailer = new Retailer("Eman");
         Listing listing = new Listing("Fiat 500",retailer);
-        assertEquals(retailer,listing.getOwner());
+        assertEquals(retailer,listing.getRetailer());
     }
 
     @Test

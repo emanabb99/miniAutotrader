@@ -77,7 +77,7 @@ public class MainMenu {
     public List<Listing> displayListings(Retailer retailer) {
         List<Listing> allListings = new ArrayList<>();
         for (Listing listing : autotrader.getCarsListedOnAutotrader()) {
-            if (listing.getOwner().equals(retailer)) {
+            if (listing.getRetailer().equals(retailer)) {
                 allListings.add(listing);
             }
         }

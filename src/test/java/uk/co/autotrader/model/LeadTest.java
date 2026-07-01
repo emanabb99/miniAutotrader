@@ -12,7 +12,7 @@ class LeadTest {
         Retailer retailer1 = new Retailer("Diya");
         Listing listing1 = new Listing("Car",retailer1);
         Lead lead = new Lead(customer1,listing1);
-        assertFalse(lead.generateLeadMessage().isEmpty());
+        assertFalse(lead.getMessage().isEmpty());
     }
 
 }

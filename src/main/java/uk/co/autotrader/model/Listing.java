@@ -5,21 +5,21 @@ import java.util.Random;
 
 public class Listing {
     private String vehicleName;
-    private final Retailer owner;
+    private final Retailer retailer;
     private int price;
     private String year;
     private Category category;
 
-    public Listing(String vehicleName, Retailer owner){
+    public Listing(String vehicleName, Retailer retailer){
         this.vehicleName = vehicleName;
-        this.owner = owner;
+        this.retailer = retailer;
         this.price = createPrice();
         this.year = createYear();
         this.category = generateRandomCategory();
     }
 
-    public Retailer getOwner() {
-        return owner;
+    public Retailer getRetailer() {
+        return retailer;
     }
 
     private int createPrice() {
@@ -61,7 +61,7 @@ public class Listing {
     }
 
     public String getDescription() {
-        return owner.getRetailerName() + "\n    " + vehicleName + "\n    " + getYear() + "\n    " + category + "\n    £" + getPrice() + "\n";
+        return retailer.getRetailerName() + "\n    " + vehicleName + "\n    " + getYear() + "\n    " + category + "\n    £" + getPrice() + "\n";
     }
 
     public String getVehicleName(){
