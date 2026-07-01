@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class PortalMainMenu {
     Scanner sc = new Scanner(System.in);
-    Autotrader autotrader = new Autotrader();
+    Autotrader autotrader;
     DealerPortal dealerPortal;
     Retailer retailer;
 
