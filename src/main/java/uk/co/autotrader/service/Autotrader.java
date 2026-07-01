@@ -31,7 +31,7 @@ public class Autotrader {
     }
 
     public String sellCar(Listing listing, Customer customer, int buyingChance) {
-        String buyingStatus = "";
+        String buyingStatus;
         if (customer == null) {
             throw new RuntimeException("Customer not found");
         }
