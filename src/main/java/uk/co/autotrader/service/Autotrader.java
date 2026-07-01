@@ -67,9 +67,7 @@ public class Autotrader {
             case AGE -> carsStream.sorted(Comparator.comparing(Listing::getYear).reversed());
             case null -> carsStream;
         };
-        List<Listing> carList = carsStream.toList();
-        carList.forEach(car -> output.add(car.getDescription()));
-        return carList;
+        return carsStream.toList();
     }
 
     public Retailer findRetailerByName(String name) {

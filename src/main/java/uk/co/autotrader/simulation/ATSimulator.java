@@ -63,7 +63,8 @@ public class ATSimulator {
             autotrader.addListing(new Listing(vehicleChosen, retailerChosen));
         }
 
-        autotrader.browseCars(sort);
+        List<Listing> browseListings = autotrader.browseCars(sort);
+        browseListings.forEach(listing -> output.add(listing.getDescription()));
         output.add("**********************");
         output.add("CAR PURCHASES:");
 
