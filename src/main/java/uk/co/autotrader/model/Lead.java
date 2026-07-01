@@ -28,10 +28,6 @@ public class Lead {
                 " in " + retailer.getRetailerName() + "'s vehicle, " + listing.getDescription() + ". " + query;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
     public Retailer getRetailer() {
         return retailer;
     }
