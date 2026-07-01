@@ -1,0 +1,52 @@
+package uk.co.autotrader.service;
+
+import uk.co.autotrader.model.Category;
+import uk.co.autotrader.model.Lead;
+import uk.co.autotrader.model.Listing;
+import uk.co.autotrader.model.Retailer;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DealerPortal {
+    private final Retailer retailer;
+    private List<Listing> myListings = new ArrayList<>();
+    private List<Lead> myLeads = new ArrayList<>();
+    private final Autotrader autotrader = new Autotrader();
+
+    public DealerPortal(Retailer retailer) {
+        this.retailer = retailer;
+    }
+
+    public void addListing(String vehicleName) {
+        autotrader.addListing(new Listing(vehicleName, retailer));
+    }
+
+    public List<String> displayListings() {
+        List<String> listingDescriptions = new ArrayList<>();
+        for (Listing listing : autotrader.getCarsListedOnAutotrader()) {
+            if (listing.getOwner().equals(retailer)) {
+                myListings.add(listing);
+            }
+        }
+        for (Listing mylisting : myListings) {
+            listingDescriptions.add(mylisting.getDescription());
+        }
+        return listingDescriptions;
+    }
+
+    public Listing editListing(Listing listing, int choice, Object newValue) {
+        switch(choice) {
+            case(1): listing.setVehicleName(newValue.toString()); break;
+            case(2): listing.setPrice(Integer.parseInt(newValue.toString())); break;
+            case(3): listing.setYear(newValue.toString()); break;
+            case(4): listing.setCategory(Category.valueOf(newValue.toString())); break;
+        }
+        return listing;
+    }
+
+    public Autotrader getAutotrader() {
+        return autotrader;
+    }
+
+}
