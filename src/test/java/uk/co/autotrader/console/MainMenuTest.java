@@ -1,7 +1,6 @@
 package uk.co.autotrader.console;
 
 import org.junit.jupiter.api.Test;
-import uk.co.autotrader.model.Customer;
 import uk.co.autotrader.model.Listing;
 import uk.co.autotrader.model.Retailer;
 

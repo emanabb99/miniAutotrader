@@ -7,7 +7,6 @@ import uk.co.autotrader.model.Retailer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DealerPortal {
     private final Retailer retailer;
