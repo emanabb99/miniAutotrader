@@ -5,13 +5,14 @@ import uk.co.autotrader.model.Listing;
 import uk.co.autotrader.model.Retailer;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class MainMenuTest {
     static MainMenu mainMenu;
-    Retailer retailer1 = new Retailer("Eman");
+    Retailer retailer1 = new Retailer("Eman","eman.com","Eman123");
     Listing listing1 = new Listing("Car",retailer1);
     static {
         mainMenu = new MainMenu();
@@ -37,5 +38,20 @@ class MainMenuTest {
         mainMenu.addRetailer(retailer1);
         assertEquals(retailer1.getRetailerName(),mainMenu.autotrader.findRetailerByName("Eman").getRetailerName());
     }
+
+    @Test
+    void checkCredentialsReturnsRetailerWhenTryingToLogInWithCorrectLogInCredentials() {
+        mainMenu.addRetailer(retailer1);
+        assertTrue(mainMenu.checkCredentials("eman.com","Eman123").isPresent());
+    }
+
+    @Test
+    void checkCredentialsReturnsNullWhenTryingToLogInWithCorrectLogInCredentials() {
+        mainMenu.addRetailer(retailer1);
+        assertEquals(Optional.empty(),mainMenu.checkCredentials("wrong.com","WrongPassword"));
+    }
+
+//    @Test
+//    void
 
 }

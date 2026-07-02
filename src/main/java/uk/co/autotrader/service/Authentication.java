@@ -2,6 +2,8 @@ package uk.co.autotrader.service;
 
 import uk.co.autotrader.model.Retailer;
 
+import java.util.Optional;
+
 public class Authentication {
     Autotrader autotrader;
 
@@ -9,13 +11,13 @@ public class Authentication {
         this.autotrader = autotrader;
     }
 
-    public Retailer verifyRetailerEmail(String input) {
+    public Optional<Retailer> findRetailerByEmail(String input) {
         for (Retailer retailer : autotrader.getRetailers()) {
             if (input.equals(retailer.getEmail())) {
-                return retailer;
+                return Optional.of(retailer);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     public boolean verifyRetailerPassword(String input, Retailer retailer) {

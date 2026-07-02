@@ -7,6 +7,7 @@ import uk.co.autotrader.simulation.ATSimulator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -188,16 +189,16 @@ public class MainMenu {
         displayMiniAutotrader(day, noiseLevel, summary, sort);
     }
 
-    public Retailer checkCredentials(String email, String password) {
+    public Optional<Retailer> checkCredentials(String email, String password) {
         Authentication authentication = new Authentication(autotrader);
-        Retailer retailer = authentication.verifyRetailerEmail(email);
-        if (authentication.verifyRetailerPassword(password, retailer)) {
-            return retailer;
-        } else {
-            return null;
+        Optional<Retailer> retailer = authentication.findRetailerByEmail(email);
+        if (retailer.isEmpty()){
+            return Optional.empty();
+        }
+        else {
+            return authentication.verifyRetailerPassword(password,retailer.get()) ? retailer : Optional.empty();
         }
     }
-
 
     public void handleLogin() {
         boolean loggingIn = true;
@@ -206,16 +207,16 @@ public class MainMenu {
             String email = sc.nextLine();
             System.out.println("Enter password");
             String password = sc.nextLine();
-            Retailer retailerFound = checkCredentials(email, password);
-            if (retailerFound != null) {
-                transferToPortal(retailerFound);
-                loggingIn = false;
-            }
-            else {
+            Optional<Retailer> retailerFound = checkCredentials(email, password);
+            if (retailerFound.isEmpty()) {
                 System.out.println("Invalid login details. Press any letter to try again. Press 'Q' to quit.");
                 if (sc.nextLine().equalsIgnoreCase("Q")) {
                     loggingIn = false;
                 }
+            }
+            else {
+                transferToPortal(retailerFound.get());
+                loggingIn = false;
             }
         }
 
