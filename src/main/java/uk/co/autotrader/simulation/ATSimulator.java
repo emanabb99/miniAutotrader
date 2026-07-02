@@ -19,21 +19,7 @@ public class ATSimulator {
         this.autotrader = autotrader;
         this.output = output;
         vehicles = List.of("Fiat 500", "Mercedes Benz C class", "Mini Cooper", "A red van", "Audi A3", "Ford Fiesta");
-        autotrader.addRetailer(new Retailer("Bob's and Belle's Bangers"));
-        autotrader.addRetailer(new Retailer("Big Buck's Best Deals"));
-        autotrader.addRetailer(new Retailer("Ol' Granny Guardrails"));
-        autotrader.addRetailer(new Retailer("Eman's hot wheels"));
-        autotrader.addRetailer(new Retailer("Another retailer"));
-        autotrader.addRetailer(new Retailer("Random retailer"));
-        autotrader.addRetailer(new Retailer("Vehicle supermarket"));
-
-        autotrader.addCustomer(new Customer("Megan Moneybanks"));
-        autotrader.addCustomer(new Customer("Robin Banks"));
-        autotrader.addCustomer(new Customer("Steve McSteve"));
-        autotrader.addCustomer(new Customer("Penny Coin"));
-        autotrader.addCustomer(new Customer("Johny Bravo"));
-        autotrader.addCustomer(new Customer("Barbie"));
-        autotrader.addCustomer(new Customer("Dexter"));
+        new SeededData(autotrader);
     }
 
     public List<String> outputSimulation(int day, NoiseLevel noiseLevel, boolean summary, Sort sort) {

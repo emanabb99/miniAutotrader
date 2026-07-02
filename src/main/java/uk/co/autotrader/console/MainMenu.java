@@ -1,10 +1,10 @@
 package uk.co.autotrader.console;
 
 import uk.co.autotrader.model.*;
+import uk.co.autotrader.service.Authentication;
 import uk.co.autotrader.service.Autotrader;
 import uk.co.autotrader.simulation.ATSimulator;
 
-import javax.sound.sampled.Port;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -192,7 +192,6 @@ public class MainMenu {
                     summary = true;
                     break;
                 case (9):
-                    Retailer retailerLoggingIn = new Retailer("Eman", "eman_abbas@hotmail.co.uk", "Password123");
                     runPortal();
                 default:
                     System.out.println("Invalid choice - please try again.");
@@ -203,37 +202,30 @@ public class MainMenu {
     }
 
     public void runPortal() {
+        Authentication authentication = new Authentication(autotrader);
         boolean loggingIn = true;
         while (loggingIn) {
-            Retailer retailer = authentication(null);
+            System.out.println("Enter portal email address");
+            Retailer retailer = authentication.verifyRetailerEmail(sc.nextLine());
             if (retailer != null) {
-                PortalMainMenu portalMainMenu = new PortalMainMenu(retailer, autotrader);
-                portalMainMenu.runMenu();
+                System.out.println("Enter password");
+                if (authentication.verifyRetailerPassword(sc.nextLine(),retailer)) {
+                    PortalMainMenu portalMainMenu = new PortalMainMenu(retailer,autotrader);
+                    portalMainMenu.runMenu();
+                }
+                else {
+                    System.out.println("Password incorrect. Try again with 'T' or quit with 'Q'");
+                    if (sc.nextLine().equalsIgnoreCase("Q")) {
+                        loggingIn = false;
+                    }
+                }
             } else {
-                System.out.println("Login details incorrect. Try again with 'T' or quit with 'Q'");
+                System.out.println("Email incorrect. Try again with 'T' or quit with 'Q'");
                 if (sc.nextLine().equalsIgnoreCase("Q")) {
                     loggingIn = false;
                 }
             }
         }
-    }
-
-    public Retailer authentication(Retailer retailerLoggingIn) {
-        System.out.println("Please enter your email address");
-        String email = sc.nextLine();
-        for (Retailer retailer : autotrader.getRetailers()) {
-            if (email.equals(retailer.getEmail())) {
-                retailerLoggingIn = retailer;
-                break;
-            }
-        }
-        if (retailerLoggingIn != null) {
-            System.out.println("Please enter password");
-            if (retailerLoggingIn.verifyPassword(sc.nextLine())) {
-                return retailerLoggingIn;
-            }
-        }
-        return null;
     }
 
     static void main() {
