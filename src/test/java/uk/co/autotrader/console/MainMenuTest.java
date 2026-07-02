@@ -50,8 +50,4 @@ class MainMenuTest {
         mainMenu.addRetailer(retailer1);
         assertEquals(Optional.empty(),mainMenu.checkCredentials("wrong.com","WrongPassword"));
     }
-
-//    @Test
-//    void
-
 }
