@@ -213,6 +213,7 @@ public class MainMenu {
                 if (authentication.verifyRetailerPassword(sc.nextLine(),retailer)) {
                     PortalMainMenu portalMainMenu = new PortalMainMenu(retailer,autotrader);
                     portalMainMenu.runMenu();
+                    break;
                 }
                 else {
                     System.out.println("Password incorrect. Try again with 'T' or quit with 'Q'");

@@ -25,7 +25,7 @@ public class Lead {
         List<String> messagePool = generateQuery();
         String query = messagePool.get(random.nextInt(messagePool.size()));
         return "Hello, my name is " + customer.getCustomerName() + ". I am interested" +
-                " in " + retailer.getRetailerName() + "'s vehicle, " + listing.getDescription() + ". " + query;
+                " in the following vehicle:\n" + listing.getDescription() + query + "\n";
     }
 
     public Retailer getRetailer() {

@@ -34,7 +34,7 @@ public class DealerPortal {
         public List<String> displayLeads () {
             List<String> leadsDescriptions = new ArrayList<>();
             for (Lead lead : autotrader.getLeads()) {
-                if (lead.getRetailer().equals(retailer)) {
+                if (lead.getRetailer().getRetailerName().equals(retailer.getRetailerName())) {
                     leadsDescriptions.add(lead.getMessage());
                 }
             }

@@ -11,9 +11,9 @@ public class SeededData {
         autotrader.addRetailer(new Retailer("Big Buck's Best Deals","bucks.co.uk","BB123"));
         autotrader.addRetailer(new Retailer("Ol' Granny Guardrails","granny.net","Guard123"));
         autotrader.addRetailer(new Retailer("Eman's hot wheels","eman_abbas@hotmail.co.uk","Eman123"));
-        autotrader.addRetailer(new Retailer("Another retailer"));
-        autotrader.addRetailer(new Retailer("Random retailer"));
-        autotrader.addRetailer(new Retailer("Vehicle supermarket"));
+        autotrader.addRetailer(new Retailer("Another retailer","anotherretailer.com","Another123"));
+        autotrader.addRetailer(new Retailer("Random retailer","random.com","Random123"));
+        autotrader.addRetailer(new Retailer("Vehicle supermarket","supermarket.com","Supermarket123"));
 
         autotrader.addCustomer(new Customer("Megan Moneybanks"));
         autotrader.addCustomer(new Customer("Robin Banks"));

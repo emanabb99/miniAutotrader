@@ -21,8 +21,7 @@ public class PortalMainMenu {
         this.dealerPortal = new DealerPortal(retailer, autotrader);
     }
 
-    public int welcomeRetailer() {
-        System.out.println("Welcome " + retailer.getRetailerName() + " to Dealer Portal.");
+    public int menuOptions() {
         System.out.println("""
                 Please choose one of the following options:
                 1. Display all live listings
@@ -41,8 +40,8 @@ public class PortalMainMenu {
     }
 
     public void displayLeads() {
-        for (String leads : dealerPortal.displayLeads()) {
-            System.out.println(leads);
+        for (int i = 0; i < dealerPortal.displayLeads().size(); i++) {
+            System.out.println(i+1 + ". " + dealerPortal.displayLeads().get(i));
         }
     }
 
@@ -69,9 +68,9 @@ public class PortalMainMenu {
 
     public void runMenu() {
         boolean loggedIn = true;
-        sc.nextLine();
+        System.out.println("Welcome " + retailer.getRetailerName() + " to Dealer Portal.");
         while (loggedIn) {
-            int choice = welcomeRetailer();
+            int choice = menuOptions();
             switch (choice) {
                 case (1):
                     displayListings();
