@@ -75,8 +75,7 @@ public class ATSimulator {
         output.add("**********************");
         output.add("Performance for last " + numberOfDays + " days");
         output.add("Total sold cars: " + autotrader.getBoughtCars().size());
-        output.add("Remaining unsold listings:");
-        autotrader.browseCars(sort);
+        output.add("Remaining unsold listings: " + autotrader.getCarsListedOnAutotrader().size());
     }
 
 }

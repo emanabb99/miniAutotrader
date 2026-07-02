@@ -67,15 +67,6 @@ public class MainMenu {
         output.clear();
     }
 
-    public Retailer findRetailer(String retailerName) {
-        for (Retailer retailer : autotrader.getRetailers()) {
-            if (retailerName.equals(retailer.getRetailerName())) {
-                return retailer;
-            }
-        }
-        return null;
-    }
-
     public List<Listing> displayListings(Retailer retailer) {
         List<Listing> allListings = new ArrayList<>();
         for (Listing listing : autotrader.getCarsListedOnAutotrader()) {
@@ -84,15 +75,6 @@ public class MainMenu {
             }
         }
         return allListings;
-    }
-
-    public Customer findCustomer(String customerName) {
-        for (Customer customer : autotrader.getCustomers()) {
-            if (customerName.equals(customer.getCustomerName())) {
-                return customer;
-            }
-        }
-        return null;
     }
 
     public void addCustomer(Customer customer) {
@@ -121,7 +103,7 @@ public class MainMenu {
 
     public void handleFindRetailer() {
         System.out.println("Enter retailer name");
-        Retailer retailer = findRetailer(sc.nextLine());
+        Retailer retailer = autotrader.findRetailerByName(sc.nextLine());
         if (retailer == null) {
             System.out.println("Retailer not found");
         } else {
@@ -136,7 +118,7 @@ public class MainMenu {
 
     public void handleFindCustomer() {
         System.out.println("Enter customer full name");
-        Customer customer = findCustomer(sc.nextLine());
+        Customer customer = autotrader.findCustomerByName(sc.nextLine());
         if (customer != null) {
             System.out.println("Customer found - " + customer.getCustomerName());
         } else {

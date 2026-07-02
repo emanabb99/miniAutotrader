@@ -37,13 +37,8 @@ public class Autotrader {
             buyingChance = random.nextInt(50);
         }
         if (buyingChance > 50) {
-            for (Listing car : carsListedOnAutotrader) {
-                if (listing.equals(car)) {
-                    boughtCars.add(listing);
-                }
-            }
-            for (Listing boughtCar : boughtCars) {
-                carsListedOnAutotrader.remove(boughtCar);
+            if (carsListedOnAutotrader.remove(listing)) {
+                boughtCars.add(listing);
             }
             return "SOLD";
         } else {
@@ -53,7 +48,7 @@ public class Autotrader {
     }
 
     public List<Lead> getLeads() {
-        return leads;
+        return List.copyOf(leads);
     }
 
     public void addRetailer(Retailer retailer) {

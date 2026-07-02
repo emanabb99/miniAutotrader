@@ -20,19 +20,6 @@ class MainMenuTest {
     }
 
     @Test
-    void checkFindRetailerIfRetailerNotInList() {
-        Retailer retailer = mainMenu.findRetailer("Retailer that does not exist");
-        assertNull(retailer);
-    }
-
-    @Test
-    void checkFindRetailerIfRetailerInList() {
-        mainMenu.addRetailer(retailer1);
-        Retailer retailer = mainMenu.findRetailer("Eman");
-        assertEquals(retailer1,retailer);
-    }
-
-    @Test
     void checkRetailerHasListings() {
         mainMenu.autotrader.addListing(listing1);
         List<Listing> listings = mainMenu.displayListings(retailer1);
@@ -43,22 +30,8 @@ class MainMenuTest {
     void checkRetailerExistsButHasNoActiveListings() {
         Retailer retailer2 = new Retailer("Retailer");
         mainMenu.addRetailer(retailer2);
-        assertEquals(retailer2,mainMenu.findRetailer("Retailer"));
-
         List<Listing> listings = mainMenu.displayListings(retailer2);
         assertTrue(listings.isEmpty());
-    }
-
-    @Test
-    void checkFindCustomerIfCustomerNotInList(){
-        Customer customer = mainMenu.findCustomer("Customer that doesn't exist");
-        assertNull(customer);
-    }
-
-    @Test
-    void checkFindCustomerIfCustomerInList(){
-        mainMenu.addCustomer(customer1);
-        assertEquals(customer1,mainMenu.findCustomer("Diya"));
     }
 
     @Test

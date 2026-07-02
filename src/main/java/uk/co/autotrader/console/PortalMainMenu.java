@@ -41,7 +41,7 @@ public class PortalMainMenu {
 
     public void displayLeads() {
         for (int i = 0; i < dealerPortal.displayLeads().size(); i++) {
-            System.out.println(i+1 + ". " + dealerPortal.displayLeads().get(i));
+            System.out.println(i + 1 + ". " + dealerPortal.displayLeads().get(i));
         }
     }
 

@@ -55,7 +55,7 @@ class DealerPortalTest {
         Retailer retailer = new Retailer("Eman");
         DealerPortal dealerPortal = new DealerPortal(retailer,autotrader);
         Listing listing = new Listing("Car",retailer);
-        Listing updatedListing = dealerPortal.editListing(listing,2,2000);
+        Listing updatedListing = dealerPortal.editListing(listing,2,"2000");
         assertEquals(2000, updatedListing.getPrice());
     }
 
