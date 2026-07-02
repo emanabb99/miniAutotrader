@@ -4,6 +4,7 @@ import uk.co.autotrader.model.*;
 import uk.co.autotrader.service.Autotrader;
 import uk.co.autotrader.simulation.ATSimulator;
 
+import javax.sound.sampled.Port;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,10 +13,10 @@ public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ArrayList<String> output = new ArrayList<>();
     Autotrader autotrader = new Autotrader();
-    public ATSimulator simulator = new ATSimulator(autotrader,output);
+    public ATSimulator simulator = new ATSimulator(autotrader, output);
 
     public Sort sortResults(int sortNumber) {
-        return switch(sortNumber) {
+        return switch (sortNumber) {
             case (1) -> Sort.PRICE_LOW_TO_HIGH;
             case (2) -> Sort.PRICE_HIGH_TO_LOW;
             case (3) -> Sort.AGE;
@@ -36,7 +37,7 @@ public class MainMenu {
                 noiseLevelchoice = noiseLevel;
             }
         }
-        while (noiseLevelchoice==null) {
+        while (noiseLevelchoice == null) {
             System.out.println("Invalid choice - please try again");
             noiseLevelchoice = chooseNoiseLevel();
         }
@@ -54,6 +55,7 @@ public class MainMenu {
                 6. Skip ahead X days
                 7. Filter the results
                 8. Quit simulation
+                9. Sign into Dealer Portal
                 """);
         int choice = sc.nextInt();
         sc.nextLine();
@@ -120,14 +122,14 @@ public class MainMenu {
     public void handleFindRetailer() {
         System.out.println("Enter retailer name");
         Retailer retailer = findRetailer(sc.nextLine());
-        if (retailer==null) {
+        if (retailer == null) {
             System.out.println("Retailer not found");
         } else {
             List<Listing> retailerListings = displayListings(retailer);
             if (retailerListings.isEmpty()) {
                 System.out.println("No retailer listings");
             } else {
-                retailerListings.forEach(list-> System.out.println(list.getDescription()));
+                retailerListings.forEach(list -> System.out.println(list.getDescription()));
             }
         }
     }
@@ -135,7 +137,7 @@ public class MainMenu {
     public void handleFindCustomer() {
         System.out.println("Enter customer full name");
         Customer customer = findCustomer(sc.nextLine());
-        if (customer!=null) {
+        if (customer != null) {
             System.out.println("Customer found - " + customer.getCustomerName());
         } else {
             System.out.println("Customer not found");
@@ -144,7 +146,7 @@ public class MainMenu {
 
     public Sort handleSorting() {
         System.out.println("Choose how to filter the results");
-        for (Sort sorted: Sort.values()) {
+        for (Sort sorted : Sort.values()) {
             System.out.println(sorted.getNumber() + ". " + sorted);
         }
         int sortNumber = sc.nextInt();
@@ -189,12 +191,49 @@ public class MainMenu {
                     simulation = false;
                     summary = true;
                     break;
+                case (9):
+                    Retailer retailerLoggingIn = new Retailer("Eman", "eman_abbas@hotmail.co.uk", "Password123");
+                    runPortal();
                 default:
                     System.out.println("Invalid choice - please try again.");
                     break;
             }
         }
-        displayMiniAutotrader(day,noiseLevel,summary,sort);
+        displayMiniAutotrader(day, noiseLevel, summary, sort);
+    }
+
+    public void runPortal() {
+        boolean loggingIn = true;
+        while (loggingIn) {
+            Retailer retailer = authentication(null);
+            if (retailer != null) {
+                PortalMainMenu portalMainMenu = new PortalMainMenu(retailer, autotrader);
+                portalMainMenu.runMenu();
+            } else {
+                System.out.println("Login details incorrect. Try again with 'T' or quit with 'Q'");
+                if (sc.nextLine().equalsIgnoreCase("Q")) {
+                    loggingIn = false;
+                }
+            }
+        }
+    }
+
+    public Retailer authentication(Retailer retailerLoggingIn) {
+        System.out.println("Please enter your email address");
+        String email = sc.nextLine();
+        for (Retailer retailer : autotrader.getRetailers()) {
+            if (email.equals(retailer.getEmail())) {
+                retailerLoggingIn = retailer;
+                break;
+            }
+        }
+        if (retailerLoggingIn != null) {
+            System.out.println("Please enter password");
+            if (retailerLoggingIn.verifyPassword(sc.nextLine())) {
+                return retailerLoggingIn;
+            }
+        }
+        return null;
     }
 
     static void main() {
