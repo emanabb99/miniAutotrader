@@ -36,7 +36,7 @@ public class PortalMainMenu {
     public void displayListings() {
         List<Listing> listings = dealerPortal.displayListings();
         for (int i = 0; i < listings.size(); i++) {
-            System.out.println(i + 1 + ". " + listings.get(i));
+            System.out.println(i + 1 + ". " + listings.get(i).getDescription());
         }
     }
 
@@ -69,9 +69,9 @@ public class PortalMainMenu {
 
     public void runMenu() {
         boolean loggedIn = true;
-        int choice = welcomeRetailer();
         sc.nextLine();
         while (loggedIn) {
+            int choice = welcomeRetailer();
             switch (choice) {
                 case (1):
                     displayListings();
