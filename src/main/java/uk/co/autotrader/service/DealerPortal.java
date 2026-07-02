@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DealerPortal {
-    Scanner sc = new Scanner(System.in);
     private final Retailer retailer;
     private final Autotrader autotrader;
 

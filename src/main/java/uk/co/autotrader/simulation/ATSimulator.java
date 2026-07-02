@@ -24,7 +24,7 @@ public class ATSimulator {
 
     public List<String> outputSimulation(int day, NoiseLevel noiseLevel, boolean summary, Sort sort) {
         if (summary) {
-            summary(day,sort);
+            summary(day);
             for (String line : output) {
                 System.out.println(line);
             }
@@ -71,7 +71,7 @@ public class ATSimulator {
         autotrader.browseCars(sort);
     }
 
-    public void summary(int numberOfDays,Sort sort) {
+    public void summary(int numberOfDays) {
         output.add("**********************");
         output.add("Performance for last " + numberOfDays + " days");
         output.add("Total sold cars: " + autotrader.getBoughtCars().size());

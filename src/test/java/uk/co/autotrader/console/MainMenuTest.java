@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainMenuTest {
     static MainMenu mainMenu;
     Retailer retailer1 = new Retailer("Eman");
-    Customer customer1 = new Customer("Diya");
     Listing listing1 = new Listing("Car",retailer1);
     static {
         mainMenu = new MainMenu();
