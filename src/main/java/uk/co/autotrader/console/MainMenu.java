@@ -13,7 +13,7 @@ public class MainMenu {
     Scanner sc = new Scanner(System.in);
     ArrayList<String> output = new ArrayList<>();
     Autotrader autotrader = new Autotrader();
-    public ATSimulator simulator = new ATSimulator(autotrader, output);
+    ATSimulator simulator = new ATSimulator(autotrader, output);
 
     public Sort sortResults(int sortNumber) {
         return switch (sortNumber) {
@@ -145,7 +145,7 @@ public class MainMenu {
     }
 
     public Sort handleSorting() {
-        System.out.println("Choose how to filter the results");
+        System.out.println("Choose how to sort the results");
         for (Sort sorted : Sort.values()) {
             System.out.println(sorted.getNumber() + ". " + sorted);
         }
@@ -188,13 +188,15 @@ public class MainMenu {
                     break;
                 case (7):
                     sort = handleSorting();
+                    day++;
+                    displayMiniAutotrader(day, noiseLevel, summary, sort);
                     break;
                 case (8):
                     simulation = false;
                     summary = true;
                     break;
                 case (9):
-                    runPortal();
+                    handleLogin();
                     break;
                 default:
                     System.out.println("Invalid choice - please try again.");
@@ -204,32 +206,42 @@ public class MainMenu {
         displayMiniAutotrader(day, noiseLevel, summary, sort);
     }
 
-    public void runPortal() {
+    public Retailer checkCredentials(String email, String password) {
         Authentication authentication = new Authentication(autotrader);
+        Retailer retailer = authentication.verifyRetailerEmail(email);
+        if (authentication.verifyRetailerPassword(password, retailer)) {
+            return retailer;
+        } else {
+            return null;
+        }
+    }
+
+
+    public void handleLogin() {
         boolean loggingIn = true;
         while (loggingIn) {
             System.out.println("Enter portal email address");
-            Retailer retailer = authentication.verifyRetailerEmail(sc.nextLine());
-            if (retailer != null) {
-                System.out.println("Enter password");
-                if (authentication.verifyRetailerPassword(sc.nextLine(),retailer)) {
-                    PortalMainMenu portalMainMenu = new PortalMainMenu(retailer,autotrader);
-                    portalMainMenu.runMenu();
-                    break;
-                }
-                else {
-                    System.out.println("Password incorrect. Try again with 'T' or quit with 'Q'");
-                    if (sc.nextLine().equalsIgnoreCase("Q")) {
-                        loggingIn = false;
-                    }
-                }
-            } else {
-                System.out.println("Email incorrect. Try again with 'T' or quit with 'Q'");
+            String email = sc.nextLine();
+            System.out.println("Enter password");
+            String password = sc.nextLine();
+            Retailer retailerFound = checkCredentials(email, password);
+            if (retailerFound != null) {
+                transferToPortal(retailerFound);
+                loggingIn = false;
+            }
+            else {
+                System.out.println("Invalid login details. Press any letter to try again. Press 'Q' to quit.");
                 if (sc.nextLine().equalsIgnoreCase("Q")) {
                     loggingIn = false;
                 }
             }
         }
+
+    }
+
+    public void transferToPortal(Retailer retailer) {
+        PortalMainMenu portalMainMenu = new PortalMainMenu(retailer, autotrader);
+        portalMainMenu.runMenu();
     }
 
     static void main() {
