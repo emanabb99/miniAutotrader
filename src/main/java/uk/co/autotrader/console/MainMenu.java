@@ -160,12 +160,13 @@ public class MainMenu {
         NoiseLevel noiseLevel = chooseNoiseLevel();
         boolean simulation = true;
         boolean summary = false;
+        displayMiniAutotrader(day, noiseLevel, summary, sort);
         while (simulation) {
-            displayMiniAutotrader(day, noiseLevel, summary, sort);
             int choice = displayMenu();
             switch (choice) {
                 case (1):
                     day++;
+                    displayMiniAutotrader(day, noiseLevel, summary, sort);
                     break;
                 case (2):
                     addRetailer(handleAddRetailer());
@@ -183,6 +184,7 @@ public class MainMenu {
                     System.out.println("What day would you like to go to?");
                     day = sc.nextInt();
                     sc.nextLine();
+                    displayMiniAutotrader(day, noiseLevel, summary, sort);
                     break;
                 case (7):
                     sort = handleSorting();
