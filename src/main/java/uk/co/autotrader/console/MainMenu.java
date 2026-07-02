@@ -193,6 +193,7 @@ public class MainMenu {
                     break;
                 case (9):
                     runPortal();
+                    break;
                 default:
                     System.out.println("Invalid choice - please try again.");
                     break;
