@@ -45,13 +45,11 @@ public class MainMenu {
                 4. View a retailer
                 5. View a customer
                 6. Skip ahead X days
-                7. Filter the results
+                7. Sort listings
                 8. Quit simulation
                 9. Sign into Dealer Portal
                 """);
-        int choice = sc.nextInt();
-        sc.nextLine();
-        return choice;
+        return NumberInputHelper.handleIntegerInputs(sc,1,9);
     }
 
     public void displayMiniAutotrader(int day, NoiseLevel noiseLevel, boolean summary, Sort filter) {
@@ -123,8 +121,7 @@ public class MainMenu {
         for (Sort sorted : Sort.values()) {
             System.out.println(sorted.getNumber() + ". " + sorted);
         }
-        int sortNumber = sc.nextInt();
-        sc.nextLine();
+        int sortNumber = NumberInputHelper.handleIntegerInputs(sc,1,4);
         return sortResults(sortNumber);
     }
 
