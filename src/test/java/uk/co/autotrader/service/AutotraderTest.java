@@ -71,34 +71,34 @@ public class AutotraderTest {
     @Test
     void givenRetailerExists_whenFindRetailer_thenReturnRetailer() {
         at.addRetailer(retailer1);
-        assertEquals(retailer1,at.findRetailerByName("Eman"));
+        assertTrue(at.findRetailerByName("Eman").isPresent());
     }
 
     @Test
     void givenRetailerDoesntExist_whenFindRetailer_thenReturnNull() {
-        assertNull(at.findRetailerByName("Retailer that doesn't exist"));
+        assertTrue(at.findRetailerByName("Retailer that doesnt exist").isEmpty());
     }
 
     @Test
     void givenCustomerExists_whenFindCustomer_thenReturnCustomer() {
         at.addCustomer(customer1);
-        assertEquals(customer1,at.findCustomerByName("Eman"));
+        assertTrue(at.findCustomerByName("Eman").isPresent());
     }
 
     @Test
     void givenCustomerDoesntExist_whenFindCustomer_thenReturnNull() {
-        assertNull(at.findCustomerByName("Customer that doesn't exist"));
+        assertTrue(at.findCustomerByName("Customer that doesn't exist").isEmpty());
     }
 
     @Test
     void givenListingExists_whenFindListing_thenReturnListing() {
         at.addListing(listing1);
-        assertEquals(listing1,at.findListingByName("Car"));
+        assertTrue(at.findListingByName("Car").isPresent());
     }
 
     @Test
     void givenListingDoesntExist_whenFindListing_thenReturnNull() {
-        assertNull(at.findListingByName("Listing that doesn't exist"));
+        assertTrue(at.findListingByName("Listing that doesn't exist").isEmpty());
     }
 
     @Test

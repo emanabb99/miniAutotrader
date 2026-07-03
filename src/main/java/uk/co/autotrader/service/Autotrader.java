@@ -75,13 +75,8 @@ public class Autotrader {
         return customers.stream().filter(customer -> name.equals(customer.getCustomerName())).findFirst();
     }
 
-    public Listing findListingByName(String name) {
-        for (Listing listing : carsListedOnAutotrader) {
-            if (name.equals(listing.getVehicleName())) {
-                return listing;
-            }
-        }
-        return null;
+    public Optional<Listing> findListingByName(String name) {
+        return carsListedOnAutotrader.stream().filter(listing -> name.equals(listing.getVehicleName())).findFirst();
     }
 
     public List<Listing> getBoughtCars() {
