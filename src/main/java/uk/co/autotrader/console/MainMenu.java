@@ -5,10 +5,7 @@ import uk.co.autotrader.service.Authentication;
 import uk.co.autotrader.service.Autotrader;
 import uk.co.autotrader.simulation.ATSimulator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainMenu {
     Scanner sc = new Scanner(System.in);
@@ -26,23 +23,17 @@ public class MainMenu {
     }
 
     public NoiseLevel chooseNoiseLevel() {
-        NoiseLevel noiseLevelchoice = null;
         System.out.println("Type in number for your desired noise level: ");
         for (NoiseLevel noiseLevel : NoiseLevel.values()) {
             System.out.println(noiseLevel.getValue() + ". " + noiseLevel);
         }
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice = NumberInputHelper.handleIntegerInputs(sc, 1, 3);
         for (NoiseLevel noiseLevel : NoiseLevel.values()) {
             if (noiseLevel.getValue() == choice) {
-                noiseLevelchoice = noiseLevel;
+                return noiseLevel;
             }
         }
-        while (noiseLevelchoice == null) {
-            System.out.println("Invalid choice - please try again");
-            noiseLevelchoice = chooseNoiseLevel();
-        }
-        return noiseLevelchoice;
+        throw new IllegalStateException("Invalid noise level");
     }
 
     public int displayMenu() {
@@ -139,7 +130,7 @@ public class MainMenu {
 
     public void runMenuAndMiniAutoTrader() {
         int day = 1;
-        Sort sort = null;
+        Sort sort = Sort.DEFAULT;
         NoiseLevel noiseLevel = chooseNoiseLevel();
         boolean simulation = true;
         boolean summary = false;
