@@ -93,14 +93,14 @@ public class MainMenu {
 
     public void handleFindRetailer() {
         System.out.println("Enter retailer name");
-        Retailer retailer = autotrader.findRetailerByName(sc.nextLine());
-        if (retailer == null) {
+        Optional<Retailer> retailer = autotrader.findRetailerByName(sc.nextLine());
+        if (retailer.isEmpty()) {
             System.out.println("Retailer not found");
-        } else {
-            List<Listing> retailerListings = displayListings(retailer);
-            if (retailerListings.isEmpty()) {
-                System.out.println("No retailer listings");
-            } else {
+        }
+        else {
+            List<Listing> retailerListings = displayListings(retailer.get());
+            if (retailerListings.isEmpty()) System.out.println("No retailer listings");
+            else {
                 retailerListings.forEach(list -> System.out.println(list.getDescription()));
             }
         }

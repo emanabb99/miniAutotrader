@@ -12,6 +12,7 @@ public class NumberInputHelper {
                 scanner.next();
             }
             input = scanner.nextInt();
+            scanner.nextLine();
             if (input >= minNumber && input <= maxNumber) {
                 return input;
             }

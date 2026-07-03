@@ -2,10 +2,7 @@ package uk.co.autotrader.service;
 
 import uk.co.autotrader.model.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Stream;
 
 
@@ -70,13 +67,8 @@ public class Autotrader {
         return carsStream.toList();
     }
 
-    public Retailer findRetailerByName(String name) {
-        for (Retailer retailer : retailers) {
-            if (name.equals(retailer.getRetailerName())) {
-                return retailer;
-            }
-        }
-        return null;
+    public Optional<Retailer> findRetailerByName(String name) {
+        return retailers.stream().filter(retailer -> name.equals(retailer.getRetailerName())).findFirst();
     }
 
     public Customer findCustomerByName(String name) {
