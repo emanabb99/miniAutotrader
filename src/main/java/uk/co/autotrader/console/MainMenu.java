@@ -108,11 +108,11 @@ public class MainMenu {
 
     public void handleFindCustomer() {
         System.out.println("Enter customer full name");
-        Customer customer = autotrader.findCustomerByName(sc.nextLine());
-        if (customer != null) {
-            System.out.println("Customer found - " + customer.getCustomerName());
-        } else {
+        Optional<Customer> customer = autotrader.findCustomerByName(sc.nextLine());
+        if (customer.isEmpty()) {
             System.out.println("Customer not found");
+        } else {
+            System.out.println("Customer found - " + customer.get().getCustomerName());
         }
     }
 

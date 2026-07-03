@@ -36,7 +36,7 @@ class MainMenuTest {
     @Test
     void checkAddRetailerWorks() {
         mainMenu.addRetailer(retailer1);
-        assertEquals(retailer1.getRetailerName(),mainMenu.autotrader.findRetailerByName("Eman").getRetailerName());
+        assertTrue(mainMenu.autotrader.findRetailerByName("Eman").isPresent());
     }
 
     @Test
