@@ -153,8 +153,7 @@ public class MainMenu {
                     break;
                 case (6):
                     System.out.println("What day would you like to go to?");
-                    day = sc.nextInt();
-                    sc.nextLine();
+                    day = NumberInputHelper.handleIntegerInputs(sc,1);
                     displayMiniAutotrader(day, noiseLevel, summary, sort);
                     break;
                 case (7):

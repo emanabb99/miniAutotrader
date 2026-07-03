@@ -18,4 +18,19 @@ public class NumberInputHelper {
             System.out.println("Please enter a number between " + minNumber + " and " + maxNumber);
         }
     }
+
+    public static int handleIntegerInputs(Scanner scanner, int minNumber) {
+        int input;
+        while (true) {
+            while (!scanner.hasNextInt()) {
+                System.out.println("Please enter a valid number");
+                scanner.next();
+            }
+            input = scanner.nextInt();
+            if (input >= minNumber) {
+                return input;
+            }
+            System.out.println("Please enter a number above " + (minNumber-1));
+        }
+    }
 }
