@@ -21,26 +21,33 @@ public class Autotrader {
         return carsListedOnAutotrader.size();
     }
 
-    public String sellCar(Listing listing, Customer customer) {
+    public SaleStatus sellCar(Listing listing, Customer customer) {
         int buyingChance;
-        Random random = new Random();
-        if (customer == null) {
-            throw new RuntimeException("Customer not found");
+        Objects.requireNonNull(listing, "Listing must not be null");
+        Objects.requireNonNull(customer, "Customer must not be null");
+        int min = customer.getMinBudget();
+        int max = customer.getMaxBudget();
+
+        if (listing.getPrice() <= max && listing.getPrice() >= min) {
+            buyingChance = 80;
         }
-        if (listing.getPrice() < customer.getMaxBudget() && listing.getPrice() > customer.getMinBudget()) {
-            buyingChance = random.nextInt(101)+50;
+        else if (listing.getPrice() >= (min*0.8) && listing.getPrice() <= (1.2*max)) {
+            buyingChance = 40;
         }
         else {
-            buyingChance = random.nextInt(50);
+            buyingChance = 10;
         }
-        if (buyingChance > 50) {
+        if (buyingChance >= 75) {
             if (carsListedOnAutotrader.remove(listing)) {
                 boughtCars.add(listing);
+                return SaleStatus.SOLD;
             }
-            return "SOLD";
-        } else {
+            return SaleStatus.CANCELLED;
+        } else if (buyingChance >= 25){
             leads.add(new Lead(customer,listing));
-            return "CANCELLED";
+            return SaleStatus.IN_PROGRESS;
+        } else {
+            return SaleStatus.CANCELLED;
         }
     }
 
@@ -57,6 +64,7 @@ public class Autotrader {
     }
 
     public List<Listing> browseCars(Sort sort) {
+        Objects.requireNonNull(sort, "Sort must not be null");
         Stream<Listing> carsStream = carsListedOnAutotrader.stream();
         carsStream = switch (sort) {
             case PRICE_LOW_TO_HIGH -> carsStream.sorted(Comparator.comparing(Listing::getPrice));

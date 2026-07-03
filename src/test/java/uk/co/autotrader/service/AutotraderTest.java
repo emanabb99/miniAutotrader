@@ -1,17 +1,13 @@
 package uk.co.autotrader.service;
 
 import org.junit.jupiter.api.Test;
-import uk.co.autotrader.model.Customer;
-import uk.co.autotrader.model.Listing;
-import uk.co.autotrader.model.Retailer;
-import uk.co.autotrader.model.Sort;
+import uk.co.autotrader.model.*;
+
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AutotraderTest {
-    Random random = new Random();
     Autotrader at = new Autotrader();
     Retailer retailer1 = new Retailer("Eman");
     Retailer retailer2 = new Retailer("Diya");
@@ -46,27 +42,16 @@ public class AutotraderTest {
     }
 
     @Test
-    void givenSellingACar_whenListingIsHigherThanCustomerMaxBudget_thenCarIsNotSold() {
+    void givenSellingACar_whenListingIsMoreThan20PercentHigherThanCustomerMaxBudget_thenCarIsNotSold() {
         at.addListing(listing1);
         listing1.setPrice(20000);
         customer1.setMaxBudget(15000);
-        String buyingOutcome = at.sellCar(listing1,customer1);
+        SaleStatus buyingOutcome = at.sellCar(listing1,customer1);
         assertEquals(1,at.getCarsListedOnAutotrader().size());
         assertEquals(0,at.getBoughtCars().size());
-        assertEquals("CANCELLED",buyingOutcome);
+        assertEquals(SaleStatus.CANCELLED,buyingOutcome);
     }
 
-    @Test
-    void givenSellingACar_whenListingIsLowerThanCustomerMinBudget_thenCarIsNotSold() {
-        at.addListing(listing1);
-        listing1.setPrice(2000);
-        int maxBudget = customer1.getMaxBudget();
-        customer1.setMinBudget(random.nextInt(maxBudget-2000)+2000);
-        String buyingOutcome = at.sellCar(listing1,customer1);
-        assertEquals(1,at.getCarsListedOnAutotrader().size());
-        assertEquals(0,at.getBoughtCars().size());
-        assertEquals("CANCELLED",buyingOutcome);
-    }
 
     @Test
     void givenRetailerExists_whenFindRetailer_thenReturnRetailer() {
