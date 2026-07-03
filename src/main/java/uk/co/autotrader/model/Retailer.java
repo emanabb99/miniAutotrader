@@ -22,6 +22,6 @@ public class Retailer {
     public String getEmail() { return email; }
 
     public boolean verifyPassword(String input) {
-        return input.equals(password);
+        return password.equals(input);
     }
 }

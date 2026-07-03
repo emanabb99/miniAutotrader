@@ -59,13 +59,13 @@ public class Autotrader {
         customers.add(customer);
     }
 
-    public List<Listing> browseCars(Sort filter) {
+    public List<Listing> browseCars(Sort sort) {
         Stream<Listing> carsStream = carsListedOnAutotrader.stream();
-        carsStream = switch (filter) {
+        carsStream = switch (sort) {
             case PRICE_LOW_TO_HIGH -> carsStream.sorted(Comparator.comparing(Listing::getPrice));
             case PRICE_HIGH_TO_LOW -> carsStream.sorted(Comparator.comparing(Listing::getPrice).reversed());
             case AGE -> carsStream.sorted(Comparator.comparing(Listing::getYear).reversed());
-            case null -> carsStream;
+            case DEFAULT -> carsStream;
         };
         return carsStream.toList();
     }

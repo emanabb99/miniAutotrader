@@ -21,7 +21,7 @@ public class MainMenu {
             case (1) -> Sort.PRICE_LOW_TO_HIGH;
             case (2) -> Sort.PRICE_HIGH_TO_LOW;
             case (3) -> Sort.AGE;
-            default -> null;
+            default -> Sort.DEFAULT;
         };
     }
 
