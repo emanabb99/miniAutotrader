@@ -5,3 +5,4 @@ public enum SaleStatus {
     CANCELLED,
     IN_PROGRESS,
 }
+

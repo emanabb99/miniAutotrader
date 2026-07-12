@@ -23,8 +23,10 @@ public class Autotrader {
 
     public SaleStatus sellCar(Listing listing, Customer customer) {
         int buyingChance;
-        Objects.requireNonNull(listing, "Listing must not be null");
-        Objects.requireNonNull(customer, "Customer must not be null");
+        Objects.requireNonNull
+                (listing, "Listing must not be null");
+        Objects.requireNonNull
+                (customer, "Customer must not be null");
         int min = customer.getMinBudget();
         int max = customer.getMaxBudget();
 
@@ -76,7 +78,10 @@ public class Autotrader {
     }
 
     public Optional<Retailer> findRetailerByName(String name) {
-        return retailers.stream().filter(retailer -> name.equals(retailer.getRetailerName())).findFirst();
+        return retailers.stream()
+                .filter(retailer ->
+                        name.equals(retailer.getRetailerName()))
+                .findFirst();
     }
 
     public Optional<Customer> findCustomerByName(String name) {

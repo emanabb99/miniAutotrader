@@ -19,6 +19,12 @@ class MainMenuTest {
     }
 
     @Test
+    void checkFindRetailerByNameWorks() {
+        mainMenu.autotrader.addRetailer(retailer1);
+        assertEquals(Optional.of(retailer1),mainMenu.autotrader.findRetailerByName("Eman"));
+    }
+
+    @Test
     void checkRetailerHasListings() {
         mainMenu.autotrader.addListing(listing1);
         List<Listing> listings = mainMenu.displayListings(retailer1);

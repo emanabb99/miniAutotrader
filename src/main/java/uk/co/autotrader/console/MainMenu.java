@@ -183,7 +183,9 @@ public class MainMenu {
             return Optional.empty();
         }
         else {
-            return authentication.verifyRetailerPassword(password,retailer.get()) ? retailer : Optional.empty();
+            return authentication.
+                    verifyRetailerPassword(password,retailer.get())
+                    ? retailer : Optional.empty();
         }
     }
 
