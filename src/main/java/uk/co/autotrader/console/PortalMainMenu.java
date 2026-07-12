@@ -47,7 +47,8 @@ public class PortalMainMenu {
 
     public Listing editListing() {
         System.out.println("Choose a listing to edit");
-        Listing listingChosen = dealerPortal.displayListings().get(sc.nextInt() - 1);
+        int listingChosenNumber = NumberInputHelper.handleIntegerInputs(sc,1,dealerPortal.displayListings().size()) - 1;
+        Listing listingChosen = dealerPortal.displayListings().get(listingChosenNumber);
         System.out.println("""
                 Choose a feature to edit:
                 1. Name
@@ -55,7 +56,7 @@ public class PortalMainMenu {
                 3. Year
                 4. Category
                 """);
-        int choice = sc.nextInt();
+        int choice = NumberInputHelper.handleIntegerInputs(sc,1,4);
         sc.nextLine();
         if (choice == 4) {
             for (Category category : Category.values()) {
