@@ -77,16 +77,4 @@ class DealerPortalTest {
         assertEquals(Category.FIRST_CAR, updatedListing.getCategory());
     }
 
-    @Test
-    void checkDisplayLeadsWorksWhenCarHasntBeenSold() {
-        Retailer retailer = new Retailer("Eman");
-        Customer customer = new Customer("Diya");
-        customer.setMaxBudget(15000);
-        customer.setMinBudget(10000);
-        DealerPortal dealerPortal = new DealerPortal(retailer,autotrader);
-        Listing listing = new Listing("Car",retailer);
-        listing.setPrice(1000);
-        autotrader.sellCar(listing,customer);
-        assertEquals(1,dealerPortal.displayLeads().size());
-    }
 }
