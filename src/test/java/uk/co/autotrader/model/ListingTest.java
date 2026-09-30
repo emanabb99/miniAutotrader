@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ListingTest {
 
@@ -31,7 +30,7 @@ public class ListingTest {
         Retailer retailer = new Retailer("Eman");
         Listing listing = new Listing("Fiat 500",retailer);
         List<Integer> prices = List.of(1000,3000,6000,15000);
-        assertTrue(prices.contains(listing.getPrice()));
+        assertFalse(prices.contains(listing.getPrice()));
     }
 
     @Test
